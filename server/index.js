@@ -3,6 +3,7 @@ require('dotenv').config()
 const app = express()
 const massive = require('massive')
 const gigCtrl = require('./Controllers/gigCtrl')
+const taskCtrl = require("./Controllers/taskCtrl")
 // const session = require('express-session')
 
 
@@ -39,6 +40,8 @@ app.post('/api/gigs', gigCtrl.createRecipe)
 app.get('/api/gigs/:title', gigCtrl.getGigs)
 app.delete('/api/gigs/:id', gigCtrl.delete)
 app.put('/api/gigs/:id', gigCtrl.update)
+app.post("/api/tasks/:id", taskCtrl.createTask)
+app.put("/api/:gig_id/:id", taskCtrl.editTask)
 
 
 
