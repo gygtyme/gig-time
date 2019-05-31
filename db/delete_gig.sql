@@ -1,6 +1,6 @@
-delete from tasks
+delete from task
 where gig_id = $1;
 
-delete from gigs
+delete from gig
 where id = $1;
 
