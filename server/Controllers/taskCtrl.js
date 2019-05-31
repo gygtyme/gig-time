@@ -1,50 +1,45 @@
 module.exports = {
-    getTasks: async (req, res) => {
-        //getting all of the tasks from the db.
-        //need to recieve identifying information to make db pull.
-        //
-
-        const db = req.app.get("db")
-        const {username} = req.body
-    },
     createTask: async (req, res) => {
         //use gig id to specify where task will go.
         //use data off of req.body for the info.
+
         const db = req.app.get("db")
         const {gigId} = req.params
-        const {/*variable*/} = req.body
+        const {task_desc, task_title} = req.body
 
-        // let task = await db./*db query*/({/*variable*/})
-        // task = task[0]
+        let task = await db.create_task({gigId, task_title, task_desc})
+        task = task[0]
 
-        res.status(200).send("all good")
+        res.status(200).send(task)
     },
     deleteTask: async (req, res) => {
         //delete a task based off of the task id.
         
         const db = req.app.get("db")
-        const {taskId} = req.params
+        let {taskId, gig_id} = req.params
 
-        // await db./*db query*/({taskId})
+        let id = taskId
 
-        res.status(200).send("deleted")
+        await db.delete_task({id, gig_id})
+
+        res.sendStatus(200)
     },
     editTask: async (req, res) => {
         //edits the task by taking task ID from req.params
         //info will be taken from the req.body
 
         const db = req.app.get("db")
-        const {taskId} = req.params
-        const {/*variables*/} = req.body
+        const {task_id} = req.params
+        const {task_title, task_desc} = req.body
 
-        // let editedTask = await db./*db query*/({/*variables*/})
+        let editedTask = await db.edit_task({task_id, task_title, task_desc})
 
-        // editedTask = editedTask[0]
+        editedTask = editedTask[0]
 
-        // if(editedTask){
-        //     return res.status(400).send("there was a failure in edit")
-        // }
+        if(editedTask){
+            return res.status(400).send("there was a failure in edit")
+        }
 
-        res.status(200).send("edited")
+        res.status(200).send(editedTask)
     }
 }
