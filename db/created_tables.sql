@@ -25,7 +25,7 @@ CREATE TABLE "gig" (
   "id" serial PRIMARY KEY,
   "user_id" int references _user,
   "title" varchar,
-  "desc" varchar,
+  "description" varchar,
   "total_time" int,
   "project_rate" int,
   "client_id" int references client,
