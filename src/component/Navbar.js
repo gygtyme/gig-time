@@ -11,17 +11,39 @@ class Navbar extends Component {
         super()
         this.state = {
 
-            open: [false, true, false, true]
-
+            open: [false, true, false, true],
+            email: '',
+            pass: ''
         }
     }
-    componentDidMount(){
-        axios.get('/api/gigs').then((res)=>{
-            this.props.userInfo(res.data)
-        }).catch((err) => { console.log(err) })    
+    componentDidMount() {
+    //     axios.get('/api/gigs').then((res) => {
+    //         this.props.userInfo(res.data)
+    //     }).catch((err) => { console.log(err) })
     }
 
-    handleClick(id) {
+    loginHandler= ()=> {
+        let {email, pass}=this.state
+
+        axios.post('/users/login', {email, pass}).then(res=>{
+this.props.userInfo(res.data)
+this.props.history.push('/userHome')
+        }).catch(err=>console.log('login error', err))
+    }
+
+    logoutHandler=()=> {
+        axios.delete('/users/logout').then(()=>{
+            console.log('user Logged Out')
+            this.props.history.push('/')
+        }).catch(err=>console.log(err, 'logout issue'))
+    }
+    changeHandler = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+handleClick=(id)=> {
         let { open } = this.state;
         this.setState({
             open: [...open.slice(0, id), !open[id], ...open.slice(id + 1)]
@@ -35,7 +57,7 @@ class Navbar extends Component {
             <nav>
                 <div className="app_name_logout_container">
                     <span className="app_name_container">GIG Time</span>
-                    
+
                     {firstName && <div>Welcome, {firstName}  <button className="logout_button" onClick={() => {
                         this.props.logout()
                         axios.get('/auth/logout').then(() => { this.props.history.push('/home') })
@@ -45,14 +67,27 @@ class Navbar extends Component {
                 </div>
 
                 {!this.props.username ? (
-                    <ul className="login_register_container">
-                        <li className="login_container">
-                            <Link to='/login' className="login_text">Login</Link>
-                        </li>
-                        <li className="register_container">
-                            <Link to='/register' className="register_text">Get Started</Link>
-                        </li>
-                    </ul>
+
+<div>
+                    <div className='loginJacob'>
+
+                        email <input type="email"
+                            name="email" placeholder="email" required onChange={e => {
+                                this.changeHandler(e)
+                            }} />
+
+                        Password <input type="password"
+                            name="pass" placeholder="password" required onChange={(e) => {
+                                this.changeHandler(e)
+                            }} />
+<button onClick={this.loginHandler}>Login</button>
+
+<button onClick={this.logoutHandler}>Logout</button>
+
+                    </div>
+
+
+                    </div>
                 ) : (
                         <div className="menu_logout_container">
                             <HamburgerMenu />
@@ -68,7 +103,8 @@ class Navbar extends Component {
 }
 const mapDispatchToProps = {
     logout,
-    userInfo
+    userInfo, 
+
 }
 const mapStateToProps = (reduxState) => {
     const { firstName } = reduxState
