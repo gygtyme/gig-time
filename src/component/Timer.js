@@ -1,12 +1,16 @@
 const React = require('react')
 const ms = require('pretty-ms')
 class Timer extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       time: 0,
       start: 0,
-      isOn: false
+      isOn: false,
+      totalTime: 0,
+      payMe: 0,
+      editToggle: false,
+      inputTime: 0
     }
     this.startTimer = this.startTimer.bind(this)
     this.stopTimer = this.stopTimer.bind(this)
@@ -23,15 +27,54 @@ class Timer extends React.Component {
     }), 1);
   }
   stopTimer() {
-    this.setState({isOn: false})
+    this.setState({ isOn: false })
     clearInterval(this.timer)
+
   }
+
+
+
   resetTimer() {
-    this.setState({time: 0})
+    this.setState({ time: 0 })
   }
+
+  takeBreak = () => {
+    this.setState({
+      totalTime: this.state.totalTime + this.state.time,
+    })
+    this.setState({
+      time : 0,
+      payMe : (this.state.totalTime/1000/60/60) * 60
+    })
+    
+  }
+
+  editTime=()=>{
+    this.setState({
+      editToggle : !this.state.editToggle
+    })
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      inputTime : e.target.value
+    })
+  }
+
+  saveEdit = () => {
+    this.setState({
+      totalTime : this.state.inputTime * 1000 * 60
+    })
+  }
+
   render() {
+    let editInput = (this.state.editToggle) ? <><input onChange={this.handleChange}/>
+    <button onClick = {this.saveEdit}>save</button></> : null
     let start = (this.state.time == 0) ?
-      <button onClick={this.startTimer}>start</button> :
+      <><button onClick={this.startTimer}>start</button> 
+      <button onClick={this.editTime}>edit time</button>
+      {editInput}
+      </> :
       null
     let stop = (this.state.isOn) ?
       <button onClick={this.stopTimer}>stop</button> :
@@ -42,13 +85,19 @@ class Timer extends React.Component {
     let resume = (this.state.time != 0 && !this.state.isOn) ?
       <button onClick={this.startTimer}>resume</button> :
       null
-    return(
+    let takeBreak = (this.state.time != 0 && !this.state.isOn) ?
+      <button onClick={this.takeBreak}>break</button> :
+      null
+    return (
       <div>
-        <h3>timer: {ms(this.state.time)}</h3>
+        <h3 className="countdown">timer: {ms(this.state.time)}</h3>
+        <h2>total time spend on task: {ms(this.state.totalTime)}</h2>
+        <h4> You owe me: ${this.state.payMe.toFixed(2)}</h4>
         {start}
         {resume}
         {stop}
         {reset}
+        {takeBreak}
       </div>
     )
   }
