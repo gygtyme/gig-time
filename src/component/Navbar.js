@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { logout } from '../redux/userReducer'
+import { logout, userInfo } from '../redux/userReducer'
 import axios from 'axios'
 import HamburgerMenu from './HamburgerMenu'
 
@@ -14,6 +14,11 @@ class Navbar extends Component {
             open: [false, true, false, true]
 
         }
+    }
+    componentDidMount(){
+        axios.get('/api/gigs').then((res)=>{
+            this.props.userInfo(res.data)
+        }).catch((err) => { console.log(err) })    
     }
 
     handleClick(id) {
@@ -62,7 +67,8 @@ class Navbar extends Component {
     }
 }
 const mapDispatchToProps = {
-    logout
+    logout,
+    userInfo
 }
 const mapStateToProps = (reduxState) => {
     const { firstName } = reduxState
