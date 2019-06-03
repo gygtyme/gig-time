@@ -1,6 +1,7 @@
 import React, {Component} from "react"
 import axios from "axios"
 import {connect} from "react-redux"
+import Timer from './Timer'
 
 class Gig extends Component{
     constructor(){
@@ -26,7 +27,8 @@ class Gig extends Component{
             <p>{gig.is_paid}</p>
             
             {gig.tasks.map((task) => {
-                return <div key={task.id}>{task.task_title}</div>
+                return <div key={task.id}>{task.task_title}
+                <Timer /></div>
             })}
             </div>
         })
