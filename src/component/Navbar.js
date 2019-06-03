@@ -26,9 +26,15 @@ class Navbar extends Component {
         let {email, pass}=this.state
 
         axios.post('/users/login', {email, pass}).then(res=>{
+//update redux store
+
 this.props.userInfo(res.data)
+
+//push to userHomepage
 this.props.history.push('/userHome')
-        }).catch(err=>console.log('login error', err))
+
+
+}).catch(err=>console.log('login error', err))
     }
 
     logoutHandler=()=> {
