@@ -4,18 +4,9 @@ import {connect} from "react-redux"
 import Timer from './Timer'
 
 class Gig extends Component{
-    constructor(){
-        super()
-        this.state = {
-            gigs: [{title:"racoon cooking", description:"cooking the racoon", total_time: 225, project_rate: 15, is_paid: "false", is_billed: "true", tasks: [
-                {task_title: "find racoon"},
-                {task_title: "kill racoon"},
-                {task_title: "eat racoon"}
-            ]}]
-        }
-    }   
+ 
     render(){
-        let gigMapped = this.state.gigs.map((gig) => {
+        let gigMapped = this.props.gigs.map((gig) => {
             return <div style={{border: "solid", width: "200px", borderRadius: "5px", padding: "5px"}} key={gig.id}>
             <h2>{gig.title}</h2>
             <p>Desc: {gig.description}</p>
@@ -31,6 +22,7 @@ class Gig extends Component{
             })}
             </div>
         })
+
         return(
             <div>
                 {gigMapped}

@@ -22,6 +22,7 @@ export const TASK_TIME = "TASK_TIME"
 export const LOGIN = 'LOGIN'
 
 export function userInfo(obj) {
+
     return {
         type: USER_INFO,
         payload: obj
