@@ -16,6 +16,6 @@ values(
   ${project_rate},
   ${client_id},
   ${is_paid},
-  ${is_paid} 
+  ${is_billed} 
   )
 returning id;

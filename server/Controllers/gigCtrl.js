@@ -36,7 +36,7 @@ module.exports = {
     const { id } = req.params
     // const { id: user_id } = req.session.user 
 
-    db.delete_gig([id, user_id]).then(() => { //we dont have a session to get user id yet
+    db.delete_gig([id]).then(() => { //we dont have a session to get user id yet
       res.status(200).send(gig)
     }).catch(err => console.log("error", err))
   },
@@ -45,9 +45,9 @@ module.exports = {
     console.log(`update gigs fired`)
     const db = req.app.get('db')
     const { id } = req.params;
-    const { title, instructions, ingredients } = req.body  //pass in whatever we want it to have
+    const { title, description, total_time, project_rate, client_id, is_paid, is_billed } = req.body  //pass in whatever we want it to have
 
-    db.update_gig([title, instructions, id]).then(() => {
+    db.update_gig({id, title, description, total_time, project_rate, client_id, is_paid, is_billed}).then(() => {
       res.sendStatus(200)
     }).catch(err => console.log("error", err))
   },
