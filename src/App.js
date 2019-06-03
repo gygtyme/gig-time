@@ -1,15 +1,22 @@
 import React from 'react';
 import './App.css';
+// import {Provider} from 'react-redux'
+// import store from './redux/store'
+import {HashRouter} from 'react-router-dom'
+import Navbar from './component/Navbar'
+import routes from './routes'
+
 
 function App() {
-  return (
-    <div>
-      <h1>Gig Time</h1>
-      <h1>Is better than Brodium</h1>
-      <h1>RULEZ!!!</h1>
-      <h2>merge error</h2>
-    </div>
-  );
+ return (
+  //  <Provider store={store}>
+     <HashRouter>
+       <Navbar />
+       {routes}
+       
+     </HashRouter>
+  //  </Provider>
+ );
 }
 
 export default App;
