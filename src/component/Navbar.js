@@ -17,9 +17,18 @@ class Navbar extends Component {
         }
     }
     componentDidMount() {
-        axios.get('/api/gigs').then((res) => {
-            this.props.userInfo(res.data)
-        }).catch((err) => { console.log(err) })
+    //     axios.get('/api/gigs').then((res) => {
+    //         this.props.userInfo(res.data)
+    //     }).catch((err) => { console.log(err) })
+    }
+
+    loginHandler= ()=> {
+        let {email, pass}=this.state
+
+        axios.post('/users/login', {email, pass}).then(res=>{
+this.props.userInfo(res.data)
+this.props.history.push('/')
+        }).catch(err=>console.log('login error', err))
     }
 
     changeHandler = (e) => {
@@ -28,7 +37,7 @@ class Navbar extends Component {
         })
     }
 
-    handleClick(id) {
+handleClick=(id)=> {
         let { open } = this.state;
         this.setState({
             open: [...open.slice(0, id), !open[id], ...open.slice(id + 1)]
@@ -57,25 +66,17 @@ class Navbar extends Component {
                     <div className='loginJacob'>
 
                         email <input type="email"
-                            name="email" placeholder="email" onChange={e => {
+                            name="email" placeholder="email" required onChange={e => {
                                 this.changeHandler(e)
                             }} />
 
                         Password <input type="password"
-                            name="pass" placeholder="password" onChange={(e) => {
+                            name="pass" placeholder="password" required onChange={(e) => {
                                 this.changeHandler(e)
                             }} />
-
+<button onClick={this.loginHandler}>Login</button>
                     </div>
 
-                    <ul className="login_register_container">
-                        <li className="login_container">
-                            <Link to='/login' className="login_text">Login</Link>
-                        </li>
-                        <li className="register_container">
-                            <Link to='/register' className="register_text">Get Started </Link>
-                        </li>
-                    </ul>
 
                     </div>
                 ) : (
@@ -93,7 +94,8 @@ class Navbar extends Component {
 }
 const mapDispatchToProps = {
     logout,
-    userInfo
+    userInfo, 
+
 }
 const mapStateToProps = (reduxState) => {
     const { firstName } = reduxState
