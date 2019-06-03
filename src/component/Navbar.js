@@ -11,14 +11,21 @@ class Navbar extends Component {
         super()
         this.state = {
 
-            open: [false, true, false, true]
-
+            open: [false, true, false, true],
+            email: '',
+            pass: ''
         }
     }
-    componentDidMount(){
-        axios.get('/api/gigs').then((res)=>{
+    componentDidMount() {
+        axios.get('/api/gigs').then((res) => {
             this.props.userInfo(res.data)
-        }).catch((err) => { console.log(err) })    
+        }).catch((err) => { console.log(err) })
+    }
+
+    changeHandler = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
     }
 
     handleClick(id) {
@@ -35,7 +42,7 @@ class Navbar extends Component {
             <nav>
                 <div className="app_name_logout_container">
                     <span className="app_name_container">GIG Time</span>
-                    
+
                     {firstName && <div>Welcome, {firstName}  <button className="logout_button" onClick={() => {
                         this.props.logout()
                         axios.get('/auth/logout').then(() => { this.props.history.push('/home') })
@@ -45,14 +52,32 @@ class Navbar extends Component {
                 </div>
 
                 {!this.props.username ? (
+
+<div>
+                    <div className='loginJacob'>
+
+                        email <input type="email"
+                            name="email" placeholder="email" onChange={e => {
+                                this.changeHandler(e)
+                            }} />
+
+                        Password <input type="password"
+                            name="pass" placeholder="password" onChange={(e) => {
+                                this.changeHandler(e)
+                            }} />
+
+                    </div>
+
                     <ul className="login_register_container">
                         <li className="login_container">
                             <Link to='/login' className="login_text">Login</Link>
                         </li>
                         <li className="register_container">
-                            <Link to='/register' className="register_text">Get Started</Link>
+                            <Link to='/register' className="register_text">Get Started </Link>
                         </li>
                     </ul>
+
+                    </div>
                 ) : (
                         <div className="menu_logout_container">
                             <HamburgerMenu />

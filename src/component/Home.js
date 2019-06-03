@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import axios from 'axios';
 import { userInfo } from "../redux/userReducer"
-
+import Navbar from './Navbar'
 
 
 
@@ -15,9 +15,23 @@ class Home extends Component {
     }
   }
   componentDidMount() {
-    axios.get('/auth/users').then((res) => {
-      this.props.userInfo(res.data)
-    }).catch((err) => { console.log(err) })
+    
+
+    axios.get('/getEverything').then((res)=>{
+      if(res.data.session.user){
+        
+        this.props.userInfo(res.data)
+
+        // axios.get('/auth/users').then((res) => {
+          
+          
+        //   this.props.userInfo(res.data)          
+          
+        // }).catch((err) => { console.log(err) })
+
+      }
+    }).catch(err=>console.log('err with navBar CDM', err))
+
   }
 
   render() {
@@ -26,7 +40,7 @@ class Home extends Component {
 
     return (
       <div>
-        <h1>text holder</h1>
+this is the home component.
 
       </div>
     )
