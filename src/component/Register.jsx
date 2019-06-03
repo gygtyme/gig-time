@@ -10,12 +10,13 @@ export default class Register extends Component {
       lastName:'', 
       email:'', 
       phone: '', 
-      password:''
+      pass:''
     }
   }
 
 submitHandler=(e)=> {
   e.preventDefault()
+  console.log('clicked!')
 
 axios.post('/users/register', this.state).then((res)=>{
   console.log(res)
@@ -43,6 +44,7 @@ changeHandler=(e)=> {
 
       <input type="password" name="password" placeholder="password" onChange={this.changeHandler} required/>
 
+<button type="submit" onClick={this.submitHandler}>register!</button>
         </form>
       </div>
     )
