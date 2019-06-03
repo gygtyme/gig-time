@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
-// import { connect } from 'react-redux'
-// import { logout } from '../redux/auth_reducer'
+import { connect } from 'react-redux'
+import { logout, userInfo } from '../redux/userReducer'
 import axios from 'axios'
 import HamburgerMenu from './HamburgerMenu'
 
 
-export default class Navbar extends Component {
+class Navbar extends Component {
     constructor() {
         super()
         this.state = {
@@ -14,6 +14,11 @@ export default class Navbar extends Component {
             open: [false, true, false, true]
 
         }
+    }
+    componentDidMount(){
+        axios.get('/api/gigs').then((res)=>{
+            this.props.userInfo(res.data)
+        }).catch((err) => { console.log(err) })    
     }
 
     handleClick(id) {
@@ -24,14 +29,14 @@ export default class Navbar extends Component {
     }
 
     render() {
-        const { username } = this.props
+        const { firstName } = this.props
         return (
 
             <nav>
                 <div className="app_name_logout_container">
                     <span className="app_name_container">GIG Time</span>
                     
-                    {username && <div>Welcome, {username}  <button className="logout_button" onClick={() => {
+                    {firstName && <div>Welcome, {firstName}  <button className="logout_button" onClick={() => {
                         this.props.logout()
                         axios.get('/auth/logout').then(() => { this.props.history.push('/home') })
 
@@ -61,12 +66,13 @@ export default class Navbar extends Component {
         )
     }
 }
-// const mapDispatchToProps = {
-//     logout
-// }
-// const mapStateToProps = (reduxState) => {
-//     const { username } = reduxState
-//     return { username }
-// }
+const mapDispatchToProps = {
+    logout,
+    userInfo
+}
+const mapStateToProps = (reduxState) => {
+    const { firstName } = reduxState
+    return { firstName }
+}
 
-// export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Navbar))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Navbar))

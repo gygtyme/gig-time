@@ -17,8 +17,9 @@ export default (
     )} /> */}
     {/* <Route path='/register' component={NewUser} /> */}
     <Route path="/gig" component={Gig} />
+    {/* <Route path='/register' component={NewUser} /> */} */}
     <Route path='/home' component={Home} />
-    
-    
+
+
   </Switch>
 )
