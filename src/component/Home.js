@@ -1,25 +1,24 @@
 import React, { Component } from 'react'
-// import { withRouter } from 'react-router-dom'
-// import { connect } from 'react-redux'
-
-// import axios from 'axios';
-// import { updateUsername } from "../redux/auth_reducer"
-
+import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import axios from 'axios';
+import { userInfo } from "../redux/userReducer"
 
 
 
-export default class Home extends Component {
+
+class Home extends Component {
   constructor() {
     super()
     this.state = {
 
     }
   }
-  // componentDidMount() {
-  //   axios.get('/auth/users').then((res) => {
-  //     this.props.updateUsername(res.data.username)
-  //   }).catch((err) => { console.log(err) })
-  // }
+  componentDidMount() {
+    axios.get('/auth/users').then((res) => {
+      this.props.userInfo(res.data)
+    }).catch((err) => { console.log(err) })
+  }
 
   render() {
 
@@ -35,13 +34,13 @@ export default class Home extends Component {
   }
 
 }
-// const mapDispatchToProps = {
-//   updateUsername
-// }
+const mapDispatchToProps = {
+  userInfo
+}
 
-// const mapStateToProps = (reduxState) => {
-//   const { username } = reduxState
-//   return { username }
-// }
+const mapStateToProps = (reduxState) => {
+  const { firstName } = reduxState
+  return { firstName }
+}
 
-// export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home))
