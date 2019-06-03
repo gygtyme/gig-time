@@ -40,18 +40,18 @@ class Timer extends React.Component {
 
   takeBreak = () => {
     this.setState({
-      totalTime: this.state.totalTime + this.state.time,
+      totalTime: this.state.totalTime + this.state.time,  //so far it only calculates once you hit break
     })
     this.setState({
       time : 0,
-      payMe : (this.state.totalTime/1000/60/60) * 60
+      payMe : (this.state.totalTime/1000/60/60) * 60 //here is where you pass in rate
     })
     
   }
 
   editTime=()=>{
     this.setState({
-      editToggle : !this.state.editToggle
+      editToggle : !this.state.editToggle 
     })
   }
 
@@ -63,7 +63,7 @@ class Timer extends React.Component {
 
   saveEdit = () => {
     this.setState({
-      totalTime : this.state.inputTime * 1000 * 60
+      totalTime : this.state.inputTime * 1000 * 60 //we need to ask for time in minutes from user
     })
   }
 
