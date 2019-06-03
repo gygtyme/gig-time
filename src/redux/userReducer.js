@@ -2,6 +2,7 @@
 //gigs should also include tasks.
 
 const initialState = {
+    user_id: "",
     firstName: "",
     lastName: "",
     email: "",
@@ -15,11 +16,18 @@ const initialState = {
 }
 
 export const USER_INFO = "USER_INFO"
+export const LOGOUT = "LOGOUT"
 
 export function userInfo(obj){
     return {
         type: USER_INFO,
         payload: obj
+    }
+}
+
+export function logout(){
+    return{
+        type: LOGOUT
     }
 }
 
@@ -29,6 +37,7 @@ export default function reducer(state = initialState, action){
         case USER_INFO:
             return {
                 ...state,
+                user_id: payload.id,
                 firstName: payload.firstName,
                 lastName: payload.lastName,
                 email: payload.email,
@@ -40,6 +49,8 @@ export default function reducer(state = initialState, action){
                 _state: payload._state,
                 gigs: payload.gigs
             }
+        case LOGOUT:
+            return initialState
         default: 
             return state
     }
