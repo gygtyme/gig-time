@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom'
 import Home from './component/Home'
 // import Login from './components/forms/Login'
 // import NewUser from './components/forms/NewUser';
+import Gig from "./component/Gig"
 
 
 export default (
@@ -15,6 +16,7 @@ export default (
       </Login>
     )} /> */}
     {/* <Route path='/register' component={NewUser} /> */}
+    <Route path="/gig" component={Gig} />
     <Route path='/home' component={Home} />
     
     
