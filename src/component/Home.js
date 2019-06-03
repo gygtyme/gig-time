@@ -6,7 +6,6 @@ import { userInfo } from "../redux/userReducer"
 
 
 
-
 class Home extends Component {
   constructor() {
     super()
@@ -15,9 +14,23 @@ class Home extends Component {
     }
   }
   componentDidMount() {
-    axios.get('/auth/users').then((res) => {
-      this.props.userInfo(res.data)
-    }).catch((err) => { console.log(err) })
+    
+
+    axios.get('/getEverything').then((res)=>{
+      if(res.data.session.user){
+        
+        this.props.userInfo(res.data)
+
+        // axios.get('/auth/users').then((res) => {
+          
+          
+        //   this.props.userInfo(res.data)          
+          
+        // }).catch((err) => { console.log(err) })
+
+      }
+    }).catch(err=>console.log('err with navBar CDM', err))
+
   }
 
   render() {
@@ -26,7 +39,8 @@ class Home extends Component {
 
     return (
       <div>
-        <h1>text holder</h1>
+        <div className="learnMore">Learn More</div>
+        <div className="registerBox">Register</div>
 
       </div>
     )

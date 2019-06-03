@@ -5,20 +5,24 @@ import Home from './component/Home'
 // import Login from './components/forms/Login'
 // import NewUser from './components/forms/NewUser';
 import Gig from "./component/Gig"
-
+import UserHome from './component/userHome'
+import Register from './component/Register'
 
 export default (
   <Switch>
     <Route exact path='/' component={Home} />
+    <Route path="/userHome" component={UserHome} />
+
+    <Route path='/register' component={Register} />
+    
+    <Route path="/gig" component={Gig} />
     {/* <Route path='/login' component={() => (
       <Login>
         <Register />
       </Login>
     )} /> */}
-    {/* <Route path='/register' component={NewUser} /> */}
-    <Route path="/gig" component={Gig} />
-    {/* <Route path='/register' component={NewUser} /> */} */}
-    <Route path='/home' component={Home} />
+    {/* <Route path='/register' component={NewUser} /> */} 
+    {/* <Route path='/home' component={Home} /> */}
 
 
   </Switch>
