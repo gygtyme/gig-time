@@ -1,5 +1,7 @@
-const React = require('react')
+import React from 'react'
+import {toggle} from '../Utils/utils_Tiago'
 const ms = require('pretty-ms')
+
 class Timer extends React.Component {
   constructor(props) {
     super(props)
@@ -51,7 +53,7 @@ class Timer extends React.Component {
 
   editTime=()=>{
     this.setState({
-      editToggle : !this.state.editToggle 
+      editToggle : toggle(this.state.editToggle)
     })
   }
 
@@ -102,4 +104,4 @@ class Timer extends React.Component {
     )
   }
 }
-module.exports = Timer
+export default Timer
