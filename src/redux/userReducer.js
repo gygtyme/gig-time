@@ -12,11 +12,13 @@ const initialState = {
     city: "",
     zip: "",
     _state: "",
-    gigs: []
+    gigs: [],
+    taskTime: 0
 }
 
 export const USER_INFO = "USER_INFO"
 export const LOGOUT = "LOGOUT"
+export const TASK_TIME = "TASK_TIME"
 
 export function userInfo(obj){
     return {
@@ -28,6 +30,13 @@ export function userInfo(obj){
 export function logout(){
     return{
         type: LOGOUT
+    }
+}
+
+export function updateTaskTime(time){
+    return{
+        type: TASK_TIME,
+        payload: time
     }
 }
 
@@ -51,6 +60,11 @@ export default function reducer(state = initialState, action){
             }
         case LOGOUT:
             return initialState
+        case TASK_TIME:
+            return {
+                ...state,
+                taskTime: payload + state.taskTime
+            }
         default: 
             return state
     }

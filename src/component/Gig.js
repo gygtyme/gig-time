@@ -15,20 +15,19 @@ class Gig extends Component{
         }
     }   
     render(){
-        console.log(this.state.gigs)
         let gigMapped = this.state.gigs.map((gig) => {
-            return <div style={{border: "solid", width: "200px", borderRadius: "5px"}} key={gig.id}>
-            
-            <h3>{gig.title}</h3>
-            <p>{gig.description}</p>
-            <p>{gig.total_time}</p>
-            <p>{gig.project_rate}</p>
-            <p>{gig.is_billed}</p>
-            <p>{gig.is_paid}</p>
-            
+            return <div style={{border: "solid", width: "200px", borderRadius: "5px", padding: "5px"}} key={gig.id}>
+            <h2>{gig.title}</h2>
+            <p>Desc: {gig.description}</p>
+            <p>Time: {gig.total_time}</p>
+            <p>Rate: {gig.project_rate}</p>
+            <div>
+                <p>Billed: {gig.is_billed}</p>
+                <p>Paid: {gig.is_paid}</p>
+            </div>
             {gig.tasks.map((task) => {
-                return <div key={task.id}>{task.task_title}
-                <Timer /></div>
+                return <div key={task.id}>Task Title: {task.task_title} <b />
+                 <Timer /></div>
             })}
             </div>
         })
