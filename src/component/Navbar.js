@@ -31,6 +31,12 @@ this.props.history.push('/userHome')
         }).catch(err=>console.log('login error', err))
     }
 
+    logoutHandler=()=> {
+        axios.delete('/users/logout').then(()=>{
+            console.log('user Logged Out')
+            this.props.history.push('/')
+        }).catch(err=>console.log(err, 'logout issue'))
+    }
     changeHandler = (e) => {
         this.setState({
             [e.target.name]: e.target.value
@@ -75,6 +81,9 @@ handleClick=(id)=> {
                                 this.changeHandler(e)
                             }} />
 <button onClick={this.loginHandler}>Login</button>
+
+<button onClick={this.logoutHandler}>Logout</button>
+
                     </div>
 
 

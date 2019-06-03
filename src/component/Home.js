@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import axios from 'axios';
 import { userInfo } from "../redux/userReducer"
-import Navbar from './Navbar'
 
 
 
@@ -40,7 +39,8 @@ class Home extends Component {
 
     return (
       <div>
-this is the home component.
+        <div className="learnMore">Learn More</div>
+        <div className="registerBox">Register</div>
 
       </div>
     )
