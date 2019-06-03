@@ -6,14 +6,14 @@ import Home from './component/Home'
 // import NewUser from './components/forms/NewUser';
 import Gig from "./component/Gig"
 import UserHome from './component/userHome'
+import Register from './component/Register'
 
 export default (
   <Switch>
     <Route exact path='/' component={Home} />
     <Route path="/userHome" component={UserHome} />
 
-
-
+    <Route path='/register' component={Register} />
     
     <Route path="/gig" component={Gig} />
     {/* <Route path='/login' component={() => (
@@ -21,7 +21,6 @@ export default (
         <Register />
       </Login>
     )} /> */}
-    {/* <Route path='/register' component={NewUser} /> */}
     {/* <Route path='/register' component={NewUser} /> */} 
     {/* <Route path='/home' component={Home} /> */}
 
