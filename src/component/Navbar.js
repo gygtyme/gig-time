@@ -27,7 +27,7 @@ class Navbar extends Component {
 
         axios.post('/users/login', {email, pass}).then(res=>{
 this.props.userInfo(res.data)
-this.props.history.push('/')
+this.props.history.push('/userHome')
         }).catch(err=>console.log('login error', err))
     }
 
