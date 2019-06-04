@@ -18,23 +18,25 @@ module.exports = {
     }
   },
 
-  createGig: (req, res) => {
+  createGig: async (req, res) => {
     console.log(`create gig was fired`, req.body)
     const { session } = req
     const { id:user_id } = req.session.user
     const db = req.app.get('db')
-    const { gigName, gigDesc, rate, clientFName, clientLName, clientPhone, email  } = req.body //need db schema to be able to know what to pass in
+    const { gigName, gigDesc, rate, clientFName, clientLName, clientPhone, email  } = req.body 
     
-    
-    
-    db.create_gig([user_id, gigName, gigDesc, rate]).then((response) => { //use the same as line 27
+
+    try {
       
-      db.create_client([clientFName, clientLName, email, clientPhone]).then(()=>{
-        console.log('client created')
-      })
-      
-      res.status(200).send(response)
-    }).catch(err => console.log("error", err))
+      await db.create_gig([user_id, gigName, gigDesc, rate])
+      await db.create_client([clientFName, clientLName, email, clientPhone])
+      let newGigs= await db.get_gigs_by_user_id(user_id)
+  
+      res.status(200).send(newGigs)
+
+    } catch (error) {
+      res.status(500).send(error)
+    }
 
   },
 
