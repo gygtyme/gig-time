@@ -33,10 +33,10 @@ module.exports = {
 
     // delete user[0].pass_hash
 
-    session.user = user[0],
+    session.user = user[0]
 
 
-      res.status(200).send(session)
+    res.status(200).send(session)
 
   },
 

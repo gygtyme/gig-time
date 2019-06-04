@@ -6,6 +6,7 @@ const gigCtrl = require('./Controllers/gigCtrl')
 const taskCtrl= require('./Controllers/taskCtrl')
 const session = require('express-session')
 const authCtrl= require('./Controllers/authCtrl')
+const clientCtrl = require("./Controllers/clientCtrl")
 
 
 
@@ -51,3 +52,6 @@ app.delete('/api/tasks/delete/:taskId', taskCtrl.deleteTask)
 app.post('/users/register', authCtrl.register)
 app.post('/users/login', authCtrl.login)
 app.delete('/users/logout', authCtrl.logout)
+
+
+app.post("/api/clients", clientCtrl.getClient)

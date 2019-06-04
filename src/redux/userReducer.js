@@ -23,7 +23,6 @@ export const LOGIN = 'LOGIN'
 export const UPDATE_GIGS='UPDATE_GIGS'
 
 export function userInfo(obj) {
-
     return {
         type: USER_INFO,
         payload: obj
@@ -36,8 +35,8 @@ export function logout() {
     }
 }
 
-export function updateTaskTime(time){
-    return{
+export function updateTaskTime(time) {
+    return {
         type: TASK_TIME,
         payload: time
     }
@@ -57,16 +56,16 @@ export default function reducer(state = initialState, action) {
         case USER_INFO:
             return {
                 ...state,
-                user_id: payload.id,
-                firstName: payload.firstName,
-                lastName: payload.lastName,
-                email: payload.email,
-                phoneNumber: payload.phoneNumber,
-                jobTitle: payload.jobTitle,
-                street: payload.street,
-                city: payload.street,
-                zip: payload.zip,
-                _state: payload._state,
+                user_id: payload.user.id,
+                firstName: payload.user.first_name,
+                lastName: payload.user.last_name,
+                email: payload.user.email,
+                phoneNumber: payload.user.phone_number,
+                jobTitle: payload.user.job_title,
+                street: payload.user.street,
+                city: payload.user.city,
+                zip: payload.user.zip,
+                _state: payload.user._state,
                 gigs: payload.gigs
             }
         case LOGOUT:
@@ -82,7 +81,8 @@ export default function reducer(state = initialState, action) {
                 ...state, 
                 gigs: payload
             }
-        default: 
+
+        default:
             return state
     }
 }

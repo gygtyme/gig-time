@@ -2,8 +2,8 @@ module.exports = {
   getGigs: (req, res) => {
     console.log(`get gigs fired`)
     const db = req.app.get('db')
-    // let { id } = req.session.user
-    // id = String(id)
+    let { id } = req.session.user
+    id = String(id)
 
     if (req.query.title) {
       let searchTerm = `%${req.query.title}%`
@@ -12,7 +12,7 @@ module.exports = {
         })
     } else {
 
-      db.display_gigs([1]).then((recipe) => {  //add id to db.display_gigs([id])
+      db.display_gigs(id).then((recipe) => {  //add id to db.display_gigs([id])
         res.status(200).send(recipe)
       }).catch(err => console.log("error", err))
     }
@@ -45,7 +45,7 @@ module.exports = {
     // const { id: user_id } = req.session.user 
 
     db.delete_gig([id]).then(() => { //we dont have a session to get user id yet
-      res.status(200).send(gig)
+      // res.status(200).send(gig)
     }).catch(err => console.log("error", err))
   },
 
@@ -58,5 +58,5 @@ module.exports = {
     db.update_gig({id, title, description, total_time, project_rate, client_id, is_paid, is_billed}).then(() => {
       res.sendStatus(200)
     }).catch(err => console.log("error", err))
-  },
+  }
 }
