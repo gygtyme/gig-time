@@ -17,9 +17,10 @@ class Navbar extends Component {
         }
     }
     componentDidMount() {
-        //     axios.get('/api/gigs').then((res) => {
-        //         this.props.userInfo(res.data)
-        //     }).catch((err) => { console.log(err) })
+            axios.get('/api/gigs').then((res) => {
+                this.props.userInfo(res.data)
+                console.log(res.data)
+            }).catch((err) => { console.log(err) })
     }
 
     loginHandler = () => {
@@ -27,7 +28,7 @@ class Navbar extends Component {
 
         axios.post('/users/login', { email, pass }).then(res => {
             //update redux store
-            console.log(res.data, 'res data')
+            // console.log(res.data, 'res data')
             this.props.userInfo(res.data)
 
             //push to userHomepage
@@ -39,7 +40,7 @@ class Navbar extends Component {
 
     logoutHandler = () => {
         axios.delete('/users/logout').then(() => {
-            console.log('user Logged Out')
+            // console.log('user Logged Out')
             this.props.history.push('/')
         }).catch(err => console.log(err, 'logout issue'))
     }
@@ -58,7 +59,7 @@ class Navbar extends Component {
 
     render() {
         const { firstName } = this.props.prop
-        console.log(this.props, 'here')
+        // console.log(this.props, 'here')
         return (
 
             <nav>

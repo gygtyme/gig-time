@@ -2,8 +2,8 @@ module.exports = {
   getGigs: (req, res) => {
     console.log(`get gigs fired`)
     const db = req.app.get('db')
-    // let { id } = req.session.user
-    // id = String(id)
+    let { id } = req.session.user
+    id = String(id)
 
     if (req.query.title) {
       let searchTerm = `%${req.query.title}%`
@@ -12,7 +12,7 @@ module.exports = {
         })
     } else {
 
-      db.display_gigs([1]).then((recipe) => {  //add id to db.display_gigs([id])
+      db.display_gigs(id).then((recipe) => {  //add id to db.display_gigs([id])
         res.status(200).send(recipe)
       }).catch(err => console.log("error", err))
     }
@@ -20,10 +20,10 @@ module.exports = {
 
   createRecipe: (req, res) => {
     console.log(`create gig was fired`)
-    // const { session } = req
+    const { session } = req
     const db = req.app.get('db')
     const { title, description, total_time, project_rate, client_id, is_paid, is_billed  } = req.body //need db schema to be able to know what to pass in
-    // const { id:user_id } = req.session.user
+    const { id:user_id } = req.session.user
     
     db.create_gig({user_id, title, description, total_time, project_rate, client_id, is_paid, is_billed }).then(() => { //use the same as line 27
       res.sendStatus(200)
@@ -37,7 +37,7 @@ module.exports = {
     // const { id: user_id } = req.session.user 
 
     db.delete_gig([id]).then(() => { //we dont have a session to get user id yet
-      res.status(200).send(gig)
+      // res.status(200).send(gig)
     }).catch(err => console.log("error", err))
   },
 
@@ -50,5 +50,5 @@ module.exports = {
     db.update_gig({id, title, description, total_time, project_rate, client_id, is_paid, is_billed}).then(() => {
       res.sendStatus(200)
     }).catch(err => console.log("error", err))
-  },
+  }
 }

@@ -46,7 +46,6 @@ export default function reducer(state = initialState, action) {
     const { type, payload } = action
     switch (type) {
         case USER_INFO:
-            
             return {
                 ...state,
                 user_id: payload.user.id,
@@ -59,7 +58,7 @@ export default function reducer(state = initialState, action) {
                 city: payload.user.city,
                 zip: payload.user.zip,
                 _state: payload.user._state,
-                gigs: payload.user.gigs
+                gigs: payload.gigs
             }
         case LOGOUT:
             return initialState
