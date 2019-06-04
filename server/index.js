@@ -37,7 +37,7 @@ massive(CONNECTION_STRING).then((database) => {
 
 
 app.get('/api/gigs', gigCtrl.getGigs)
-app.post('/api/gigs', gigCtrl.createRecipe)
+app.post('/api/createGig', gigCtrl.createGig)
 app.get('/api/gigs/:title', gigCtrl.getGigs)
 app.delete('/api/gigs/:id', gigCtrl.delete)
 app.put('/api/gigs/:id', gigCtrl.update)

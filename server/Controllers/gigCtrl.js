@@ -18,16 +18,24 @@ module.exports = {
     }
   },
 
-  createRecipe: (req, res) => {
-    console.log(`create gig was fired`)
+  createGig: (req, res) => {
+    console.log(`create gig was fired`, req.body)
     const { session } = req
-    const db = req.app.get('db')
-    const { title, description, total_time, project_rate, client_id, is_paid, is_billed  } = req.body //need db schema to be able to know what to pass in
     const { id:user_id } = req.session.user
+    const db = req.app.get('db')
+    const { gigName, gigDesc, rate, clientFName, clientLName, clientPhone, email  } = req.body //need db schema to be able to know what to pass in
     
-    db.create_gig({user_id, title, description, total_time, project_rate, client_id, is_paid, is_billed }).then(() => { //use the same as line 27
-      res.sendStatus(200)
+    
+    
+    db.create_gig([user_id, gigName, gigDesc, rate]).then((response) => { //use the same as line 27
+      
+      db.create_client([clientFName, clientLName, email, clientPhone]).then(()=>{
+        console.log('client created')
+      })
+      
+      res.status(200).send(response)
     }).catch(err => console.log("error", err))
+
   },
 
   delete: (req, res) => {
