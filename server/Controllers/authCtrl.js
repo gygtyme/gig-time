@@ -67,7 +67,7 @@ module.exports = {
         try {
           //get user's gigs
           let userGigs= await dbInstance.get_gigs_by_user_id(session.user.id)
-          console.log(userGigs, "USER GIGS")
+          // console.log(userGigs, "USER GIGS")
 
           session.gigs=userGigs
 
@@ -89,7 +89,7 @@ session.gigs[i].tasks=gigTasks
 
 
 
-console.log("tasks added", session.gigs[0].tasks)
+// console.log("tasks added", session.gigs[0].tasks)
 
           //get client. 
 

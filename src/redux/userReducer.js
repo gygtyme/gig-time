@@ -20,6 +20,7 @@ export const USER_INFO = "USER_INFO"
 export const LOGOUT = "LOGOUT"
 export const TASK_TIME = "TASK_TIME"
 export const LOGIN = 'LOGIN'
+export const UPDATE_GIGS='UPDATE_GIGS'
 
 export function userInfo(obj) {
 
@@ -41,6 +42,13 @@ export function updateTaskTime(time){
         payload: time
     }
 }
+
+export function updateGigs (gigsArray){
+    return {
+        type: UPDATE_GIGS, 
+        payload: gigsArray
+    }
+} 
 
 
 export default function reducer(state = initialState, action) {
@@ -67,6 +75,12 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 taskTime: payload + state.taskTime
+            }
+
+        case UPDATE_GIGS:
+            return {
+                ...state, 
+                gigs: payload
             }
         default: 
             return state
