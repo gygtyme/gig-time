@@ -126,4 +126,8 @@ session.gigs[i].tasks=gigTasks
 
   },
 
+  getSession: (req, res) => {
+    res.send(req.session).status(200)
+  }
+
 }
