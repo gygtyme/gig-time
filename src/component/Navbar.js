@@ -63,7 +63,9 @@ class Navbar extends Component {
 
             <nav>
                 <div className="app_name_logout_container">
-                    <span className="app_name_container">GIG Time</span>
+                    <Link to='/' style={{'text-decoration': 'none', 'color': 'black'}}>
+                        <span className="app_name_container">GIG Time</span>
+                    </Link>
 
                     {firstName && <div>Welcome, {firstName}  <button className="logout_button" onClick={() => {
                         this.props.logout()
@@ -89,7 +91,9 @@ class Navbar extends Component {
                                 }} />
                             <button onClick={this.loginHandler}>Login</button>
 
-                            <button onClick={this.logoutHandler}>Logout</button>
+                            {/* <button onClick={this.logoutHandler}>Logout</button> */}
+
+                            <Link to='/register' style={{'text-decoration': 'none'}}> <button> Register </button> </Link>
 
                         </div>
 

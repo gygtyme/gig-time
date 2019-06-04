@@ -16,6 +16,7 @@ export default (
     <Route path='/register' component={Register} />
     
     <Route path="/gig" component={Gig} />
+    {/* <Route path='/learnMore' component={LearnMore} /> */}
     {/* <Route path='/login' component={() => (
       <Login>
         <Register />

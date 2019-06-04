@@ -57,4 +57,4 @@ const mapStateToProps = (reduxState) => {
   return { firstName }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home)) 
