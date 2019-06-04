@@ -17,31 +17,31 @@ class Navbar extends Component {
         }
     }
     componentDidMount() {
-    //     axios.get('/api/gigs').then((res) => {
-    //         this.props.userInfo(res.data)
-    //     }).catch((err) => { console.log(err) })
+        //     axios.get('/api/gigs').then((res) => {
+        //         this.props.userInfo(res.data)
+        //     }).catch((err) => { console.log(err) })
     }
 
-    loginHandler= ()=> {
-        let {email, pass}=this.state
+    loginHandler = () => {
+        let { email, pass } = this.state
 
-        axios.post('/users/login', {email, pass}).then(res=>{
-//update redux store
+        axios.post('/users/login', { email, pass }).then(res => {
+            //update redux store
+            console.log(res.data, 'res data')
+            this.props.userInfo(res.data)
 
-this.props.userInfo(res.data)
-
-//push to userHomepage
-this.props.history.push('/userHome')
+            //push to userHomepage
+            this.props.history.push('/userHome')
 
 
-}).catch(err=>console.log('login error', err))
+        }).catch(err => console.log('login error', err))
     }
 
-    logoutHandler=()=> {
-        axios.delete('/users/logout').then(()=>{
+    logoutHandler = () => {
+        axios.delete('/users/logout').then(() => {
             console.log('user Logged Out')
             this.props.history.push('/')
-        }).catch(err=>console.log(err, 'logout issue'))
+        }).catch(err => console.log(err, 'logout issue'))
     }
     changeHandler = (e) => {
         this.setState({
@@ -49,7 +49,7 @@ this.props.history.push('/userHome')
         })
     }
 
-handleClick=(id)=> {
+    handleClick = (id) => {
         let { open } = this.state;
         this.setState({
             open: [...open.slice(0, id), !open[id], ...open.slice(id + 1)]
@@ -57,7 +57,8 @@ handleClick=(id)=> {
     }
 
     render() {
-        const { firstName } = this.props
+        const { firstName } = this.props.prop
+        console.log(this.props, 'here')
         return (
 
             <nav>
@@ -72,25 +73,25 @@ handleClick=(id)=> {
                     }}>logout</button></div>}
                 </div>
 
-                {!this.props.username ? (
+                {!firstName ? (
 
-<div>
-                    <div className='loginJacob'>
+                    <div>
+                        <div className='loginJacob'>
 
-                        email <input type="email"
-                            name="email" placeholder="email" required onChange={e => {
-                                this.changeHandler(e)
-                            }} />
+                            email <input type="email"
+                                name="email" placeholder="email" required onChange={e => {
+                                    this.changeHandler(e)
+                                }} />
 
-                        Password <input type="password"
-                            name="pass" placeholder="password" required onChange={(e) => {
-                                this.changeHandler(e)
-                            }} />
-<button onClick={this.loginHandler}>Login</button>
+                            Password <input type="password"
+                                name="pass" placeholder="password" required onChange={(e) => {
+                                    this.changeHandler(e)
+                                }} />
+                            <button onClick={this.loginHandler}>Login</button>
 
-<button onClick={this.logoutHandler}>Logout</button>
+                            <button onClick={this.logoutHandler}>Logout</button>
 
-                    </div>
+                        </div>
 
 
                     </div>
@@ -109,12 +110,17 @@ handleClick=(id)=> {
 }
 const mapDispatchToProps = {
     logout,
-    userInfo, 
+    userInfo,
 
 }
 const mapStateToProps = (reduxState) => {
-    const { firstName } = reduxState
-    return { firstName }
+    
+return {
+    prop: reduxState
+}
+    
+    // const { firstName } = reduxState
+    // return { firstName }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Navbar))
