@@ -18,3 +18,4 @@ values(
   false, 
   false   
   )
+returning *
