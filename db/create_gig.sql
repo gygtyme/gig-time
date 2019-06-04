@@ -9,13 +9,12 @@ insert into gig(
   is_billed
   )
 values(
-  ${user_id},
-  ${title}, 
-  ${description}, 
-  ${total_time},
-  ${project_rate},
-  ${client_id},
-  ${is_paid},
-  ${is_billed} 
+  $1, 
+  $2, 
+  $3, 
+  0,
+  $4, 
+  null, 
+  false, 
+  false   
   )
-returning id;

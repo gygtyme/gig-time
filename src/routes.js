@@ -9,6 +9,8 @@ import UserHome from './component/userHome'
 import Register from './component/Register'
 import LearnMore from './component/LearnMore';
 import ClientView from './component/ClientView';
+import GigWizard from './component/GigWizard'
+import SingleGig from './component/SingleGig';
 
 export default (
   <Switch>
@@ -23,6 +25,8 @@ export default (
     <Route path='/learnMore' component={LearnMore} />
 
     <Route path='/clientView' component={ClientView} />
+    <Route path="/wizard" component={GigWizard} />
+    <Route path="/singlegig/:gig_id" component={SingleGig} />
     {/* <Route path='/login' component={() => (
       <Login>
         <Register />
