@@ -28,12 +28,15 @@ class SingleGig extends Component {
         <div style={{border: "solid"}}>
         <h2>{gig.title}</h2>
         <p>{client.client_first} {client.client_last}</p>
-        <p>{client.client_email}{client.client_phone}</p>
+        <p>{client.client_email} {client.client_phone}</p>
         <p>{gig.description}</p>
         <p>{gig.total_time}</p>
         <p>{gig.project_rate}</p>
         <p>{gig.is_paid}</p>
         <p>{gig.is_billed}</p>
+        <div>
+            {}
+        </div>
         </div>
         return (
             <div>

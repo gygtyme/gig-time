@@ -64,7 +64,7 @@ class Navbar extends Component {
 
             <nav>
                 <div className="app_name_logout_container">
-                    <Link to='/' style={{'text-decoration': 'none', 'color': 'black'}}>
+                    <Link to='/' style={{textDecoration: 'none', color: 'black'}}>
                         <span className="app_name_container">GIG Time</span>
                     </Link>
 
