@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { logout, userInfo } from '../redux/userReducer'
 import axios from 'axios'
 import HamburgerMenu from './HamburgerMenu'
+import './styles/Navbar.css';
 
 
 class Navbar extends Component {
