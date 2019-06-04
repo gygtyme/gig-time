@@ -5,18 +5,19 @@ class UserHome extends Component{
   render(){
 
     let gigMapped = this.props.gigs.map((gig) => {
-      return <div style={{border: "solid", width: "200px", borderRadius: "5px", padding: "5px"}} key={gig.id} onClick={()=> {
+      return <div style={{border: "solid",
+       width: "200px",
+        borderRadius: "5px",
+         padding: "5px",
+        margin: '15px'
+        }} key={gig.id} onClick={()=> {
         this.props.history.push(`/singlegig/${gig.id}`)
       }}>
       <h2>{gig.title}</h2>
       
       <p>Desc: {gig.description}</p>
       <p>Time: {gig.total_time}</p>
-      <p>Rate: {gig.project_rate}</p>
-      <div>
-          <p>Billed: {gig.is_billed}</p>
-          <p>Paid: {gig.is_paid}</p>
-      </div>
+
 
       
 </div>
@@ -26,7 +27,11 @@ class UserHome extends Component{
 
 
     return(
-      <div>
+      <div style={{
+        display:'flex', 
+        justifyContent: 'space-around', 
+        flexWrap: 'wrap',
+      }}>
         User Home!
 
 {gigMapped}
