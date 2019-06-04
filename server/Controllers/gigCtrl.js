@@ -30,11 +30,10 @@ module.exports = {
     db.create_gig([user_id, gigName, gigDesc, rate]).then((response) => { //use the same as line 27
       
       db.create_client([clientFName, clientLName, email, clientPhone]).then(()=>{
-        res.status(200).send(response)
-  
+        console.log('client created')
       })
       
-    
+      res.status(200).send(response)
     }).catch(err => console.log("error", err))
 
   },

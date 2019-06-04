@@ -29,6 +29,7 @@ class GigWizard extends Component {
     
     axios.post('/api/createGig', this.state).then(res => {
       //dispatch to redux store updated gig list
+      console.log(res.data, 'froewijafwoi')
       this.props.updateGigs(res.data)
     })
   }
