@@ -7,6 +7,7 @@ import Home from './component/Home'
 import Gig from "./component/Gig"
 import UserHome from './component/userHome'
 import Register from './component/Register'
+import SingleGig from './component/SingleGig';
 
 export default (
   <Switch>
@@ -16,6 +17,7 @@ export default (
     <Route path='/register' component={Register} />
     
     <Route path="/gig" component={Gig} />
+    <Route path="/singlegig/:gig_id" component={SingleGig} />
     {/* <Route path='/login' component={() => (
       <Login>
         <Register />
