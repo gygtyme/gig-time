@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import axios from 'axios';
 import { userInfo } from "../redux/userReducer"
-
+import { Link } from 'react-router-dom';
 
 
 class Home extends Component {
@@ -39,8 +39,8 @@ class Home extends Component {
 
     return (
       <div>
-        <div className="learnMore">Learn More</div>
-        <div className="registerBox">Register</div>
+        <div className="learnMore"><Link to='/learnMore'><button>Learn More</button></Link></div>
+        <div className="registerBox"><Link to='register'><button>Register</button></Link></div>
 
       </div>
     )
@@ -57,4 +57,4 @@ const mapStateToProps = (reduxState) => {
   return { firstName }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home)) 
