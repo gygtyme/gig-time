@@ -17,7 +17,6 @@ class Navbar extends Component {
         }
     }
     componentDidMount() {
-        console.log('this is the bomb')
         axios.get('/api/getsession').then((res) => {
             this.props.userInfo(res.data)
         }).catch((err) => { console.log(err) })
