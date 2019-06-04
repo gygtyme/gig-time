@@ -8,16 +8,21 @@ import Gig from "./component/Gig"
 import UserHome from './component/userHome'
 import Register from './component/Register'
 import LearnMore from './component/LearnMore';
+import ClientView from './component/ClientView';
 
 export default (
   <Switch>
     <Route exact path='/' component={Home} />
+
     <Route path="/userHome" component={UserHome} />
 
     <Route path='/register' component={Register} />
     
     <Route path="/gig" component={Gig} />
+
     <Route path='/learnMore' component={LearnMore} />
+
+    <Route path='/clientView' component={ClientView} />
     {/* <Route path='/login' component={() => (
       <Login>
         <Register />
