@@ -18,10 +18,9 @@ class Navbar extends Component {
         }
     }
     componentDidMount() {
-            axios.get('/api/gigs').then((res) => {
-                this.props.userInfo(res.data)
-                console.log(res.data)
-            }).catch((err) => { console.log(err) })
+        axios.get('/api/getsession').then((res) => {
+            this.props.userInfo(res.data)
+        }).catch((err) => { console.log(err) })
     }
 
     loginHandler = () => {
@@ -60,46 +59,31 @@ class Navbar extends Component {
 
     render() {
         const { firstName } = this.props.prop
-        // console.log(this.props, 'here')
         return (
-
-            <nav className='navbar'>
-                {/* <div className="app_name_logout_container"> */}
-                    <Link to='/' style={{'text-decoration': 'none', 'color': 'black'}}>
+            <nav>
+                <div className="app_name_logout_container">
+                    <Link to='/' style={{textDecoration: 'none', color: 'black'}}>
                         <span className="app_name_container">GIG Time</span>
                     </Link>
-
                     {firstName && <div>Welcome, {firstName}  <button className="logout_button" onClick={() => {
                         this.props.logout()
                         axios.get('/auth/logout').then(() => { this.props.history.push('/home') })
-
-
                     }}>logout</button></div>}
-                {/* </div> */}
-
+                </div>
                 {!firstName ? (
-
                     <div>
                         <div className='loginJacob'>
-
                             email <input type="email"
                                 name="email" placeholder="email" required onChange={e => {
                                     this.changeHandler(e)
                                 }} />
-
                             Password <input type="password"
                                 name="pass" placeholder="password" required onChange={(e) => {
                                     this.changeHandler(e)
                                 }} />
                             <button onClick={this.loginHandler}>Login</button>
-
-                            {/* <button onClick={this.logoutHandler}>Logout</button> */}
-
-                            <Link to='/register' style={{'text-decoration': 'none'}}> <button> Register </button> </Link>
-
+                            <Link to='/register' style={{ 'text-decoration': 'none' }}> <button> Register </button> </Link>
                         </div>
-
-
                     </div>
                 ) : (
                         <div className="menu_logout_container">
@@ -120,11 +104,11 @@ const mapDispatchToProps = {
 
 }
 const mapStateToProps = (reduxState) => {
-    
-return {
-    prop: reduxState
-}
-    
+
+    return {
+        prop: reduxState
+    }
+
     // const { firstName } = reduxState
     // return { firstName }
 }
