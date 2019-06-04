@@ -31,6 +31,7 @@ class GigWizard extends Component {
       //dispatch to redux store updated gig list
       console.log(res.data, 'froewijafwoi')
       this.props.updateGigs(res.data)
+      this.props.history.push('/userHome')
     })
   }
 
