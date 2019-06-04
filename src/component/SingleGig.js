@@ -26,7 +26,7 @@ class SingleGig extends Component {
         let gig_id = this.props.match.params.gig_id
         let gig = this.props.gigs.filter(gig => +gig_id === +gig.id)
         gig = gig[0]
-        console.log(gig)
+        
         let gigDisplay = (this.props.firstName) ?
         <div style={{border: "solid"}}>
         <h2>{gig.title}</h2>
