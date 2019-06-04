@@ -1,5 +1,5 @@
 import React from 'react'
-import {toggle, takeBreak} from '../Utils/utils_Tiago'
+import {toggle, breakTime} from '../Utils/utils_Tiago'
 const ms = require('pretty-ms')
 
 class Timer extends React.Component {
@@ -42,7 +42,7 @@ class Timer extends React.Component {
 
   takeBreak = () => { //tiago unit test here
     this.setState({
-      totalTime: takeBreak(this.state.totalTime, this.state.time),  //so far it only calculates once you hit break
+      totalTime: breakTime(this.state.totalTime, this.state.time),  //so far it only calculates once you hit break
     })
     this.setState({
       time : 0,
