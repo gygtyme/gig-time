@@ -55,3 +55,5 @@ app.delete('/users/logout', authCtrl.logout)
 
 
 app.post("/api/clients", clientCtrl.getClient)
+
+app.get('/api/getsession', authCtrl.getSession)
