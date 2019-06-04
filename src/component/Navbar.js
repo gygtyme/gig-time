@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { logout, userInfo } from '../redux/userReducer'
 import axios from 'axios'
 import HamburgerMenu from './HamburgerMenu'
+import './styles/Navbar.css';
 
 
 class Navbar extends Component {
@@ -62,8 +63,8 @@ class Navbar extends Component {
         // console.log(this.props, 'here')
         return (
 
-            <nav>
-                <div className="app_name_logout_container">
+            <nav className='navbar'>
+                {/* <div className="app_name_logout_container"> */}
                     <Link to='/' style={{'text-decoration': 'none', 'color': 'black'}}>
                         <span className="app_name_container">GIG Time</span>
                     </Link>
@@ -74,7 +75,7 @@ class Navbar extends Component {
 
 
                     }}>logout</button></div>}
-                </div>
+                {/* </div> */}
 
                 {!firstName ? (
 
