@@ -51,7 +51,7 @@ export default class HamburgerMenu extends Component {
     if(this.state.windowWidth <= 1080) {
       return [
         <div key={6} className="mobile_nav">
-          <p  key={8} onClick={this.handleNavClick.bind(this)}><i key={9} className="material-icons">view_headline</i></p>
+          <p  key={8} onClick={this.handleNavClick.bind(this)}><i key={9} className="material-icons"><i class="fas fa-bars"></i></i></p>
           {this.renderMobileNav()}
         </div>
       ];
