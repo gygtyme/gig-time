@@ -1,0 +1,43 @@
+.homeBody {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px black solid;
+}
+
+.homeMain  {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 80vh;
+  width: 80vw;
+  border: 1px black solid;
+}
+
+
+.learnMore {
+  height: 10vh;
+  width: 10vw;
+  border: black 1px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel {
+  height: 10vh;
+  width: 10vw;
+  border: black 1px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.registerBox {
+  height: 10vh;
+  width: 10vw;
+  border: black 1px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

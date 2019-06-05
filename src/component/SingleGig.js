@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux"
 import Axios from 'axios';
-import Timer from "./Timer"
+
+import Task from './Task'
 
 class SingleGig extends Component {
     state = {
@@ -25,7 +26,7 @@ class SingleGig extends Component {
         let gig_id = this.props.match.params.gig_id
         let gig = this.props.gigs.filter(gig => +gig_id === +gig.id)
         gig = gig[0]
-        console.log(gig)
+        
         let gigDisplay = (this.props.firstName) ?
         <div style={{border: "solid"}}>
         <h2>{gig.title}</h2>
@@ -37,13 +38,7 @@ class SingleGig extends Component {
         <p>{gig.is_paid}</p>
         <p>{gig.is_billed}</p>
         <div>
-            {gig.tasks.map((task) => 
-                <div key={task.id}>
-                    <h4>{task.task_title}</h4>
-                    <p>{task.task_description}</p>
-                    <Timer />
-                </div>
-            )}
+            <Task gig={gig}/>
         </div>
         </div> : null
         return (

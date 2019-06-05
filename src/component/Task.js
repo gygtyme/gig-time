@@ -1,40 +1,39 @@
 import React, { Component } from 'react';
-import {connect} from "react-redux"
+import { connect } from "react-redux"
 import Axios from 'axios';
+import Timer from './Timer'
+import SingleGig from './SingleGig';
+import SingleTask from './SingleTask';
 
 class Task extends Component {
     state = {
-        
+        toggleView: false,
+        targetId: null
     }
-    
 
-    
+    handleToggle = (val) => {
+        console.log(val)
+        this.setState({
+            toggleView: !this.state.toggleView,
+            targetId : val
+        })
+    }
+
     render() {
-      console.log('here is props', this.props)
-        let gig_id = this.props.match.params.gig_id
-        let gig = this.props.gigs.filter(gig => +gig_id === +gig.id)
-        gig = gig[0]
-        let gigDisplay = 
-        <div style={{border: "solid"}}>
-        <h2>{gig.title}</h2>
-        
-        <p>{gig.description}</p>
-        <p>{gig.total_time}</p>
-        <p>{gig.project_rate}</p>
-        <p>{gig.is_paid}</p>
-        <p>{gig.is_billed}</p>
-        </div>
+        console.log(this.props)
+        let taskView = this.props.gig.tasks.map((task) => 
+        <SingleTask task={task}/> )
         return (
-            <div>
-                {gigDisplay}
+            <div >
+                {taskView}
             </div>
         );
     }
 }
 
 const mapStateToProps = (state) => {
-    let {gigs} = state
-    return {gigs}
+    let { gigs } = state
+    return { gigs }
 }
 
 export default connect(mapStateToProps)(Task);
