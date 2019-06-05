@@ -1,0 +1,1 @@
+select * from gig where gig_id=$1

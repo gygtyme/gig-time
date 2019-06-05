@@ -27,9 +27,9 @@ module.exports = {
     
 
     try {
+      let newClient=await db.create_client([clientFName, clientLName, email, clientPhone])
       
-      await db.create_gig([user_id, gigName, gigDesc, rate])
-      await db.create_client([clientFName, clientLName, email, clientPhone])
+      await db.create_gig([user_id, gigName, gigDesc, rate, newClient[0].client_id])
       let newGigs= await db.get_gigs_by_user_id(user_id)
   
       res.status(200).send(newGigs)
@@ -60,6 +60,57 @@ module.exports = {
     db.update_gig({id, title, description, total_time, project_rate, client_id, is_paid, is_billed}).then(() => {
       res.sendStatus(200)
     }).catch(err => console.log("error", err))
+  }, 
+
+  billGig: async (req, res) => {
+    req.app.get('db')
+    let gigId= req.params
+    let {total, clientId}= req.body
+    
+
+    
+//get client email for gig
+let gig= await db.get_gig_by_gig_id(gigId)
+
+let client= await db.get_client_by_id(gig[0].client_id)
+//
+
+//send nodemailer to client email
+
+
+//make body for client email
+
+
+//status 200
+
+
+
+var nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'dropinappinfo@gmail.com',
+    pass: GOOGLE
+  }
+});
+
+var mailOptions = {
+  from: 'billing@gigtime.com',
+  to: `${client[0].client_email}`,
+  subject: `Your Project is done! Here's your invoice!`,
+  text: `${client[0].client_first}, Thank you for your business! I have completed ${gig[0].title}. `
+};
+
+transporter.sendMail(mailOptions, function (error, info) {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Email sent: ' + info.response);
+  }
+});
+
+
   },
 
   updateGigTime: async(req, res) => {
@@ -77,4 +128,4 @@ module.exports = {
       res.sendStatus(200)
     }).catch(err => console.log("error", err))
   }
-}
+ }
