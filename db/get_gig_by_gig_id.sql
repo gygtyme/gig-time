@@ -1,1 +1,2 @@
-select * from gig where gig_id=$1
+select * from gig 
+where id=$1

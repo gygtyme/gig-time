@@ -50,7 +50,15 @@ class SingleGig extends Component {
                 <p>Ammount due: ${((gig.total_time /1000/60/60)*gig.project_rate).toFixed(2)}</p>
                 <p>{gig.is_paid}</p>
                 <p>{gig.is_billed}</p>
-                
+                <button onClick={()=>{Axios.post(`/billGig/${gig_id}`, {
+                    total: this.state.amountDue, 
+
+                }).then( (res)=>{
+
+                    this.props.history.push('/userHome')
+                    alert('your email has been sent to the client!')
+                }
+                ).catch(err=>console.log(err, 'frontendError'))}}>Bill This Gig </button>
                 <div>
                     <Task gig={gig} />
                 </div>

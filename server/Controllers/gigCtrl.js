@@ -1,3 +1,5 @@
+const {GOOGLE}=process.env
+
 module.exports = {
   getGigs: (req, res) => {
     console.log(`get gigs fired`)
@@ -63,16 +65,57 @@ module.exports = {
   }, 
 
   billGig: async (req, res) => {
-    req.app.get('db')
-    let gigId= req.params
-    let {total, clientId}= req.body
-    
 
+console.log('bill hit!')
+    let db=req.app.get('db')
+    
+    let {total}= req.body
+    
+    console.log(req.params)
     
 //get client email for gig
-let gig= await db.get_gig_by_gig_id(gigId)
 
-let client= await db.get_client_by_id(gig[0].client_id)
+try {
+  let gig= await db.get_gig_by_gig_id([req.params.gigId])
+  let id=gig[0].client_id
+console.log(id, 'client ID')
+  let client= await db.get_client_by_id({id})
+  console.log("gig", gig[0], "client", client)
+
+
+
+  var nodemailer = require('nodemailer');
+
+  var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'dropinappinfo@gmail.com',
+      pass: GOOGLE
+    }
+  });
+  
+  var mailOptions = {
+    from: 'billing@gigtime.com',
+    to: `${client[0].client_email}`,
+    subject: `Your Project is done! Here's your invoice!`,
+    text: `${client[0].client_first}, Thank you for your business! I have completed ${gig[0].title}. `
+  };
+  
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+
+res.sendStatus(200)
+
+} catch (error) {
+  res.status(500).send(error)
+  console.log(error)
+}
+
 //
 
 //send nodemailer to client email
@@ -83,32 +126,6 @@ let client= await db.get_client_by_id(gig[0].client_id)
 
 //status 200
 
-
-
-var nodemailer = require('nodemailer');
-
-var transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'dropinappinfo@gmail.com',
-    pass: GOOGLE
-  }
-});
-
-var mailOptions = {
-  from: 'billing@gigtime.com',
-  to: `${client[0].client_email}`,
-  subject: `Your Project is done! Here's your invoice!`,
-  text: `${client[0].client_first}, Thank you for your business! I have completed ${gig[0].title}. `
-};
-
-transporter.sendMail(mailOptions, function (error, info) {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log('Email sent: ' + info.response);
-  }
-});
 
 
   },
