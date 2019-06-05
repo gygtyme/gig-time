@@ -13,7 +13,8 @@ const initialState = {
     zip: "",
     _state: "",
     gigs: [],
-    taskTime: 0
+    taskTime: 0,
+    totalGigTime: 0
 }
 
 export const USER_INFO = "USER_INFO"
@@ -21,11 +22,20 @@ export const LOGOUT = "LOGOUT"
 export const TASK_TIME = "TASK_TIME"
 export const LOGIN = 'LOGIN'
 export const UPDATE_GIGS='UPDATE_GIGS'
+export const UPDATE_GIG_TIME = 'UPDATE_GIG_TIME'
 
 export function userInfo(obj) {
     return {
         type: USER_INFO,
         payload: obj
+    }
+}
+
+export function updateGigTime(val) {
+    console.log('hey I am redux and I got this', val)
+    return {
+        type: UPDATE_GIG_TIME,
+        payload: val
     }
 }
 
@@ -80,6 +90,11 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state, 
                 gigs: payload
+            }
+        case UPDATE_GIG_TIME:
+            return {
+                ...state,
+                totalGigTime: state.totalGigTime + payload
             }
 
         default:
