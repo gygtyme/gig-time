@@ -1,9 +1,10 @@
 import React from 'react'
-import { toggle, breakTime } from '../Utils/utils_Tiago'
+import { toggle, breakTime} from '../Utils/utils_Tiago'
 import { connect } from "react-redux"
-import { updateGigTime } from '../redux/userReducer'
+import { updateGigTime, refreshTotalGigTime  } from '../redux/userReducer'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios';
+import { async } from 'q';
 const ms = require('pretty-ms')
 
 class Timer extends React.Component {
@@ -55,11 +56,21 @@ class Timer extends React.Component {
     console.log('this is the total time on state', this.state.totalTime)
     this.props.updateGigTime(this.state.totalTime)
     this.updateGigTime()
+    this.props.refreshTotalGigTime()
+  }
+
+  saveEdit = async() => {
+    await this.setState({
+      totalTime: this.state.inputTime * 1000 * 60 //we need to ask for time in minutes from user
+    })
+    this.props.updateGigTime(this.state.totalTime)
+    this.updateGigTime()
+    this.props.refreshTotalGigTime()
   }
 
   updateGigTime = () => {
     const { totalGigTime } = this.props.reduxState
-    console.log('this is in updateGigTime',this.props.match.params, totalGigTime, this.props)
+    console.log('this is in updateGigTime', this.props.match.params, totalGigTime, this.props)
     axios.put(`/api/gigtime/${this.props.match.params.gig_id}`, { totalGigTime }).then(() => {
       console.log('hey')
     })
@@ -69,6 +80,7 @@ class Timer extends React.Component {
     this.setState({
       editToggle: toggle(this.state.editToggle)
     })
+
   }
 
   handleChange = (e) => {
@@ -77,11 +89,7 @@ class Timer extends React.Component {
     })
   }
 
-  saveEdit = () => {
-    this.setState({
-      totalTime: this.state.inputTime * 1000 * 60 //we need to ask for time in minutes from user
-    })
-  }
+
 
   render() {
     let editInput = (this.state.editToggle) ? <><input onChange={this.handleChange} />
@@ -119,7 +127,8 @@ class Timer extends React.Component {
   }
 }
 const mapDispatchToProps = {
-  updateGigTime
+  updateGigTime,
+  refreshTotalGigTime
 }
 const mapStateToProps = (reduxState) => {
 

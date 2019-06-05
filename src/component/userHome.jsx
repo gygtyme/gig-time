@@ -1,6 +1,9 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
+const ms = require('pretty-ms')
+
+
 class UserHome extends Component{
   render(){
 
@@ -16,7 +19,7 @@ class UserHome extends Component{
       <h2>{gig.title}</h2>
       
       <p>Desc: {gig.description}</p>
-      <p>Time: {gig.total_time}</p>
+      <p>Time: {ms(gig.total_time)}</p>
 
 
       
@@ -48,7 +51,8 @@ class UserHome extends Component{
           right: "20px", 
           borderRadius: '100%',
           textAlign: 'center', 
-          padding:'20px'
+          padding:'20px',
+          
         
         }}>+</div>
         </Link>
@@ -59,7 +63,8 @@ class UserHome extends Component{
 
 const mapStateToProps=(reduxState)=> {
 return {
-  gigs: reduxState.gigs
+  gigs: reduxState.gigs,
+  totalGigTime: reduxState.totalGigTime
 }
 }
 
