@@ -46,12 +46,13 @@ class Timer extends React.Component {
   }
 
   takeBreak = async () => { //tiago unit test here
+    
     await this.setState({
       totalTime: breakTime(this.state.totalTime, this.state.time),  //so far it only calculates once you hit break
     })
     await this.setState({
       time: 0,
-      payMe: (this.state.totalTime / 1000 / 60 / 60) * 60 //here is where you pass in rate
+      
     })
     console.log('this is the total time on state', this.state.totalTime)
     this.props.updateGigTime(this.state.totalTime)
@@ -115,8 +116,8 @@ class Timer extends React.Component {
     return (
       <div>
         <h3 className="countdown">timer: {ms(this.state.time)}</h3>
-        <h2>total time spend on task: {ms(this.state.totalTime)}</h2>
-        <h4> You owe me: ${this.state.payMe.toFixed(2)}</h4>
+        
+        
         {start}
         {resume}
         {stop}
