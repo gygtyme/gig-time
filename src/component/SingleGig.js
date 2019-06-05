@@ -9,8 +9,7 @@ class SingleGig extends Component {
         client: {}
     }
     componentDidMount(){
-        let gig = this.props.match.params.gig_id
-        let id = gig.client_id
+        let id = this.getGigClient()
         this.getClient(id)
     }
 
@@ -20,6 +19,17 @@ class SingleGig extends Component {
                 client: res.data
             })
         })
+    }
+
+    getGigClient= () => {
+        let gig = this.props.match.params.gig_id
+        let id = this.props.gigs.filter(gigs => +gig === +gigs.id)
+        console.log(id)
+        if(!id[0]){
+                return
+        }
+        let clientId = id[0].client_id
+        return clientId
     }
     render() {
         const {client} = this.state

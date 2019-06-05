@@ -32,7 +32,6 @@ export function userInfo(obj) {
 }
 
 export function updateGigTime(val) {
-    console.log('hey I am redux and I got this', val)
     return {
         type: UPDATE_GIG_TIME,
         payload: val
