@@ -1,5 +1,9 @@
 import React from 'react'
-import {toggle, breakTime} from '../Utils/utils_Tiago'
+import { toggle, breakTime } from '../Utils/utils_Tiago'
+import { connect } from "react-redux"
+import { updateGigTime } from '../redux/userReducer'
+import { withRouter } from 'react-router-dom'
+import axios from 'axios';
 const ms = require('pretty-ms')
 
 class Timer extends React.Component {
@@ -40,42 +44,52 @@ class Timer extends React.Component {
     this.setState({ time: 0 })
   }
 
-  takeBreak = () => { //tiago unit test here
-    this.setState({
+  takeBreak = async () => { //tiago unit test here
+    await this.setState({
       totalTime: breakTime(this.state.totalTime, this.state.time),  //so far it only calculates once you hit break
     })
-    this.setState({
-      time : 0,
-      payMe : (this.state.totalTime/1000/60/60) * 60 //here is where you pass in rate
+    await this.setState({
+      time: 0,
+      payMe: (this.state.totalTime / 1000 / 60 / 60) * 60 //here is where you pass in rate
     })
-    
+    console.log('this is the total time on state', this.state.totalTime)
+    this.props.updateGigTime(this.state.totalTime)
+    this.updateGigTime()
   }
 
-  editTime=()=>{ //tiago unit test here
+  updateGigTime = () => {
+    const { totalGigTime } = this.props.reduxState
+    console.log('this is in updateGigTime',this.props.match.params, totalGigTime, this.props)
+    axios.put(`/api/gigtime/${this.props.match.params.gig_id}`, { totalGigTime }).then(() => {
+      console.log('hey')
+    })
+  }
+
+  editTime = () => { //tiago unit test here
     this.setState({
-      editToggle : toggle(this.state.editToggle)
+      editToggle: toggle(this.state.editToggle)
     })
   }
 
   handleChange = (e) => {
     this.setState({
-      inputTime : e.target.value
+      inputTime: e.target.value
     })
   }
 
   saveEdit = () => {
     this.setState({
-      totalTime : this.state.inputTime * 1000 * 60 //we need to ask for time in minutes from user
+      totalTime: this.state.inputTime * 1000 * 60 //we need to ask for time in minutes from user
     })
   }
 
   render() {
-    let editInput = (this.state.editToggle) ? <><input onChange={this.handleChange}/>
-    <button onClick = {this.saveEdit}>save</button></> : null
+    let editInput = (this.state.editToggle) ? <><input onChange={this.handleChange} />
+      <button onClick={this.saveEdit}>save</button></> : null
     let start = (this.state.time == 0) ?
-      <><button onClick={this.startTimer}>start</button> 
-      <button onClick={this.editTime}>edit time</button>
-      {editInput}
+      <><button onClick={this.startTimer}>start</button>
+        <button onClick={this.editTime}>edit time</button>
+        {editInput}
       </> :
       null
     let stop = (this.state.isOn) ?
@@ -104,4 +118,15 @@ class Timer extends React.Component {
     )
   }
 }
-export default Timer
+const mapDispatchToProps = {
+  updateGigTime
+}
+const mapStateToProps = (reduxState) => {
+
+  return {
+    reduxState
+  }
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Timer))
