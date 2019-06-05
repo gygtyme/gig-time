@@ -73,7 +73,7 @@ class Navbar extends Component {
                 {!firstName ? (
                     <div>
                         <div className='loginJacob'>
-                            email <input type="email"
+                            email <input  className="newTask" autoFocus type="email"
                                 name="email" placeholder="email" required onChange={e => {
                                     this.changeHandler(e)
                                 }} />
