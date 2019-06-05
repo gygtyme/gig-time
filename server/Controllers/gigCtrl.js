@@ -111,5 +111,21 @@ transporter.sendMail(mailOptions, function (error, info) {
 });
 
 
+  },
+
+  updateGigTime: async(req, res) => {
+    console.log(`update gigTime fired`, req.params, req.body)
+    const db = req.app.get('db')
+    let { id } = req.params;
+    id = +id
+    const { totalGigTime } = req.body 
+    console.log(id)
+    let oldTime = await db.get_gig_total_time(id)
+    console.log(oldTime[0])
+    let newTime = oldTime[0].total_time + totalGigTime
+
+    db.update_gig_total_time({id, newTime}).then(() => {
+      res.sendStatus(200)
+    }).catch(err => console.log("error", err))
   }
  }

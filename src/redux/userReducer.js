@@ -13,7 +13,8 @@ const initialState = {
     zip: "",
     _state: "",
     gigs: [],
-    taskTime: 0
+    taskTime: 0,
+    totalGigTime: 0
 }
 
 export const USER_INFO = "USER_INFO"
@@ -21,11 +22,25 @@ export const LOGOUT = "LOGOUT"
 export const TASK_TIME = "TASK_TIME"
 export const LOGIN = 'LOGIN'
 export const UPDATE_GIGS='UPDATE_GIGS'
+export const UPDATE_GIG_TIME = 'UPDATE_GIG_TIME'
+export const REFRESH_TOTALGIGTIME = 'REFRESH_TOTALGIGTIME'
 
 export function userInfo(obj) {
     return {
         type: USER_INFO,
         payload: obj
+    }
+}
+
+export function refreshTotalGigTime(){
+    return {
+        type: REFRESH_TOTALGIGTIME
+    }
+}
+export function updateGigTime(val) {
+    return {
+        type: UPDATE_GIG_TIME,
+        payload: val
     }
 }
 
@@ -80,6 +95,17 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state, 
                 gigs: payload
+            }
+        case UPDATE_GIG_TIME:
+            return {
+                ...state,
+                totalGigTime: state.totalGigTime + payload
+            }
+
+        case REFRESH_TOTALGIGTIME:
+            return {
+                ...state,
+                totalGigTime : 0
             }
 
         default:
