@@ -1,7 +1,7 @@
 .navbar {
   height: 10vh;
   border: black solid 1px;
-  margin: 10px;
+  /* margin: 10px; */
   display: flex;
   justify-content: space-between;
   align-items: center;
