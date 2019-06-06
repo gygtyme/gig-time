@@ -7,6 +7,7 @@ const taskCtrl= require('./Controllers/taskCtrl')
 const session = require('express-session')
 const authCtrl= require('./Controllers/authCtrl')
 const clientCtrl = require("./Controllers/clientCtrl")
+const braintree = require("braintree")
 
 
 
@@ -33,6 +34,9 @@ massive(CONNECTION_STRING).then((database) => {
   app.listen(SERVER_PORT, () => {
     console.log(`2-server is connected on ${SERVER_PORT}`)
   })
+})
+let gateway = braintree.connect({
+  accessToken: "access_token$sandbox$ftswmhvxwzk49jbz$7c793f90eb4ab6cbcaff73574c1ec44e"
 })
 
 
@@ -61,3 +65,16 @@ app.post("/api/clients", clientCtrl.getClient)
 app.get('/api/getsession', authCtrl.getSession)
 
 app.post('/billGig/:gigId', gigCtrl.billGig)
+
+
+//this is paypal generating the client token
+app.get("/client_token", function (req, res) {
+  gateway.clientToken.generate({}, function (err, response) {
+    res.send(response.clientToken);
+  });
+});
+//recieving payment from client
+app.post("/checkout", function (req, res) {
+  var nonce = req.body.payment_method_nonce;
+  clientCtrl.clientPayment()
+});

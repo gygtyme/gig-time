@@ -9,6 +9,7 @@ import ClientView from './component/ClientView';
 import GigWizard from './component/GigWizard'
 import SingleGig from './component/SingleGig';
 import TaskWizard from './component/TaskWizard';
+import PaypalView from "./component/PaypalView"
 
 
 export default (
@@ -27,6 +28,7 @@ export default (
     <Route path="/wizard" component={GigWizard} />
     <Route path="/singlegig/:gig_id" component={SingleGig} />
     <Route path="/taskwizard/:gig_id" component={TaskWizard} />
+    <Route path="/clientpay" component={PaypalView} />
 
 
   </Switch>
