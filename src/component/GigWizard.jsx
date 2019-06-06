@@ -30,16 +30,19 @@ class GigWizard extends Component {
     axios.post('/api/createGig', this.state).then(res => {
       //dispatch to redux store updated gig list
       this.props.updateGigs(res.data)
-      this.props.history.push('/userHome')
-    }).catch(err=>console.log(err))
+    })
+    this.props.history.push('/userHome')
+  }
+
+  goBack = () => {
+    
+    this.props.history.push(`/userHome`)
   }
 
 
   render() {
     return (
       <div>
-
-
         <form >
           <div>
             <h1>Gig Info</h1>
@@ -71,7 +74,7 @@ class GigWizard extends Component {
 
           <button type="submit" onClick={this.wizardSubmitHandler}>Submit</button>
         </form>
-
+          <button onClick={this.goBack}>cancel</button>
 
       </div>
     )
