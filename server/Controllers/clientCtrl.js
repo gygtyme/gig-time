@@ -21,24 +21,10 @@ module.exports = {
     sendFeedback: async (req, res) => {
         console.log(req.session)
       let dbInstance= req.app.get('db')
-        let {feedback, gig, clientId:id}= req.body
+        let {feedback, gig}= req.body
 
         let {email, firstName}= req.session.user
-        // let gig= req.session.user.gigs.find(el=> {
-        //     return +el.client_id===+req.body.clientId
-        // })
-
-//need client id so we can send email to client. 
-//
-      // let client= await dbInstance.get_client_by_id({id})
-
-//db call
       
-
-        
-        //nodemailer sends with req.body
-
-
 
   var nodemailer = require('nodemailer');
 

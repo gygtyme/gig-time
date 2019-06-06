@@ -3,7 +3,11 @@ const {GOOGLE}=process.env
 module.exports = {
   getGigs: (req, res) => {
     console.log(`get gigs fired`)
+    
+    
     const db = req.app.get('db')
+    
+    if(req.session.user){
     let { id } = req.session.user
     id = String(id)
 
@@ -18,6 +22,9 @@ module.exports = {
         res.status(200).send(recipe)
       }).catch(err => console.log("error", err))
     }
+  }
+
+
   },
 
   createGig: async (req, res) => {
@@ -145,5 +152,23 @@ res.sendStatus(200)
     db.update_gig_total_time({id, newTime}).then(() => {
       res.sendStatus(200)
     }).catch(err => console.log("error", err))
+  }, 
+
+  getSingleGig: async (req, res)=> {
+    console.log('hit')
+    
+
+    try {
+      let db= req.app.get('db')
+      let gig=  await db.get_gig_by_gig_id(+req.params.gigId)
+      
+      res.status(200).send(gig[0])
+    } catch (error) {
+      res.send(error)
+      console.log(error)
+    }
+
+
+
   }
  }
