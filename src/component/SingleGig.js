@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 import axios from 'axios';
 import Task from './Task'
 import { Link } from 'react-router-dom'
+import Switch from 'react-switch'
 import TaskWizard from './TaskWizard'
 const ms = require('pretty-ms')
 
@@ -52,7 +53,7 @@ class SingleGig extends Component {
     editGig = (id) => {
         const { title, description, project_rate } = this.state
         // project_rate = +project_rate
-        axios.put(`/api/gigs/${id}`, { title, description, project_rate}).then(() => {
+        axios.put(`/api/gigs/${id}`, { title, description, project_rate }).then(() => {
 
         })
         this.toggleEdit()
@@ -68,6 +69,31 @@ class SingleGig extends Component {
         this.setState({
             [e.target.name]: e.target.value
         })
+    }
+
+    handlePaidSwitch = () => {
+        this.setState({
+            is_paid: !this.state.is_paid
+        })
+        this.saveToDB()
+    }
+    
+    saveToDB = () => {
+        console.log('look at me', this.props.match.params.gig_id)
+        const { gig_id:id } = this.props.match.params
+        const {is_paid, is_billed} = this.state
+        axios.put(`/api/gig/paid/${id}`, {is_paid}).then(() => {
+            console.log('you have altered the db')
+        })
+        axios.put(`/api/gig/billed/${id}`, {is_billed}).then(()=>{
+            console.log('you have update billed')
+        })
+    }
+    handleBilledSwitch = () => {
+        this.setState({
+            is_billed: !this.state.is_billed
+        })
+        this.saveToDB()
     }
 
     render() {
@@ -87,8 +113,8 @@ class SingleGig extends Component {
                 <p>Total development time: {ms(gig.total_time)}</p>
                 <p>Gig rate: ${gig.project_rate}</p>
                 <p>Ammount due: ${((gig.total_time / 1000 / 60 / 60) * gig.project_rate).toFixed(2)}</p>
-                <p>{gig.is_paid}</p>
-                <p>{gig.is_billed}</p>
+                <p>Paid:{gig.is_paid} <Switch onChange={this.handlePaidSwitch}></Switch></p>
+                <p>Billed: {gig.is_billed} <Switch onChange={this.handleBilledSwitch}></Switch></p>
                 <button onClick={() => {
                     axios.post(`/billGig/${gig_id}`, {
                         total: this.state.amountDue,
@@ -100,10 +126,10 @@ class SingleGig extends Component {
                     }
                     ).catch(err => console.log(err, 'frontendError'))
                 }}>Bill This Gig </button>
-              
+
                 <button onClick={this.toggleEdit}>edit Gig</button>
-                <button onClick={()=>this.deleteGig(gig.id)}>delete Gig</button>
-{/* 
+                <button onClick={() => this.deleteGig(gig.id)}>delete Gig</button>
+                {/* 
 
     this is for later- to send the update to the client when requested. 
                 <button onClick={()=> {
@@ -132,18 +158,18 @@ class SingleGig extends Component {
                 </div>
             </div> : (this.props.firstName && this.state.toggleEdit) ?
                 <div>
-                    
+
                     <p>Gig Title:</p>
                     <input onChange={this.handleChange} placeholder={this.state.title}
-                    value={this.state.title} name='title'/>
+                        value={this.state.title} name='title' />
                     <p>Gig Description:</p>
                     <input onChange={this.handleChange} placeholder={this.state.description}
-                    value={this.state.description} name="description" />
+                        value={this.state.description} name="description" />
                     <p>Gig rate:</p>
                     <input onChange={this.handleChange} placeholder={this.state.project_rate}
-                    value={this.state.project_rate} name='project_rate'/>
-                    <button onClick={()=>this.editGig(gig.id)}>save</button>
-                   
+                        value={this.state.project_rate} name='project_rate' />
+                    <button onClick={() => this.editGig(gig.id)}>save</button>
+
 
                 </div>
                 : null
