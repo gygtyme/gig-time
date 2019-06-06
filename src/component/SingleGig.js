@@ -14,7 +14,7 @@ class SingleGig extends Component {
         toggleEdit: false,
         title: null,
         description: null,
-        project_rate: null,
+        project_rate: 0,
         is_paid: null,
         is_billed: null
     }
@@ -85,7 +85,7 @@ class SingleGig extends Component {
                 <p>Client contact: {client.client_email} {client.client_phone}</p>
                 <p>Gig description: {gig.description}</p>
                 <p>Total development time: {ms(gig.total_time)}</p>
-                <p>Gig rate: ${gig.project_rate.toFixed(2)}</p>
+                <p>Gig rate: ${gig.project_rate}</p>
                 <p>Ammount due: ${((gig.total_time / 1000 / 60 / 60) * gig.project_rate).toFixed(2)}</p>
                 <p>{gig.is_paid}</p>
                 <p>{gig.is_billed}</p>

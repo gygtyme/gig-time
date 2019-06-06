@@ -47,7 +47,7 @@ app.put('/api/gigtime/:id', gigCtrl.updateGigTime)
 
 app.get('/api/tasks/:gigId', taskCtrl.getGigTasks)
 app.post('/api/tasks/create', taskCtrl.createTask)
-app.put('/api/tasks/edit/:taskId', taskCtrl.editTask)
+app.put('/api/tasks/:taskId', taskCtrl.editTask)
 app.delete('/api/tasks/:taskId', taskCtrl.deleteTask)
 
 
