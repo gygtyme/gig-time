@@ -144,5 +144,26 @@ res.sendStatus(200)
     db.update_gig_total_time({id, newTime}).then(() => {
       res.sendStatus(200)
     }).catch(err => console.log("error", err))
-  }
+  },
+
+  togglePaid: (req, res) => {
+    console.log(`update paid fired`, req.params, req.body)
+    const db = req.app.get('db')
+    const { id } = req.params;
+    const { is_paid } = req.body  
+    db.update_paid({id, is_paid}).then(() => {
+      res.sendStatus(200)
+    }).catch(err => console.log("error", err))
+  }, 
+
+  toggleBilled: (req, res) => {
+    console.log(`update paid fired`, req.params, req.body)
+    const db = req.app.get('db')
+    const { id } = req.params;
+    const { is_billed } = req.body  
+    db.update_billed({id, is_billed}).then(() => {
+      res.sendStatus(200)
+    }).catch(err => console.log("error", err))
+  }, 
+
  }
