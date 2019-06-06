@@ -42,16 +42,16 @@ class UserHome extends Component{
       <Link to='/wizard'>
         <div style={{
 
-          width: '60px', 
+          // width: '100px', 
 
           border: '2px solid black', 
           fontSize: '60px', 
           position: 'absolute', 
           bottom: '20px', 
           right: "20px", 
-          borderRadius: '100%',
-          textAlign: 'center', 
-          padding:'20px',
+          borderRadius: '50%',
+          textAlign: 'center',
+          padding: '15px'
           
         
         }}>+</div>

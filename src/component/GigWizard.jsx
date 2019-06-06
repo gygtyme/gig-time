@@ -29,25 +29,16 @@ class GigWizard extends Component {
     
     axios.post('/api/createGig', this.state).then(res => {
       //dispatch to redux store updated gig list
-      console.log(res.data, 'froewijafwoi')
       this.props.updateGigs(res.data)
       this.props.history.push('/userHome')
-    })
+    }).catch(err=>console.log(err))
   }
 
 
   render() {
     return (
       <div>
-        <ul>
-          <li>title</li>
-          <li>description</li>
-          <li>hourly rate</li>
-          <li>client email</li>
-          <li>client first</li>
-          <li>client last</li>
-          <li>client phone</li>
-        </ul>
+
 
         <form >
           <div>
