@@ -10,7 +10,13 @@ const ms = require('pretty-ms')
 class SingleGig extends Component {
     state = {
         client: {},
-        amountDue: 0
+        amountDue: 0,
+        toggleEdit: false,
+        title: null,
+        description: null,
+        project_rate: null,
+        is_paid: null,
+        is_billed: null
     }
     componentDidMount() {
         let id = this.getGigClient()
@@ -38,9 +44,30 @@ class SingleGig extends Component {
 
     deleteGig = (id) => {
         axios.delete(`/api/gigs/${id}`).then(res => {
-            
+
         })
         this.props.history.push('/userHome')
+    }
+
+    editGig = (id) => {
+        const { title, description, project_rate } = this.state
+        // project_rate = +project_rate
+        axios.put(`/api/gigs/${id}`, { title, description, project_rate}).then(() => {
+
+        })
+        this.toggleEdit()
+    }
+
+    toggleEdit = () => {
+        this.setState({
+            toggleEdit: !this.state.toggleEdit
+        })
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
     }
 
     render() {
@@ -48,9 +75,10 @@ class SingleGig extends Component {
         let gig_id = this.props.match.params.gig_id
         let gig = this.props.gigs.filter(gig => +gig_id === +gig.id)
         gig = gig[0]
-        console.log('look it here', gig)
-        let gigDisplay = (this.props.firstName) ?
-            
+
+
+        let gigDisplay = (this.props.firstName && !this.state.toggleEdit) ?
+
             <div style={{ border: "solid" }}>
                 <h2>{gig.title}</h2>
                 <p>Client name: {client.client_first} {client.client_last}</p>
@@ -72,7 +100,8 @@ class SingleGig extends Component {
                     }
                     ).catch(err => console.log(err, 'frontendError'))
                 }}>Bill This Gig </button>
-                <button onClick={()=>this.deleteGig(gig.id)}>delete Gig</button>
+                <button onClick={() => this.deleteGig(gig.id)}>delete Gig</button>
+                <button onClick={this.toggleEdit}>edit Gig</button>
                 <div>
                     <Task gig={gig} />
                     <Link to={`/taskwizard/${gig.id}`}>
@@ -93,9 +122,26 @@ class SingleGig extends Component {
                         }}><i class="fas fa-plus-circle"></i></div>
                     </Link>
                 </div>
-            </div> : null
+            </div> : (this.props.firstName && this.state.toggleEdit) ?
+                <div>
+                    
+                    <p>Gig Title:</p>
+                    <input onChange={this.handleChange} placeholder={this.state.title}
+                    value={this.state.title} name='title'/>
+                    <p>Gig Description:</p>
+                    <input onChange={this.handleChange} placeholder={this.state.description}
+                    value={this.state.description} name="description" />
+                    <p>Gig rate:</p>
+                    <input onChange={this.handleChange} placeholder={this.state.project_rate}
+                    value={this.state.project_rate} name='project_rate'/>
+                    <button onClick={()=>this.editGig(gig.id)}>save</button>
+                   
+
+                </div>
+                : null
         return (
             <div>
+
                 {gigDisplay}
 
             </div>
