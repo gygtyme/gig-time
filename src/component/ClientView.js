@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
+import './styles/ClientView.css';
 
 class ClientView extends Component {
   constructor() {
     super()
+
+    this.state = {
+
+    }
   }
 
   render() {
     return(
       <div>
-        <h1> Client View? </h1>
+        <div>
+          
+        </div>
       </div>
     )
   }

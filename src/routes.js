@@ -21,9 +21,9 @@ export default (
     
     <Route path="/gig" component={Gig} />
 
-    <Route path='/learnMore' component={LearnMore} />
+    <Route path='/learn-more' component={LearnMore} />
 
-    <Route path='/clientView' component={ClientView} />
+    <Route path='/client-view' component={ClientView} />
     <Route path="/wizard" component={GigWizard} />
     <Route path="/singlegig/:gig_id" component={SingleGig} />
     <Route path="/taskwizard/:gig_id" component={TaskWizard} />
