@@ -5,35 +5,38 @@ import axios from 'axios'
 const ms = require('pretty-ms')
 
 
-class UserHome extends Component{
-  render(){
+class UserHome extends Component {
+  render() {
 
     let gigMapped = this.props.gigs.map((gig) => {
-      return <div style={{border: "solid",
-       width: "200px",
-        borderRadius: "5px",
-         padding: "5px",
-        margin: '15px'
-        }} key={gig.id} onClick={()=> {
-        this.props.history.push(`/singlegig/${gig.id}`)
-      }}>
-      <h2>{gig.title}</h2>
-      
-      <p>Desc: {gig.description}</p>
-      <p>Time: {ms(gig.total_time)}</p>
+      return (
+        
+          <div style={{
+            border: "solid",
+            width: "200px",
+            borderRadius: "5px",
+            padding: "5px",
+            margin: '15px'
+          }} key={gig.id} onClick={() => {
+            this.props.history.push(`/singlegig/${gig.id}`)
+          }}>
+
+            <h2>{gig.title}</h2>
+            <p>Desc: {gig.description}</p>
+            <p>Time: {ms(gig.total_time)}</p>
+
+          </div>
+          
+      )
+    })
 
 
-      
-</div>
-  })    
 
 
-
-
-    return(
+    return (
       <div style={{
-        display:'flex', 
-        justifyContent: 'space-around', 
+        display: 'flex',
+        justifyContent: 'space-around',
         flexWrap: 'wrap',
       }}>
         User Home!
@@ -45,33 +48,33 @@ class UserHome extends Component{
       <Link to='/wizard'>
         <div style={{
 
-          // width: '100px', 
+            width: '60px',
 
-          border: '2px solid black', 
-          fontSize: '60px', 
-          position: 'absolute', 
-          bottom: '20px', 
-          right: "20px", 
-          borderRadius: '50%',
-          textAlign: 'center',
-          padding: '15px'
-          
-        
-        }}>+</div>
+            border: '2px solid black',
+            fontSize: '60px',
+            position: 'absolute',
+            bottom: '20px',
+            right: "20px",
+            borderRadius: '100%',
+            textAlign: 'center',
+            padding: '20px',
+
+
+          }}>+</div>
         </Link>
       </div>
     )
   }
 }
 
-const mapStateToProps=(reduxState)=> {
-return {
-  gigs: reduxState.gigs,
-  totalGigTime: reduxState.totalGigTime
-}
+const mapStateToProps = (reduxState) => {
+  return {
+    gigs: reduxState.gigs,
+    totalGigTime: reduxState.totalGigTime
+  }
 }
 
-const mapDispatchToProps= {
+const mapDispatchToProps = {
 
 }
 
