@@ -25,8 +25,8 @@ export default class LearnMore extends Component {
         </section>
         <section className='learnMoreVideo'>
           <Iframe 
-            width="600" 
-            height="300" 
+            width="700" 
+            height="400" 
             url="https://www.youtube.com/embed/dQw4w9WgXcQ"
           />
         </section>

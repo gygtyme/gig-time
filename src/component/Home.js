@@ -41,7 +41,7 @@ class Home extends Component {
     return (
       <div className='homeBody'>
         <div className='homeMain'>
-          <div className="learnMore"><Link to='/learnMore'><button>Learn More</button></Link></div>
+          <div className="learnMore"><Link to='/learn-more'><button>Learn More</button></Link></div>
           <div className='carousel'>Carousel of Magic</div>
           <div className="registerBox"><Link to='register'><button>Register</button></Link></div>
         </div>
