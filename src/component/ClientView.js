@@ -42,9 +42,8 @@ return(
 
 
           axios.post('/feedback', {feedback: this.state.feedback,
-            // clientId: gigToDisplay.client_id,
-
-            // userId
+            user_id: this.state.displayGig.user_id, 
+            gig: this.state.displayGig 
           })
         }}>Submit Feedback</button>         
         </div>

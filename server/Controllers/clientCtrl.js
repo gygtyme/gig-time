@@ -21,10 +21,13 @@ module.exports = {
     sendFeedback: async (req, res) => {
         console.log(req.session)
       let dbInstance= req.app.get('db')
-        let {feedback, gig}= req.body
 
-        let {email, firstName}= req.session.user
       
+        let {feedback, user_id, gig}= req.body
+
+        let user= await dbInstance.get_user_by_id(user_id)
+        
+         user=user[0]
 
   var nodemailer = require('nodemailer');
 
@@ -37,10 +40,10 @@ module.exports = {
   });
   
   var mailOptions = {
-    from: 'billing@gigtime.com',
-    to: `${email}`,
+    from: 'feedback@gigtime.com',
+    to: `${user.email}`,
     subject: `A client has left you feedback on one of your gigs.`,
-    text: `${firstName}, you have feedback on your gig ${gig.title}. The client's feedback is listed below. 
+    text: `${user.first_name}, you have feedback on your gig ${gig.title}. The client's feedback is listed below. 
     ${feedback}
     `
   };
