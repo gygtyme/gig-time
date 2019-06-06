@@ -60,16 +60,15 @@ module.exports = {
 
   },
 
-  deleteTask: async (req, res) => {
-    let db = req.app.get('db')
+ 
+  deleteTask: (req, res) => {
+    const db = req.app.get('db')
     let { taskId } = req.params
-
-    try {
-      await db.delete_task(taskId)
+    console.log(`delete gig was fired`, taskId)
+    
+    db.delete_task({taskId}).then(() => { 
       res.sendStatus(200)
-    } catch (error) {
-      res.status(500).send(error)
-    }
-  }
+    }).catch(err => console.log("error", err))
+  },
 
 }
