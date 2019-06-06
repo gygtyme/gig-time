@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux"
-import Axios from 'axios';
+import axios from 'axios';
 import Task from './Task'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import TaskWizard from './TaskWizard'
 const ms = require('pretty-ms')
 
@@ -18,7 +18,7 @@ class SingleGig extends Component {
     }
 
     getClient = (id) => {
-        Axios.post("/api/clients", { id }).then(res => {
+        axios.post("/api/clients", { id }).then(res => {
             this.setState({
                 client: res.data
             })
@@ -35,6 +35,14 @@ class SingleGig extends Component {
         let clientId = id[0].client_id
         return clientId
     }
+
+    deleteGig = (id) => {
+        axios.delete(`/api/gigs/${id}`).then(res => {
+            
+        })
+        this.props.history.push('/userHome')
+    }
+
     render() {
         const { client } = this.state
         let gig_id = this.props.match.params.gig_id
@@ -42,6 +50,7 @@ class SingleGig extends Component {
         gig = gig[0]
         console.log('look it here', gig)
         let gigDisplay = (this.props.firstName) ?
+            
             <div style={{ border: "solid" }}>
                 <h2>{gig.title}</h2>
                 <p>Client name: {client.client_first} {client.client_last}</p>
@@ -53,7 +62,7 @@ class SingleGig extends Component {
                 <p>{gig.is_paid}</p>
                 <p>{gig.is_billed}</p>
                 <button onClick={() => {
-                    Axios.post(`/billGig/${gig_id}`, {
+                    axios.post(`/billGig/${gig_id}`, {
                         total: this.state.amountDue,
 
                     }).then((res) => {
@@ -63,31 +72,32 @@ class SingleGig extends Component {
                     }
                     ).catch(err => console.log(err, 'frontendError'))
                 }}>Bill This Gig </button>
+                <button onClick={()=>this.deleteGig(gig.id)}>delete Gig</button>
                 <div>
                     <Task gig={gig} />
                     <Link to={`/taskwizard/${gig.id}`}>
-                    <div style={{
+                        <div style={{
 
-                        width: '60px',
-
-                        
-                        fontSize: '60px',
-                        position: 'absolute',
-                        bottom: '20px',
-                        right: "20px",
-                        borderRadius: '100%',
-                        textAlign: 'center',
-                        padding: '20px',
+                            width: '60px',
 
 
-                    }}><i class="fas fa-plus-circle"></i></div>
-                </Link>
+                            fontSize: '60px',
+                            position: 'absolute',
+                            bottom: '20px',
+                            right: "20px",
+                            borderRadius: '100%',
+                            textAlign: 'center',
+                            padding: '20px',
+
+
+                        }}><i class="fas fa-plus-circle"></i></div>
+                    </Link>
                 </div>
             </div> : null
         return (
             <div>
                 {gigDisplay}
-                
+
             </div>
         );
     }
