@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './styles/ClientView.css';
+import ProgressBar from './ProgressBar';
 
 class ClientView extends Component {
   constructor() {
@@ -13,8 +14,8 @@ class ClientView extends Component {
   render() {
     return(
       <div>
-        <div>
-          
+        <div class='progress'>
+          <ProgressBar />
         </div>
       </div>
     )
