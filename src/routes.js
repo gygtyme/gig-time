@@ -8,6 +8,7 @@ import LearnMore from './component/LearnMore';
 import ClientView from './component/ClientView';
 import GigWizard from './component/GigWizard'
 import SingleGig from './component/SingleGig';
+import TaskWizard from './component/TaskWizard';
 
 
 export default (
@@ -25,7 +26,7 @@ export default (
     <Route path='/clientView' component={ClientView} />
     <Route path="/wizard" component={GigWizard} />
     <Route path="/singlegig/:gig_id" component={SingleGig} />
-    
+    <Route path="/taskwizard/:gig_id" component={TaskWizard} />
 
 
   </Switch>

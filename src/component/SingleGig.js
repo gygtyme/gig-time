@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from "react-redux"
 import Axios from 'axios';
 import Task from './Task'
+import {Link} from 'react-router-dom'
+import TaskWizard from './TaskWizard'
 const ms = require('pretty-ms')
 
 
@@ -10,7 +12,7 @@ class SingleGig extends Component {
         client: {},
         amountDue: 0
     }
-    componentDidMount(){
+    componentDidMount() {
         let id = this.getGigClient()
         this.getClient(id)
     }
@@ -23,12 +25,12 @@ class SingleGig extends Component {
         })
     }
 
-    getGigClient= () => {
+    getGigClient = () => {
         let gig = this.props.match.params.gig_id
         let id = this.props.gigs.filter(gigs => +gig === +gigs.id)
         console.log(id)
-        if(!id[0]){
-                return
+        if (!id[0]) {
+            return
         }
         let clientId = id[0].client_id
         return clientId
@@ -47,25 +49,45 @@ class SingleGig extends Component {
                 <p>Gig description: {gig.description}</p>
                 <p>Total development time: {ms(gig.total_time)}</p>
                 <p>Gig rate: ${gig.project_rate.toFixed(2)}</p>
-                <p>Ammount due: ${((gig.total_time /1000/60/60)*gig.project_rate).toFixed(2)}</p>
+                <p>Ammount due: ${((gig.total_time / 1000 / 60 / 60) * gig.project_rate).toFixed(2)}</p>
                 <p>{gig.is_paid}</p>
                 <p>{gig.is_billed}</p>
-                <button onClick={()=>{Axios.post(`/billGig/${gig_id}`, {
-                    total: this.state.amountDue, 
+                <button onClick={() => {
+                    Axios.post(`/billGig/${gig_id}`, {
+                        total: this.state.amountDue,
 
-                }).then( (res)=>{
+                    }).then((res) => {
 
-                    this.props.history.push('/userHome')
-                    alert('your email has been sent to the client!')
-                }
-                ).catch(err=>console.log(err, 'frontendError'))}}>Bill This Gig </button>
+                        this.props.history.push('/userHome')
+                        alert('your email has been sent to the client!')
+                    }
+                    ).catch(err => console.log(err, 'frontendError'))
+                }}>Bill This Gig </button>
                 <div>
                     <Task gig={gig} />
+                    <Link to={`/taskwizard/${gig.id}`}>
+                    <div style={{
+
+                        width: '60px',
+
+                        
+                        fontSize: '60px',
+                        position: 'absolute',
+                        bottom: '20px',
+                        right: "20px",
+                        borderRadius: '100%',
+                        textAlign: 'center',
+                        padding: '20px',
+
+
+                    }}><i class="fas fa-plus-circle"></i></div>
+                </Link>
                 </div>
             </div> : null
         return (
             <div>
                 {gigDisplay}
+                
             </div>
         );
     }

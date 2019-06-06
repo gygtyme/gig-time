@@ -31,24 +31,19 @@ class GigWizard extends Component {
       //dispatch to redux store updated gig list
       console.log(res.data, 'froewijafwoi')
       this.props.updateGigs(res.data)
-      this.props.history.push('/userHome')
     })
+    this.props.history.push('/userHome')
+  }
+
+  goBack = () => {
+    
+    this.props.history.push(`/userHome`)
   }
 
 
   render() {
     return (
       <div>
-        <ul>
-          <li>title</li>
-          <li>description</li>
-          <li>hourly rate</li>
-          <li>client email</li>
-          <li>client first</li>
-          <li>client last</li>
-          <li>client phone</li>
-        </ul>
-
         <form >
           <div>
             <h1>Gig Info</h1>
@@ -80,7 +75,7 @@ class GigWizard extends Component {
 
           <button type="submit" onClick={this.wizardSubmitHandler}>Submit</button>
         </form>
-
+          <button onClick={this.goBack}>cancel</button>
 
       </div>
     )
