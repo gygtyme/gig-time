@@ -80,7 +80,7 @@ class Navbar extends Component {
                             Password <input type="password"
                                 name="pass" placeholder="password" required onChange={(e) => {
                                     this.changeHandler(e)
-                                }} />
+                                }} /> 
                             <button onClick={this.loginHandler}>Login</button>
                             <Link to='/register' style={{ 'text-decoration': 'none' }}> <button> Register </button> </Link>
                         </div>
