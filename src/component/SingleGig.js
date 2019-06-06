@@ -73,6 +73,13 @@ class SingleGig extends Component {
                     ).catch(err => console.log(err, 'frontendError'))
                 }}>Bill This Gig </button>
                 <button onClick={()=>this.deleteGig(gig.id)}>delete Gig</button>
+{/* 
+
+    this is for later- to send the update to the client when requested. 
+                <button onClick={()=> {
+                    axios.post('/update')
+                }}>Send Update To Client</button> */}
+
                 <div>
                     <Task gig={gig} />
                     <Link to={`/taskwizard/${gig.id}`}>

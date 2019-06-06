@@ -23,7 +23,7 @@ export default (
 
     <Route path='/learn-more' component={LearnMore} />
 
-    <Route path='/client-view' component={ClientView} />
+    <Route path='/client-view/:gig_id' component={ClientView} />
     <Route path="/wizard" component={GigWizard} />
     <Route path="/singlegig/:gig_id" component={SingleGig} />
     <Route path="/taskwizard/:gig_id" component={TaskWizard} />
