@@ -32,17 +32,17 @@ class Navbar extends Component {
             this.props.userInfo(res.data)
 
             //push to userHomepage
-            this.props.history.push('/userHome')
 
 
         }).catch(err => console.log('login error', err))
+        this.props.history.push('/userHome')
     }
 
     logoutHandler = () => {
         axios.delete('/users/logout').then(() => {
             // console.log('user Logged Out')
-            this.props.history.push('/')
         }).catch(err => console.log(err, 'logout issue'))
+        this.props.history.push('/')
     }
     changeHandler = (e) => {
         this.setState({
@@ -62,13 +62,13 @@ class Navbar extends Component {
         return (
             <nav className='navbar'>
                 {/* <div className="app_name_logout_container"> */}
-                    <Link to='/' style={{textDecoration: 'none', color: 'black'}}>
-                        <span className="app_name_container">GIG Time</span>
-                    </Link>
-                    {firstName && <div>Welcome, {firstName}  <button className="logout_button" onClick={() => {
-                        this.props.logout()
-                        axios.get('/auth/logout').then(() => { this.props.history.push('/home') })
-                    }}>logout</button></div>}
+                <Link to='/' style={{ textDecoration: 'none', color: 'black' }}>
+                    <span className="app_name_container">GIG Time</span>
+                </Link>
+                {firstName && <div>Welcome, {firstName}  <button className="logout_button" onClick={() => {
+                    this.props.logout()
+                    axios.get('/auth/logout').then(() => { this.props.history.push('/home') })
+                }}>logout</button></div>}
                 {/* </div> */}
                 {!firstName ? (
                     <div>

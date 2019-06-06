@@ -3,7 +3,8 @@ insert into task(
     task_title,
     task_desc
 )values(
-    ${gig_id},
-    ${task_title},
-    ${task_desc}
-);
+    ${gigId},
+    ${taskTitle},
+    ${taskDesc}
+)
+returning task;

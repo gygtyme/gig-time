@@ -30,26 +30,27 @@ module.exports = {
 
     try {
       let newClient=await db.create_client([clientFName, clientLName, email, clientPhone])
-      
-      await db.create_gig([user_id, gigName, gigDesc, rate, newClient[0].client_id])
+
+      await db.create_gig([user_id, gigName, gigDesc, rate, newClient[0].id])
       let newGigs= await db.get_gigs_by_user_id(user_id)
   
       res.status(200).send(newGigs)
 
     } catch (error) {
+      console.log(error, 'create gig error')
       res.status(500).send(error)
     }
 
   },
 
   delete: (req, res) => {
-    console.log(`delete gig was fired`)
     const db = req.app.get('db')
     const { id } = req.params
+    console.log(`delete gig was fired`, id)
     // const { id: user_id } = req.session.user 
 
-    db.delete_gig([id]).then(() => { //we dont have a session to get user id yet
-      // res.status(200).send(gig)
+    db.delete_gig([id]).then(() => { 
+      res.status(200).send(gig)
     }).catch(err => console.log("error", err))
   },
 

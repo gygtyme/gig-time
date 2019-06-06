@@ -12,3 +12,4 @@ insert into client (
   true
 )
 
+returning id
