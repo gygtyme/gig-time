@@ -1,5 +1,7 @@
+@import 'variables';
+
 body {
-  background-color: #EDEDED;
+  background-color: $ghost-white;
 }
 .circular-menu {
   position: fixed;
@@ -12,7 +14,7 @@ body {
   width: 3.5em;
   height: 3.5em;
   border-radius: 50%;
-  background-color: hsl(261, 97%, 60%);
+  background-color: $lapis-lazuli;
   box-shadow: 0 2px 5px 0 hsla(0, 0%, 0%, .26);  
   color: hsl(0, 0%, 100%);
   text-align: center;
@@ -48,7 +50,7 @@ body {
   top: 0;
   right: 0;
   z-index: -2;
-  background-color: hsl(251, 78%, 62%);
+  background-color: $lapis-lazuli;
   transition: all .3s ease;
 }
 
@@ -78,6 +80,8 @@ body {
   line-height: 3;
   background-color: hsla(0,0%,0%,.1);
   transition: transform .3s ease, background .2s ease;
+  font-family: $site-font;
+  
 }
 
 .circular-menu .menu-item:hover {

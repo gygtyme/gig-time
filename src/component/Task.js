@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux"
-import Axios from 'axios';
-import Timer from './Timer'
-import SingleGig from './SingleGig';
 import SingleTask from './SingleTask';
 
 class Task extends Component {

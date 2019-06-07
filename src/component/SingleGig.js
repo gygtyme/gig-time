@@ -4,7 +4,7 @@ import axios from 'axios';
 import Task from './Task'
 import { Link } from 'react-router-dom'
 import Switch from 'react-switch'
-import './menu.css'
+
 import TaskWizard from './TaskWizard'
 const ms = require('pretty-ms')
 
@@ -138,7 +138,7 @@ class SingleGig extends Component {
 
         let gigDisplay = (this.props.firstName && !this.state.toggleEdit) ?
 
-            <div style={{ border: "solid" }}>
+            <div  style={{ border: "solid" }}>
                 <h2>{gig.title}</h2>
                 <p>Client name: {client.client_first} {client.client_last}</p>
                 <p>Client contact: {client.client_email} {client.client_phone}</p>
