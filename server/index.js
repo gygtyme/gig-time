@@ -56,7 +56,7 @@ app.delete('/api/tasks/:taskId', taskCtrl.deleteTask)
 
 app.post('/users/register', authCtrl.register)
 app.post('/users/login', authCtrl.login)
-app.delete('/auth/logout', authCtrl.logout)
+app.delete('/users/logout', authCtrl.logout)
 
 
 app.post("/api/clients", clientCtrl.getClient)
@@ -70,3 +70,5 @@ app.post('/billGig/:gigId', gigCtrl.billGig)
   
 
 app.get('/api/getSingleGig/:gigId', gigCtrl.getSingleGig)
+app.post('/feedback', clientCtrl.sendFeedback)
+app.post('/update/:gig_id', clientCtrl.sendUpdate)
