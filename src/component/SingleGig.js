@@ -147,7 +147,7 @@ class SingleGig extends Component {
                 <p>Gig rate: ${gig.project_rate}</p>
                 <p>Ammount due: ${((gig.total_time / 1000 / 60 / 60) * gig.project_rate).toFixed(2)}</p>
                 <p>Paid:{gig.is_paid} <Switch checked={this.state.is_paid} onChange={this.handlePaidSwitch}></Switch></p>
-                <p>Billed: {gig.is_billed} <Switch checked={this.state.is_billed} onChange={this.handleBilledSwitch}></Switch></p>
+                <p>Billed: {gig.is_billed} <Switch value={this.state.is_billed} checked={this.state.is_billed} onChange={this.handleBilledSwitch}></Switch></p>
                                   
                 
  
@@ -171,7 +171,7 @@ class SingleGig extends Component {
                             <a href={"/#/taskwizard/" + gig_id} class="menu-item ">create</a>
                             <a onClick={() => this.deleteGig(gig.id)} class="menu-item ">delete</a>
                             <a onClick={this.toggleEdit} class="menu-item ">edit</a>
-                            <a onClick={this.billThem} class="menu-item ">bill</a>
+                            <a onClick={this.billThem} class="menu-item">bill</a>
                         </menu>
                     </div>
 
