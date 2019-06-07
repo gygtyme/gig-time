@@ -148,15 +148,14 @@ class SingleGig extends Component {
                 <p>Paid:{gig.is_paid} <Switch checked={this.state.is_paid} onChange={this.handlePaidSwitch}></Switch></p>
                 <p>Billed: {gig.is_billed} <Switch checked={this.state.is_billed} onChange={this.handleBilledSwitch}></Switch></p>
                                   
-                <button onClick={()=>this.deleteGig(gig.id)}>delete Gig</button>
+                
  
                 <button onClick={()=>{
                     this.sendUpdateToClientHandler(client.client_first, client.client_email, gig_id)
                 }}>Send Update To Client </button>
 
-                <button onClick={this.toggleEdit}>edit Gig</button>
-                <button onClick={() => this.deleteGig(gig.id)}>delete Gig</button>
-    //             {/* 
+                
+                {/* 
 
     // this is for later- to send the update to the client when requested. 
     //             <button onClick={()=> {

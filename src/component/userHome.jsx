@@ -1,22 +1,22 @@
-import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 const ms = require('pretty-ms')
 
 
 class UserHome extends Component {
 
   state = {
-    
+
     menuOn: false
-}
+  }
 
   menuToggle = () => {
     this.setState({
-        menuOn: !this.state.menuOn
+      menuOn: !this.state.menuOn
     })
-}
+  }
   render() {
 
     let gigMapped = this.props.gigs.map((gig) => {
@@ -50,9 +50,7 @@ class UserHome extends Component {
         justifyContent: 'space-around',
         flexWrap: 'wrap',
       }}>
-        User Home!
-
-{gigMapped}
+        {gigMapped}
 
         <button onClick={axios.post('/feedback').then(res => console.log(res))}>FIRE</button>
 
@@ -63,8 +61,8 @@ class UserHome extends Component {
           <menu class="items-wrapper">
             <a href={"/#/wizard"} class="menu-item ">create</a>
             {/* <a  class="menu-item "></a> */}
-            <a  href={"/#/gighistory"} class="menu-item ">history</a>
-            {/* <a  class="menu-item "></a> */}
+            <a href={"/#/gighistory"} class="menu-item ">history</a>
+            <a href={"/#/clientlist"} class="menu-item ">clients</a>
           </menu>
         </div>
       </div>
