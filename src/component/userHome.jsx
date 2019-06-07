@@ -52,8 +52,6 @@ class UserHome extends Component {
       }}>
         {gigMapped}
 
-        <button onClick={axios.post('/feedback').then(res => console.log(res))}>FIRE</button>
-
         <div id="circularMenu" class={this.state.menuOn ? 'circular-menu active' : 'circular-menu'}>
           <a class="floating-btn" onClick={this.menuToggle}>
             <i class="fa fa-plus"></i>
