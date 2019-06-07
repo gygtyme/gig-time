@@ -55,12 +55,11 @@ module.exports = {
   },
 
   update: (req, res) => {
-    console.log(`update gigs fired`)
+    console.log(`update gigs fired`, req.params, req.body)
     const db = req.app.get('db')
     const { id } = req.params;
-    const { title, description, total_time, project_rate, client_id, is_paid, is_billed } = req.body  //pass in whatever we want it to have
-
-    db.update_gig({id, title, description, total_time, project_rate, client_id, is_paid, is_billed}).then(() => {
+    const { title, description, project_rate } = req.body  
+    db.update_gig({id, title, description, project_rate}).then(() => {
       res.sendStatus(200)
     }).catch(err => console.log("error", err))
   }, 
@@ -145,5 +144,26 @@ res.sendStatus(200)
     db.update_gig_total_time({id, newTime}).then(() => {
       res.sendStatus(200)
     }).catch(err => console.log("error", err))
-  }
+  },
+
+  togglePaid: (req, res) => {
+    console.log(`update paid fired`, req.params, req.body)
+    const db = req.app.get('db')
+    const { id } = req.params;
+    const { is_paid } = req.body  
+    db.update_paid({id, is_paid}).then(() => {
+      res.sendStatus(200)
+    }).catch(err => console.log("error", err))
+  }, 
+
+  toggleBilled: (req, res) => {
+    console.log(`update paid fired`, req.params, req.body)
+    const db = req.app.get('db')
+    const { id } = req.params;
+    const { is_billed } = req.body  
+    db.update_billed({id, is_billed}).then(() => {
+      res.sendStatus(200)
+    }).catch(err => console.log("error", err))
+  }, 
+
  }
