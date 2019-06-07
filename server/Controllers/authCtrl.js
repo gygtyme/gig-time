@@ -92,7 +92,7 @@ session.gigs[i].tasks=gigTasks
       }
 
     } catch (err) {
-      res.sendStatus(500)
+      res.sendStatus(500)  //this is hitting when we log in with new users causing problems
       console.log(err)
     }
 

@@ -4,6 +4,7 @@ import axios from 'axios';
 import Task from './Task'
 import { Link } from 'react-router-dom'
 import Switch from 'react-switch'
+import './menu.css'
 import TaskWizard from './TaskWizard'
 const ms = require('pretty-ms')
 
@@ -17,8 +18,11 @@ class SingleGig extends Component {
         description: null,
         project_rate: 0,
         is_paid: null,
-        is_billed: null
+        is_billed: null,
+        menuOn: false
     }
+
+
     componentDidMount() {
         let id = this.getGigClient()
         this.getClient(id)
@@ -86,15 +90,15 @@ class SingleGig extends Component {
         })
         this.saveToDB()
     }
-    
+
     saveToDB = () => {
         console.log('look at me', this.props.match.params.gig_id)
-        const { gig_id:id } = this.props.match.params
-        const {is_paid, is_billed} = this.state
-        axios.put(`/api/gig/paid/${id}`, {is_paid}).then(() => {
+        const { gig_id: id } = this.props.match.params
+        const { is_paid, is_billed } = this.state
+        axios.put(`/api/gig/paid/${id}`, { is_paid }).then(() => {
             console.log('you have altered the db')
         })
-        axios.put(`/api/gig/billed/${id}`, {is_billed}).then(()=>{
+        axios.put(`/api/gig/billed/${id}`, { is_billed }).then(() => {
             console.log('you have update billed')
         })
     }
@@ -103,6 +107,25 @@ class SingleGig extends Component {
             is_billed: !this.state.is_billed
         })
         this.saveToDB()
+    }
+
+    menuToggle = () => {
+        this.setState({
+            menuOn: !this.state.menuOn
+        })
+    }
+
+    billThem = () => {
+        let gig_id = this.props.match.params.gig_id
+        axios.post(`/billGig/${gig_id}`, {
+            total: this.state.amountDue,
+
+        }).then((res) => {
+
+            this.props.history.push('/userHome')
+            alert('your email has been sent to the client!')
+        }
+        ).catch(err => console.log(err, 'frontendError'))
     }
 
     render() {
@@ -124,17 +147,7 @@ class SingleGig extends Component {
                 <p>Ammount due: ${((gig.total_time / 1000 / 60 / 60) * gig.project_rate).toFixed(2)}</p>
                 <p>Paid:{gig.is_paid} <Switch onChange={this.handlePaidSwitch}></Switch></p>
                 <p>Billed: {gig.is_billed} <Switch onChange={this.handleBilledSwitch}></Switch></p>
-                <button onClick={() => {
-                    axios.post(`/billGig/${gig_id}`, {
-                        total: this.state.amountDue,
-
-                    }).then((res) => {
-
-                        this.props.history.push('/userHome')
-                        alert('your email has been sent to the client!')
-                    }
-                    ).catch(err => console.log(err, 'frontendError'))
-                }}>Bill This Gig </button>
+                                  
                 <button onClick={()=>this.deleteGig(gig.id)}>delete Gig</button>
  
                 <button onClick={()=>{
@@ -143,33 +156,32 @@ class SingleGig extends Component {
 
                 <button onClick={this.toggleEdit}>edit Gig</button>
                 <button onClick={() => this.deleteGig(gig.id)}>delete Gig</button>
-                {/* 
+    //             {/* 
 
-    this is for later- to send the update to the client when requested. 
-                <button onClick={()=> {
-                    axios.post('/update')
-                }}>Send Update To Client</button> */}
+    // this is for later- to send the update to the client when requested. 
+    //             <button onClick={()=> {
+    //                 axios.post('/update')
+    //             }}>Send Update To Client</button> */}
 
                 <div>
                     <Task gig={gig} />
-                    <Link to={`/taskwizard/${gig.id}`}>
-                        <div style={{
-
-                            width: '60px',
 
 
-                            fontSize: '60px',
-                            position: 'absolute',
-                            bottom: '20px',
-                            right: "20px",
-                            borderRadius: '100%',
-                            textAlign: 'center',
-                            padding: '20px',
+                    <div id="circularMenu" class={this.state.menuOn ? 'circular-menu active' : 'circular-menu'}>
+                        <a class="floating-btn" onClick={this.menuToggle}>
+                            <i class="fa fa-plus"></i>
+                        </a>
+                        <menu class="items-wrapper">
+                            <a href={"/#/taskwizard/" + gig_id} class="menu-item ">create</a>
+                            <a onClick={() => this.deleteGig(gig.id)} class="menu-item ">delete</a>
+                            <a onClick={this.toggleEdit} class="menu-item ">edit</a>
+                            <a onClick={this.billThem} class="menu-item ">bill</a>
+                        </menu>
+                    </div>
 
 
-                        }}><i class="fas fa-plus-circle"></i></div>
-                    </Link>
                 </div>
+
             </div> : (this.props.firstName && this.state.toggleEdit) ?
                 <div>
 
