@@ -37,8 +37,7 @@ module.exports = {
         from: 'update@gigtime.com',
         to: `${clientEmail}`,
         subject: `A client has left you feedback on one of your gigs.`,
-        text: `<div>Hey ${firstName}! This is your update on the project: <a href='localhost:3000/#/client-view/${gig_id}'> localhost:3000/#/client-view/${gig_id} </a> click the link or paste it into your browser</div>
-        `
+        text: `Hey ${firstName}! This is your update on the project: http://localhost:3000/#/client-view/${gig_id} (click the link or paste it into your browser url)`
       };
 
       transporter.sendMail(mailOptions, function (error, info) {

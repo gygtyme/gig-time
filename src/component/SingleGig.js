@@ -57,6 +57,7 @@ class SingleGig extends Component {
         }).catch(err => {
             console.log(err)
         })
+    }
 
     editGig = (id) => {
         const { title, description, project_rate } = this.state
@@ -97,6 +98,7 @@ class SingleGig extends Component {
             console.log('you have update billed')
         })
     }
+
     handleBilledSwitch = () => {
         this.setState({
             is_billed: !this.state.is_billed
@@ -141,13 +143,8 @@ class SingleGig extends Component {
                 }}>Send Update To Client </button>
 
                 <button onClick={this.toggleEdit}>edit Gig</button>
-                <button onClick={() => this.deleteGig(gig.id)}>delete Gig</button>
-                {/* 
 
-    this is for later- to send the update to the client when requested. 
-                <button onClick={()=> {
-                    axios.post('/update')
-                }}>Send Update To Client</button> */}
+                <button onClick={() => this.deleteGig(gig.id)}>delete Gig</button>
 
                 <div>
                     <Task gig={gig} />
@@ -193,7 +190,6 @@ class SingleGig extends Component {
 
             </div>
         );
-    }
     }
 }
 

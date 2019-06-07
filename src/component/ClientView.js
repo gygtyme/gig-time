@@ -16,11 +16,10 @@ class ClientView extends Component {
   
 
   render() {
-let gigId= this.props.match.params.gig_id
-let gigToDisplay= this.props.gigs.find(el=>{
-  return +el.id===+gigId
-})
-
+    let gigId= this.props.match.params.gig_id
+    let gigToDisplay= this.props.gigs.find(el=>{
+        return +el.id===+gigId
+    })
 
     return(
       <div>
