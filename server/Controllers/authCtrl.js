@@ -81,19 +81,6 @@ session.gigs[i].tasks=gigTasks
 
 }
 
-// session.gigs.forEach(async (el, i)=>{
-//    gigTasks= await dbInstance.get_tasks_by_gig_id(el.id)
-//   session.gigs[i].tasks=gigTasks
-// })
-
-
-
-
-// console.log("tasks added", session.gigs[0].tasks)
-
-          //get client. 
-
-
         } catch (error) {
           console.log('error in for loop', error)
         }
@@ -105,7 +92,7 @@ session.gigs[i].tasks=gigTasks
       }
 
     } catch (err) {
-      res.sendStatus(500)
+      res.sendStatus(500)  //this is hitting when we log in with new users causing problems
       console.log(err)
     }
 
@@ -127,7 +114,13 @@ session.gigs[i].tasks=gigTasks
   },
 
   getSession: (req, res) => {
-    res.send(req.session).status(200)
+if(req.session.user){
+  res.send(req.session).status(200)
+
+}else{
+  res.sendStatus(418)
+}
+
   }
 
 }
