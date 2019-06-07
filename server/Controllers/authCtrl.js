@@ -41,7 +41,7 @@ module.exports = {
   },
 
   login: async (req, res) => {
-    // console.log('hit login')
+    console.log('hit login', req.body)
     //check for user by phone number against database
     //do not destructure password! 
     let { email: loginEmail } = req.body
