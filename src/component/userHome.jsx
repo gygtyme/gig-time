@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import axios from 'axios'
 const ms = require('pretty-ms')
 
 
@@ -43,7 +42,6 @@ class UserHome extends Component {
 
 {gigMapped}
 
-<button onClick={axios.post('/feedback').then(res=>console.log(res))}>FIRE</button>
 
       <Link to='/wizard'>
         <div style={{

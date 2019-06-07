@@ -127,7 +127,13 @@ session.gigs[i].tasks=gigTasks
   },
 
   getSession: (req, res) => {
-    res.send(req.session).status(200)
+if(req.session.user){
+  res.send(req.session).status(200)
+
+}else{
+  res.sendStatus(418)
+}
+
   }
 
 }
