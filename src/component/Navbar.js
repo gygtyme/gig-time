@@ -67,7 +67,7 @@ class Navbar extends Component {
                 </Link>
                 {firstName && <div>Welcome, {firstName}  <button className="logout_button" onClick={() => {
                     this.props.logout()
-                    axios.delete('/auth/logout').then(() => { this.props.history.push('/') })
+                    axios.delete('/users/logout').then(() => { this.props.history.push('/') })
                 }}>logout</button></div>}
                 {/* </div> */}
                 {!firstName ? (
