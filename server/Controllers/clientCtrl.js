@@ -50,11 +50,11 @@ module.exports = {
     }
   });
   
-  var mailOptions = {
+  var mailOptions = {  //line 57 can not read title of undefined... need to check that
     from: 'billing@gigtime.com',
     to: `${email}`,
     subject: `A client has left you feedback on one of your gigs.`,
-    text: `${firstName}, you have feedback on your gig ${gig.title}. The client's feedback is listed below. 
+    text: `${firstName}, you have feedback on your gig ${gig.title}. The client's feedback is listed below.  
     ${feedback}
     `
   };
