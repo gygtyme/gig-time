@@ -66,5 +66,12 @@ app.post("/api/clients", clientCtrl.getClient)
 
 app.get('/api/getsession', authCtrl.getSession)
 
-app.post('/billGig/:gigId', gigCtrl.billGig)
+
 app.post('/feedback', clientCtrl.sendFeedback)
+
+app.post('/billGig/:gigId', gigCtrl.billGig)
+  
+
+app.get('/api/getSingleGig/:gigId', gigCtrl.getSingleGig)
+app.post('/feedback', clientCtrl.sendFeedback)
+app.post('/update/:gig_id', clientCtrl.sendUpdate)

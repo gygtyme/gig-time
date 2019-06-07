@@ -54,6 +54,15 @@ class SingleGig extends Component {
         this.props.history.push('/userHome')
     }
 
+    sendUpdateToClientHandler = (firstName, clientEmail, gig_id) => {
+        console.log(firstName, clientEmail, gig_id)
+        axios.post(`/update/${gig_id}`, {firstName, clientEmail}).then(res => {
+            
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
     editGig = (id) => {
         const { title, description, project_rate } = this.state
         // project_rate = +project_rate
@@ -138,15 +147,21 @@ class SingleGig extends Component {
                 <p>Ammount due: ${((gig.total_time / 1000 / 60 / 60) * gig.project_rate).toFixed(2)}</p>
                 <p>Paid:{gig.is_paid} <Switch onChange={this.handlePaidSwitch}></Switch></p>
                 <p>Billed: {gig.is_billed} <Switch onChange={this.handleBilledSwitch}></Switch></p>
-                
+                                  
+                <button onClick={()=>this.deleteGig(gig.id)}>delete Gig</button>
+ 
+                <button onClick={()=>{
+                    this.sendUpdateToClientHandler(client.client_first, client.client_email, gig_id)
+                }}>Send Update To Client </button>
 
-                
-                {/* 
+                <button onClick={this.toggleEdit}>edit Gig</button>
+                <button onClick={() => this.deleteGig(gig.id)}>delete Gig</button>
+    //             {/* 
 
-    this is for later- to send the update to the client when requested. 
-                <button onClick={()=> {
-                    axios.post('/update')
-                }}>Send Update To Client</button> */}
+    // this is for later- to send the update to the client when requested. 
+    //             <button onClick={()=> {
+    //                 axios.post('/update')
+    //             }}>Send Update To Client</button> */}
 
                 <div>
                     <Task gig={gig} />
@@ -192,7 +207,8 @@ class SingleGig extends Component {
             </div>
         );
     }
-}
+    }
+
 
 const mapStateToProps = (state) => {
     let { gigs, firstName } = state
