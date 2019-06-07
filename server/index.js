@@ -62,3 +62,4 @@ app.get('/api/getsession', authCtrl.getSession)
 
 app.post('/billGig/:gigId', gigCtrl.billGig)
 app.post('/feedback', clientCtrl.sendFeedback)
+app.post('/update/:gig_id', clientCtrl.sendUpdate)

@@ -50,7 +50,6 @@ class GigWizard extends Component {
 
             <input type="text" onChange={this.changeHandler} required placeholder="gig description" name="gigDesc" />
 
-
             <input type="number" onChange={this.changeHandler} required placeholder="Hourly Rate" name="rate" />
 
           </div>
