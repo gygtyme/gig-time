@@ -1,5 +1,7 @@
-@import '_variables';
-@import '_Navbar';
+@import 'variables';
+@import 'Navbar';
+@import 'UserHome';
+@import 'menu';
 
 html, body {
   background: $ghost-white;

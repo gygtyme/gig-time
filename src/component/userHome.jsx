@@ -19,18 +19,12 @@ class UserHome extends Component {
 
     let gigMapped = this.props.gigs.map((gig) => {
       return (
-
-        <div style={{
-          border: "solid",
-          width: "200px",
-          borderRadius: "5px",
-          padding: "5px",
-          margin: '15px'
-        }} key={gig.id} onClick={() => {
+        
+        <div className='gig_card_container' key={gig.id} onClick={() => {
           this.props.history.push(`/singlegig/${gig.id}`)
         }}>
 
-          <h2>{gig.title}</h2>
+          <p className="card_title">{gig.title}</p>
           <p>Desc: {gig.description}</p>
           <p>Time: {ms(gig.total_time)}</p>
 
@@ -43,11 +37,7 @@ class UserHome extends Component {
 
 
     return (
-      <div style={{
-        display: 'flex',
-        justifyContent: 'space-around',
-        flexWrap: 'wrap',
-      }}>
+      <div  className="user_home_main_container">
         {gigMapped}
 
         <div id="circularMenu" class={this.state.menuOn ? 'circular-menu active' : 'circular-menu'}>
