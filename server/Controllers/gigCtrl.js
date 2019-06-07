@@ -40,7 +40,8 @@ module.exports = {
 
       await db.create_gig([user_id, gigName, gigDesc, rate, newClient[0].id])
       let newGigs= await db.get_gigs_by_user_id(user_id)
-  
+      session.gigs=newGigs
+
       res.status(200).send(newGigs)
 
     } catch (error) {

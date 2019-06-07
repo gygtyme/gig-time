@@ -20,14 +20,17 @@ class Task extends Component {
     }
 
     render() {
-        console.log(this.props)
+        
+        console.log(this.props, 'TASK')
         let taskView = this.props.gig.tasks.map((task) => 
         <SingleTask task={task}/> )
+        if(taskView){        
         return (
             <div >
                 {taskView}
             </div>
         );
+    } 
     }
 }
 
