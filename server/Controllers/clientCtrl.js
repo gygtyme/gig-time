@@ -15,7 +15,39 @@ module.exports = {
     }, 
 
     sendUpdate: async (req, res)=> {
-//sends fromt he gig an update to the client. 
+//sends from the gig an update to the client.
+
+      let {gig_id} = req.params
+
+      let { firstName, clientEmail } = req.body
+
+      //needs to go to link localhost:3000/#/client-view/:gig_id
+
+      var nodemailer = require('nodemailer');
+
+      var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'dropinappinfo@gmail.com',
+          pass: GOOGLE
+        }
+      });
+
+      var mailOptions = {
+        from: 'update@gigtime.com',
+        to: `${clientEmail}`,
+        subject: `A client has left you feedback on one of your gigs.`,
+        text: `<div>Hey ${firstName}! This is your update on the project: <a href='localhost:3000/#/client-view/${gig_id}'> localhost:3000/#/client-view/${gig_id} </a> click the link or paste it into your browser</div>
+        `
+      };
+
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      });
     }, 
 
     sendFeedback: async (req, res) => {
