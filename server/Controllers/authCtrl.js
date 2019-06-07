@@ -81,19 +81,6 @@ session.gigs[i].tasks=gigTasks
 
 }
 
-// session.gigs.forEach(async (el, i)=>{
-//    gigTasks= await dbInstance.get_tasks_by_gig_id(el.id)
-//   session.gigs[i].tasks=gigTasks
-// })
-
-
-
-
-// console.log("tasks added", session.gigs[0].tasks)
-
-          //get client. 
-
-
         } catch (error) {
           console.log('error in for loop', error)
         }
