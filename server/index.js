@@ -36,7 +36,10 @@ massive(CONNECTION_STRING).then((database) => {
   })
 })
 let gateway = braintree.connect({
-  accessToken: "access_token$sandbox$ftswmhvxwzk49jbz$7c793f90eb4ab6cbcaff73574c1ec44e"
+  environment: braintree.Environment.Sandbox,
+  merchantId: "8dzhhh92hgw76svr",
+  publicKey: "4y2vbn7yb4hdyqmp",
+  privateKey: "cdfc645715e3319eecf05706d3deea38	"
 })
 
 
@@ -51,7 +54,7 @@ app.put('/api/gigtime/:id', gigCtrl.updateGigTime)
 
 app.get('/api/tasks/:gigId', taskCtrl.getGigTasks)
 app.post('/api/tasks/create', taskCtrl.createTask)
-app.put('/api/tasks/edit/:taskId', taskCtrl.editTask)
+app.put('/api/tasks/:taskId', taskCtrl.editTask)
 app.delete('/api/tasks/:taskId', taskCtrl.deleteTask)
 
 
@@ -68,8 +71,16 @@ app.post('/billGig/:gigId', gigCtrl.billGig)
 
 
 //this is paypal generating the client token
+gateway.clientToken.generate({
+  customerId: "josh.buchanan00@gmail.com"
+}, function (err, response){
+  console.log(11111, response)
+  // let clientToken = response.clientToken
+}
+)
 app.get("/client_token", function (req, res) {
   gateway.clientToken.generate({}, function (err, response) {
+    console.log(2222222, gateway)
     res.send(response.clientToken);
   });
 });
@@ -78,3 +89,4 @@ app.post("/checkout", function (req, res) {
   var nonce = req.body.payment_method_nonce;
   clientCtrl.clientPayment()
 });
+app.post('/feedback', clientCtrl.sendFeedback)

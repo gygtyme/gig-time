@@ -55,12 +55,11 @@ module.exports = {
   },
 
   update: (req, res) => {
-    console.log(`update gigs fired`)
+    console.log(`update gigs fired`, req.params, req.body)
     const db = req.app.get('db')
     const { id } = req.params;
-    const { title, description, total_time, project_rate, client_id, is_paid, is_billed } = req.body  //pass in whatever we want it to have
-
-    db.update_gig({id, title, description, total_time, project_rate, client_id, is_paid, is_billed}).then(() => {
+    const { title, description, project_rate } = req.body  
+    db.update_gig({id, title, description, project_rate}).then(() => {
       res.sendStatus(200)
     }).catch(err => console.log("error", err))
   }, 

@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
+import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
+import axios from 'axios'
 const ms = require('pretty-ms')
 
 
@@ -22,7 +23,7 @@ class UserHome extends Component {
 
             <h2>{gig.title}</h2>
             <p>Desc: {gig.description}</p>
-            <p>Time: {ms(gig.total_time)}</p>
+            <p>Time: {(gig.total_time)}</p>
 
           </div>
           
@@ -42,8 +43,10 @@ class UserHome extends Component {
 
 {gigMapped}
 
-        <Link to='/wizard'>
-          <div style={{
+
+
+      <Link to='/wizard'>
+        <div style={{
 
             width: '60px',
 

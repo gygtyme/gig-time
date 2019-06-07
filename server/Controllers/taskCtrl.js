@@ -43,19 +43,15 @@ module.exports = {
   },
 
   editTask: async (req, res) => {
-    let db = req.app.get('db')
-    let { taskId } = req.params
-    let { newTitle, newDescription, gigId } = req.body
-    //doesn't exist
-    try {
-      await db.edit_task([newTitle, newDescription])
-      let dbRes = await db.getGigTasks(gigId)
-
-      res.status(200).send(dbRes)
-    } catch (error) {
-      res.status(500).send(error)
-    }
-
+   
+    console.log(`update task fired`, req.params, req.body)
+    const db = req.app.get('db')
+    const { taskId } = req.params;
+    let id = taskId
+    const { task_title, task_desc } = req.body  
+    db.edit_task({id, task_title, task_desc}).then(() => {
+      res.sendStatus(200)
+    }).catch(err => console.log("error", err))
 
 
   },
