@@ -15,15 +15,13 @@ class ClientView extends Component {
   }
   async componentDidMount() {
 let display= await axios.get(`/api/getSingleGig/${this.props.match.params.gig_id}`)
-
-  this.setState({
-    displayGig: display.data
-  })
-
-
-}
+  }
 
   render() {
+    let gigId= this.props.match.params.gig_id
+    let gigToDisplay= this.props.gigs.find(el=>{
+        return +el.id===+gigId
+    })
 
 let {displayGig}=this.state
 return(

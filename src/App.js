@@ -6,7 +6,7 @@ import store from './redux/store'
 import { HashRouter } from 'react-router-dom'
 import Navbar from './component/Navbar'
 import routes from './routes'
-
+import './component/styles/home.scss';
 
 
 function App() {

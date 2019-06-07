@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import './styles/LearnMore.css';
 import Iframe from 'react-iframe';
+import Scroller from './Scroller'
 
 export default class LearnMore extends Component {
 
 
   render() {
-    return(
+    return (
       <div>
         <div className='learnMoreHero'>
           <div className='heroText'>
             <h2>Welcome to GIG Time!</h2>
             <h4>We are fast, furious, and efficient!</h4>
-            <h2>Are You?</h2>
+            <h2>Learn More</h2>
+            <Scroller y={800}/>
           </div>
         </div>
         <section className='learnMoreCardContainer'>
@@ -20,10 +22,12 @@ export default class LearnMore extends Component {
           <div className='learnMoreCard'>You'll Get The Fat Stacks</div>
           <div className='learnMoreCard'>You'll Probably Get Free Drugs</div>
         </section>
+        <p>Want even more?<Scroller y={1600}/></p>
+          
         <section className='learnMoreVideo'>
-          <Iframe 
-            width="700" 
-            height="400" 
+          <Iframe
+            width="700"
+            height="400"
             url="https://www.youtube.com/embed/dQw4w9WgXcQ"
           />
         </section>
