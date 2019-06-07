@@ -34,6 +34,61 @@ module.exports = {
 
     let { firstName, clientEmail } = req.body
 
+<<<<<<< HEAD
+      var mailOptions = {
+        from: 'update@gigtime.com',
+        to: `${clientEmail}`,
+        subject: `A client has left you feedback on one of your gigs.`,
+        text: `Hey ${firstName}! This is your update on the project: http://localhost:3000/#/client-view/${gig_id} (click the link or paste it into your browser url)`
+      };
+
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      });
+    }, 
+
+    sendFeedback: async (req, res) => {
+        console.log(req.session)
+      let dbInstance= req.app.get('db')
+        let {feedback, gig, clientId:id}= req.body
+
+        let {email, firstName}= req.session.user
+        // let gig= req.session.user.gigs.find(el=> {
+        //     return +el.client_id===+req.body.clientId
+        // })
+
+//need client id so we can send email to client. 
+//
+      // let client= await dbInstance.get_client_by_id({id})
+
+//db call
+      
+
+        
+        //nodemailer sends with req.body
+
+
+
+  var nodemailer = require('nodemailer');
+
+  var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'dropinappinfo@gmail.com',
+      pass: GOOGLE
+    }
+  });
+  
+  var mailOptions = {
+    from: 'billing@gigtime.com',
+    to: `${email}`,
+    subject: `A client has left you feedback on one of your gigs.`,
+    text: `${firstName}, you have feedback on your gig ${gig.title}. The client's feedback is listed below. 
+=======
     //needs to go to link localhost:3000/#/client-view/:gig_id
 
     var nodemailer = require('nodemailer');
@@ -89,6 +144,7 @@ module.exports = {
       to: `${user.email}`,
       subject: `A client has left you feedback on one of your gigs.`,
       text: `${user.first_name}, you have feedback on your gig ${gig.title}. The client's feedback is listed below. 
+>>>>>>> master
     ${feedback}
     `
     };

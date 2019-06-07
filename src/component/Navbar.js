@@ -61,7 +61,6 @@ class Navbar extends Component {
         const { firstName } = this.props.prop
         return (
             <nav className='navbar'>
-                {/* <div className="app_name_logout_container"> */}
                 <Link to='/' style={{ textDecoration: 'none', color: 'black' }}>
                     <span className="app_name_container">GIG Time</span>
                 </Link>
@@ -69,7 +68,6 @@ class Navbar extends Component {
                     this.props.logout()
                     axios.delete('/users/logout').then(() => { this.props.history.push('/') })
                 }}>logout</button></div>}
-                {/* </div> */}
                 {!firstName ? (
                     <div>
                         <div className='loginJacob'>
