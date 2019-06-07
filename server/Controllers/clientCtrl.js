@@ -53,24 +53,13 @@ module.exports = {
     sendFeedback: async (req, res) => {
         console.log(req.session)
       let dbInstance= req.app.get('db')
-        let {feedback, gig, clientId:id}= req.body
 
-        let {email, firstName}= req.session.user
-        // let gig= req.session.user.gigs.find(el=> {
-        //     return +el.client_id===+req.body.clientId
-        // })
-
-//need client id so we can send email to client. 
-//
-      // let client= await dbInstance.get_client_by_id({id})
-
-//db call
       
+        let {feedback, user_id, gig}= req.body
 
+        let user= await dbInstance.get_user_by_id(user_id)
         
-        //nodemailer sends with req.body
-
-
+         user=user[0]
 
   var nodemailer = require('nodemailer');
 
@@ -83,10 +72,10 @@ module.exports = {
   });
   
   var mailOptions = {
-    from: 'billing@gigtime.com',
-    to: `${email}`,
+    from: 'feedback@gigtime.com',
+    to: `${user.email}`,
     subject: `A client has left you feedback on one of your gigs.`,
-    text: `${firstName}, you have feedback on your gig ${gig.title}. The client's feedback is listed below. 
+    text: `${user.first_name}, you have feedback on your gig ${gig.title}. The client's feedback is listed below. 
     ${feedback}
     `
   };

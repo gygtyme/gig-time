@@ -67,7 +67,7 @@ class Navbar extends Component {
                 </Link>
                 {firstName && <div>Welcome, {firstName}  <button className="logout_button" onClick={() => {
                     this.props.logout()
-                    axios.get('/auth/logout').then(() => { this.props.history.push('/home') })
+                    axios.delete('/auth/logout').then(() => { this.props.history.push('/') })
                 }}>logout</button></div>}
                 {/* </div> */}
                 {!firstName ? (
@@ -82,7 +82,7 @@ class Navbar extends Component {
                                     this.changeHandler(e)
                                 }} /> 
                             <button onClick={this.loginHandler}>Login</button>
-                            <Link to='/register' style={{ 'text-decoration': 'none' }}> <button> Register </button> </Link>
+                            <Link to='/register' style={{ 'textDecoration': 'none' }}> <button> Register </button> </Link>
                         </div>
                     </div>
                 ) : (

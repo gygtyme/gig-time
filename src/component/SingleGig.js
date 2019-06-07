@@ -57,6 +57,7 @@ class SingleGig extends Component {
         }).catch(err => {
             console.log(err)
         })
+    }
 
     editGig = (id) => {
         const { title, description, project_rate } = this.state
@@ -195,7 +196,7 @@ class SingleGig extends Component {
         );
     }
     }
-}
+
 
 const mapStateToProps = (state) => {
     let { gigs, firstName } = state
