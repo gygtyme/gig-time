@@ -47,7 +47,7 @@
       border:1px solid #dcdcdc;
       display:inline-block;
       cursor:pointer;
-      color:#777777;
+      color:$spanish-gray;
       font-family:Arial;
       font-size:15px;
       font-weight:bold;
@@ -57,7 +57,8 @@
       margin: 1em;
     }
     button:hover {
-      background-color:transparent;
+      background-color:$spanish-gray;
+      color: $ghost-white;
     }
     button:active {
       position:relative;
