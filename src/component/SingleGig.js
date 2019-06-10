@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from "react-redux"
 import axios from 'axios';
 import Task from './Task'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import Switch from 'react-switch'
 import { userInfo} from '../redux/userReducer'
 
-import TaskWizard from './TaskWizard'
+// import TaskWizard from './TaskWizard'
 const ms = require('pretty-ms')
 
 
@@ -163,14 +163,14 @@ class SingleGig extends Component {
 
 
                     <div id="circularMenu" class={this.state.menuOn ? 'circular-menu active' : 'circular-menu'}>
-                        <a class="floating-btn" onClick={this.menuToggle}>
+                        <div class="floating-btn" onClick={this.menuToggle}>
                             <i class="fa fa-plus"></i>
-                        </a>
+                        </div>
                         <menu class="items-wrapper">
                             <a href={"/#/taskwizard/" + gig_id} class="menu-item ">create</a>
-                            <a onClick={() => this.deleteGig(gig.id)} class="menu-item ">delete</a>
-                            <a onClick={this.toggleEdit} class="menu-item ">edit</a>
-                            <a onClick={this.billThem} class="menu-item">bill</a>
+                            <div onClick={() => this.deleteGig(gig.id)} class="menu-item ">delete</div>
+                            <div onClick={this.toggleEdit} class="menu-item ">edit</div>
+                            <div onClick={this.billThem} class="menu-item">bill</div>
                         </menu>
                     </div>
 

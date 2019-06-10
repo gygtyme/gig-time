@@ -14,11 +14,11 @@ class ClientView extends Component {
     }
   }
   async componentDidMount() {
-let display= await axios.get(`/api/getSingleGig/${this.props.match.params.gig_id}`)
+// let display= await axios.get(`/api/getSingleGig/${this.props.match.params.gig_id}`)
   }
 
   render() {
-    let gigId= this.props.match.params.gig_id
+    // let gigId= this.props.match.params.gig_id
     // let gigToDisplay= this.props.gigs.find(el=>{
     //     return +el.id===+gigId
     // })
@@ -35,7 +35,7 @@ return(
           this.setState({
             [e.target.name]:e.target.value
           })
-        }}></textarea> 
+        }}></textarea>
         <button onClick={()=> {
 
 
