@@ -14,9 +14,9 @@ body {
   width: 3.5em;
   height: 3.5em;
   border-radius: 50%;
-  background-color: $lapis-lazuli;
+  background-color: $charcoal;
   box-shadow: 0 2px 5px 0 hsla(0, 0%, 0%, .26);  
-  color: hsl(0, 0%, 100%);
+  color: $lapis-lazuli;
   text-align: center;
   line-height: 3.9;
   cursor: pointer;
@@ -50,7 +50,7 @@ body {
   top: 0;
   right: 0;
   z-index: -2;
-  background-color: $lapis-lazuli;
+  background-color: $charcoal;
   transition: all .3s ease;
 }
 
@@ -71,7 +71,7 @@ body {
   z-index: -1;
   display: block;
   text-decoration: none;
-  color: hsl(0, 0%, 100%);
+  color: $ghost-white;
   font-size: 1em;
   width: 3em;
   height: 3em;
@@ -80,7 +80,7 @@ body {
   line-height: 3;
   background-color: hsla(0,0%,0%,.1);
   transition: transform .3s ease, background .2s ease;
-  font-family: $site-font;
+  font-family: $header-fonts;
   
 }
 

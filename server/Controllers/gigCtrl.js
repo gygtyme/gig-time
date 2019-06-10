@@ -40,9 +40,16 @@ module.exports = {
 
       await db.create_gig([user_id, gigName, gigDesc, rate, newClient[0].id])
       let newGigs= await db.get_gigs_by_user_id(user_id)
-      session.gigs=newGigs
+      let userGigs = await db.get_gigs_by_user_id(user_id)
+      session.gigs = userGigs
+      for (let i = 0; i < session.gigs.length; i++) {
 
-      res.status(200).send(newGigs)
+        let gigTasks = await db.get_tasks_by_gig_id(session.gigs[i].id)
+        session.gigs[i].tasks = gigTasks
+      }
+      session.gigs = userGigs
+      
+      res.status(200).send(session)
 
     } catch (error) {
       console.log(error, 'create gig error')
@@ -62,14 +69,24 @@ module.exports = {
     }).catch(err => console.log("error", err))
   },
 
-  update: (req, res) => {
+  update: async(req, res) => {
     console.log(`update gigs fired`, req.params, req.body)
     const db = req.app.get('db')
+    const { session } = req
     const { id } = req.params;
     const { title, description, project_rate } = req.body
-    db.update_gig({ id, title, description, project_rate }).then(() => {
-      res.sendStatus(200)
-    }).catch(err => console.log("error", err))
+    let updatedGig = await db.update_gig({ id, title, description, project_rate })
+    let userGigs = await db.get_gigs_by_user_id(session.user.id)
+      session.gigs = userGigs
+      for (let i = 0; i < session.gigs.length; i++) {
+
+        let gigTasks = await db.get_tasks_by_gig_id(session.gigs[i].id)
+        session.gigs[i].tasks = gigTasks
+      }
+      session.gigs = userGigs
+     
+      res.status(200).send(session)
+     
   },
 
   billGig: async (req, res) => {
