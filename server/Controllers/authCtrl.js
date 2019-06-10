@@ -26,12 +26,9 @@ module.exports = {
 
     const user = await dbInstance.register_new_user([firstName, lastName, email, phone, hashedPass])
 
-    // console.log(user[0])
-    //log in user automatically
 
     user[0].isLoggedIn = true
 
-    // delete user[0].pass_hash
 
     session.user = user[0]
 
@@ -42,23 +39,21 @@ module.exports = {
 
   login: async (req, res) => {
     console.log('hit login', req.body)
-    //check for user by phone number against database
-    //do not destructure password! 
     let { email: loginEmail } = req.body
     let dbInstance = req.app.get('db')
     const { session } = req
 
 
     try {
-      let email = await dbInstance.find_user_by_email([loginEmail])
-      // console.log(email, "email")
+      let loginUser = await dbInstance.find_user_by_email([loginEmail])
+      
+      loginUser[0].isLoggedIn = true
+      console.log(loginUser, "loginAttempt", req.body.pass, loginUser[0].pass_hash, "passwords")
+      session.user = loginUser[0]
 
-      email[0].isLoggedIn = true
-      session.user = email[0]
+      const authenticated = bcrypt.compareSync(req.body.pass, loginUser[0].pass_hash)
 
-      const authenticated = bcrypt.compareSync(req.body.pass, email[0].pass_hash)
-
-
+      console.log(authenticated, 'authenticated?')
 
       if (authenticated) {
 
@@ -87,9 +82,10 @@ module.exports = {
 
 
         res.status(200).send(session)
-      } else {
-        throw new Error(401)
-      }
+      } 
+      // else {
+      //   throw new Error(401)
+      // }
 
     } catch (err) {
       res.sendStatus(500)  //this is hitting when we log in with new users causing problems
