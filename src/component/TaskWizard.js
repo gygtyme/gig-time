@@ -15,7 +15,7 @@ class TaskWizard extends Component {
   }
 
   changeHandler = (e) => {
-    
+
     this.setState({
       [e.target.name]: e.target.value
     })
@@ -24,14 +24,14 @@ class TaskWizard extends Component {
   wizardSubmitHandler = (e) => {
     e.preventDefault()
     const { gig_id } = this.props.match.params
-    const {taskTitle, taskDesc} = this.state
-    axios.post('/api/tasks/create', {gig_id, taskTitle, taskDesc}).then(res => {
-      
-      
+    const { taskTitle, taskDesc } = this.state
+    axios.post('/api/tasks/create', { gig_id, taskTitle, taskDesc }).then(res => {
+
+
     })
     this.props.history.push(`/singlegig/${gig_id}`)
   }
-  
+
   goBack = () => {
     const { gig_id } = this.props.match.params
     this.props.history.push(`/singlegig/${gig_id}`)
@@ -40,24 +40,26 @@ class TaskWizard extends Component {
 
   render() {
     return (
-      <div>
+      <div className="task_wizard_container">
         <form >
-          <div>
-            <h1>Gig Info</h1>
-            <input type="text" onChange={this.changeHandler} required placeholder="Task title" name="taskTitle" />
 
-            <input type="text" onChange={this.changeHandler} required placeholder="Task description" name="taskDesc" />
+          <h1>Create a Task:</h1>
+          <div className="group">
+            <input className="input_task_container" type="text" onChange={this.changeHandler} required placeholder="Task title" name="taskTitle" />
+
+            <textarea cols="50" rows="7" className="text_task_container" type="text" onChange={this.changeHandler} required placeholder="Task description" name="taskDesc" />
 
 
 
 
           </div>
 
-
-          <button type="submit" onClick={this.wizardSubmitHandler}>Submit</button>
+          <div className="button_task_container">
+            <button type="submit" onClick={this.wizardSubmitHandler}>Submit</button>
+            <button onClick={this.goBack}>cancel</button>
+          </div>
         </form>
 
-          <button onClick={this.goBack}>cancel</button>
 
       </div>
     )
