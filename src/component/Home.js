@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import axios from 'axios';
 import { userInfo } from "../redux/userReducer"
 import { Link } from 'react-router-dom';
-import './styles/Home.css'
+
 
 
 class Home extends Component {

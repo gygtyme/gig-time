@@ -4,7 +4,7 @@ import axios from 'axios';
 import Task from './Task'
 import { Link } from 'react-router-dom'
 import Switch from 'react-switch'
-import './menu.css'
+
 import TaskWizard from './TaskWizard'
 const ms = require('pretty-ms')
 
@@ -56,8 +56,8 @@ class SingleGig extends Component {
 
     sendUpdateToClientHandler = (firstName, clientEmail, gig_id) => {
         console.log(firstName, clientEmail, gig_id)
-        axios.post(`/update/${gig_id}`, {firstName, clientEmail}).then(res => {
-            
+        axios.post(`/update/${gig_id}`, { firstName, clientEmail }).then(res => {
+
         }).catch(err => {
             console.log(err)
         })
@@ -138,7 +138,7 @@ class SingleGig extends Component {
 
         let gigDisplay = (this.props.firstName && !this.state.toggleEdit) ?
 
-            <div style={{ border: "solid" }}>
+            <div className="gig_card_container" >
                 <h2>{gig.title}</h2>
                 <p>Client name: {client.client_first} {client.client_last}</p>
                 <p>Client contact: {client.client_email} {client.client_phone}</p>
@@ -148,10 +148,10 @@ class SingleGig extends Component {
                 <p>Ammount due: ${((gig.total_time / 1000 / 60 / 60) * gig.project_rate).toFixed(2)}</p>
                 <p>Paid:{gig.is_paid} <Switch checked={this.state.is_paid} onChange={this.handlePaidSwitch}></Switch></p>
                 <p>Billed: {gig.is_billed} <Switch value={this.state.is_billed} checked={this.state.is_billed} onChange={this.handleBilledSwitch}></Switch></p>
-                                  
-                
- 
-                <button onClick={()=>{
+
+
+
+                <button onClick={() => {
                     this.sendUpdateToClientHandler(client.client_first, client.client_email, gig_id)
                 }}>Send Update To Client </button>
 
@@ -181,22 +181,23 @@ class SingleGig extends Component {
             </div> : (this.props.firstName && this.state.toggleEdit) ?
                 <div>
 
-                    <p>Gig Title:</p>
-                    <input onChange={this.handleChange} placeholder={this.state.title}
+                    <p className="sub_header">Gig Title:</p>
+                    <input className="input_task_container" onChange={this.handleChange} placeholder={this.state.title}
                         value={this.state.title} name='title' />
-                    <p>Gig Description:</p>
-                    <input onChange={this.handleChange} placeholder={this.state.description}
+                    <p className="sub_header">Gig Description:</p>
+                    <input className="input_task_container" onChange={this.handleChange} placeholder={this.state.description}
                         value={this.state.description} name="description" />
-                    <p>Gig rate:</p>
-                    <input onChange={this.handleChange} placeholder={this.state.project_rate}
+                    <p className="sub_header">Gig rate:</p>
+                    <input className="input_task_container" onChange={this.handleChange} placeholder={this.state.project_rate}
                         value={this.state.project_rate} name='project_rate' />
-                    <button onClick={() => this.editGig(gig.id)}>save</button>
-
+                    <div className="button_task_container">
+                        <button onClick={() => this.editGig(gig.id)}>save</button>
+                    </div>
 
                 </div>
                 : null
         return (
-            <div>
+            <div className="gigDisplay_container">
 
                 {gigDisplay}
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import axios from 'axios'
 const ms = require('pretty-ms')
@@ -25,14 +24,8 @@ class ClientList extends Component {
   render() {
     console.log(this.state.list)
     let displayArr = this.state.list.map((client) => {
-      return <div style={{
-        border: "solid",
-        width: "200px",
-        borderRadius: "5px",
-        padding: "5px",
-        margin: '15px'
-      }} key={client.id} >
-        <p>{client.client_first}</p>
+      return <div className='gig_card_container' key={client.id} >
+        <p className="card_title">{client.client_first}</p>
         <p>{client.client_last}</p>
         <p>{client.email}</p>
         
@@ -42,7 +35,7 @@ class ClientList extends Component {
 
 
     return <>
-      <div>Client List:{displayArr}</div>
+      <div className="user_home_main_container">Client List:{displayArr}</div>
 
     </>
 

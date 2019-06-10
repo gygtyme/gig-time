@@ -1,5 +1,8 @@
 const functions = require('./functions.js')
 const axios= require('axios')
+const mockAxios= require('axios')
+
+import fetchData from 
 
 test('sendEmail Should send an email', () => {
   expect( functions.sendEmail() ).toEqual('email sent')
@@ -27,3 +30,19 @@ test('reducer on update gigs should update state', ()=> {
     payload: ['gig2', 'gig4', 'gig7']
   })).toEqual({gigs:['gig2', 'gig4', 'gig7']})
 })
+
+
+it('should call a fetchData function', done => {
+  functions.fetchData('/test', {}).then(response => {
+    expect(response).toEqual({
+      data: {},
+    });
+  });
+  expect(mockAxios.request).toHaveBeenCalledWith({
+    method: 'get',
+    url: '/test'
+  });
+  expect(mockAxios.request).toHaveBeenCalledTimes(1);
+  expect(consoleErrorSpy).not.toHaveBeenCalled();
+  done();
+});

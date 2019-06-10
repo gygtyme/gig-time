@@ -1,9 +1,46 @@
+@import 'variables';
 .navbar {
+  font-family: $header-fonts;
   height: 10vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
   box-sizing: border-box;
+  background: $charcoal;
+  color: $ghost-white;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  font-size: 12px;
+  
+
+    span{
+      font-size: 30px;
+      color: $ghost-white;
+    }
+
+    div{
+      .loginJacob{
+        display: flex;
+        
+        font-size: 15px;
+      }
+
+    }
+
+}
+
+.fas{
+  font-size: 20px;
+}
+
+.link_container{
+}
+
+.link_text{
+  color: $rich-electric-blue;
+  text-decoration: none;
+  font-size: 20px;
 }
 
