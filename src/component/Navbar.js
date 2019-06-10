@@ -68,7 +68,7 @@ class Navbar extends Component {
                     axios.delete('/users/logout').then(() => { this.props.history.push('/') })
                 }}>logout</button></div>}
                 {!firstName ? (
-                    <div>
+                    <form>
                         <div className='loginJacob'>
                             Email <input  className="newTask" autoFocus type="email"
                                 name="email" placeholder="email" required onChange={e => {
@@ -81,7 +81,7 @@ class Navbar extends Component {
                             <button onClick={this.loginHandler}>Login</button>
                             <Link to='/register' style={{ 'textDecoration': 'none' }}> <button> Register </button> </Link>
                         </div>
-                    </div>
+                    </form>
                 ) : (
                         <div className="menu_logout_container">
                             <HamburgerMenu />

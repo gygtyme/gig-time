@@ -15,8 +15,8 @@ export default class LearnMore extends Component {
             <h2>Welcome to GIG Time!</h2>
             <h4>We are fast, furious, and efficient!</h4>
             <Link to='/register'><button className='registerButton'>Register Today!</button></Link>
-            <h3>Learn More Below</h3>
-            <Scroller/>
+            <h3>Learn More!</h3>
+            <Scroller y={600}/>
           </div>
         </div>
         
@@ -26,11 +26,11 @@ export default class LearnMore extends Component {
             <div className='learnMoreCard'>You'll Get The Fat Stacks</div>
             <div className='learnMoreCard'>You'll Probably Get Free Drugs</div>
           </div>
-          <Link to='/register'><button className='registerButton'>Register Today!</button></Link>
+          <Link to='/register'><button className='registerButton'>Register Here!</button></Link>
+          <p>Learn How It Works Below!</p>
+          <div><Scroller y={1200}/></div>
         </div>
-        
-        {/* <p>Want even more?<Scroller y={1600}/></p> */}
-          
+
         <section className='learnMoreVideo'>
           <Iframe
             width="700"

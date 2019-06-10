@@ -6,7 +6,7 @@ export default class Scroller extends Component {
     return (
       <ScrollTo>
         {({ scrollTo }) => (
-          <a onClick={() => scrollTo({ id: "learnMoreCardContainer" y:500 })}><i style={{fontSize: 50, zIndex: 10}} className="fas fa-arrow-down"></i></a>
+          <div onClick={() => scrollTo({ x: 20, y: this.props.y })}><i style={{fontSize: 50, zIndex: 10}} className="fas fa-arrow-down"></i></div>
         )}
       </ScrollTo>
     );
