@@ -6,7 +6,6 @@ import axios from 'axios'
 import HamburgerMenu from './HamburgerMenu'
 
 
-
 class Navbar extends Component {
     constructor() {
         super()

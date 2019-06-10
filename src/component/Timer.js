@@ -4,7 +4,7 @@ import { connect } from "react-redux"
 import { updateGigTime, refreshTotalGigTime  } from '../redux/userReducer'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios';
-import { async } from 'q';
+// import { async } from 'q';
 const ms = require('pretty-ms')
 
 class Timer extends React.Component {
@@ -95,7 +95,7 @@ class Timer extends React.Component {
   render() {
     let editInput = (this.state.editToggle) ? <><input onChange={this.handleChange} />
       <button onClick={this.saveEdit}>save</button></> : null
-    let start = (this.state.time == 0) ?
+    let start = (this.state.time === 0) ?
       <><button onClick={this.startTimer}>start</button>
         <button onClick={this.editTime}>edit time</button>
         {editInput}
@@ -104,13 +104,13 @@ class Timer extends React.Component {
     let stop = (this.state.isOn) ?
       <button onClick={this.stopTimer}>stop</button> :
       null
-    let reset = (this.state.time != 0 && !this.state.isOn) ?
+    let reset = (this.state.time !== 0 && !this.state.isOn) ?
       <button onClick={this.resetTimer}>reset</button> :
       null
-    let resume = (this.state.time != 0 && !this.state.isOn) ?
+    let resume = (this.state.time !== 0 && !this.state.isOn) ?
       <button onClick={this.startTimer}>resume</button> :
       null
-    let takeBreak = (this.state.time != 0 && !this.state.isOn) ?
+    let takeBreak = (this.state.time !== 0 && !this.state.isOn) ?
       <button onClick={this.takeBreak}>break</button> :
       null
     return (

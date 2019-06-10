@@ -15,7 +15,7 @@ import ClientList from './component/ClientList'
 
 export default (
   <Switch>
-    <Route exact path='/' component={Home} />
+    <Route exact path='/' component={LearnMore} />
 
     <Route path="/userHome" component={UserHome} />
 
@@ -23,7 +23,7 @@ export default (
     
     <Route path="/gig" component={Gig} />
 
-    <Route path='/learn-more' component={LearnMore} />
+    <Route path='/learn-more' component={Home} />
 
     <Route path='/client-view/:gig_id' component={ClientView} />
     <Route path="/wizard" component={GigWizard} />
