@@ -24,10 +24,20 @@ class SingleGig extends Component {
     }
 
 
-    componentDidMount() {
+    componentDidMount () {
+        console.log(this.props)
         let id = this.getGigClient()
         this.getClient(id)
+        // this.reduxCollector() //going to fix it tomorrow
     }
+    
+    // reduxCollector = () =>{
+        
+    //      this.setState({
+    //         is_billed : this.props.gigs[0].is_billed,
+    //         is_paid : this.props.gigs[0].is_paid
+    //     })
+    // }
 
     getClient = (id) => {
         axios.post("/api/clients", { id }).then(res => {
@@ -50,7 +60,7 @@ class SingleGig extends Component {
 
     deleteGig = (id) => {
         axios.delete(`/api/gigs/${id}`).then(res => {
-
+            this.props.userInfo(res.data)
         })
         this.props.history.push('/userHome')
     }
@@ -92,16 +102,13 @@ class SingleGig extends Component {
         this.saveToDB()
     }
 
-    saveToDB = () => {
-        console.log('look at me', this.props.match.params.gig_id)
+    saveToDB = async() => {
+        console.log('look at me', 'bille:',this.state.is_billed, 'paid:', this.state.is_paid)
         const { gig_id: id } = this.props.match.params
         const { is_paid, is_billed } = this.state
-        axios.put(`/api/gig/paid/${id}`, { is_paid }).then(() => {
-            console.log('you have altered the db')
-        })
-        axios.put(`/api/gig/billed/${id}`, { is_billed }).then(() => {
-            console.log('you have update billed')
-        })
+        await axios.put(`/api/gig/paid/${id}`, { is_paid })
+        
+        await axios.put(`/api/gig/billed/${id}`, { is_billed })
     }
 
     handleBilledSwitch = () => {
