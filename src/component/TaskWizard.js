@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
-import { updateGigs } from '../redux/userReducer'
+import { updateGigs, userInfo} from '../redux/userReducer'
 
 class TaskWizard extends Component {
   constructor() {
@@ -21,15 +21,18 @@ class TaskWizard extends Component {
     })
 
   }
-  wizardSubmitHandler = (e) => {
+  wizardSubmitHandler = async(e) => {
     e.preventDefault()
     const { gig_id } = this.props.match.params
     const { taskTitle, taskDesc } = this.state
-    axios.post('/api/tasks/create', { gig_id, taskTitle, taskDesc }).then(res => {
-
+    await axios.post('/api/tasks/create', { gig_id, taskTitle, taskDesc }).then(res => {
+      this.props.userInfo(res.data)
+      
 
     })
     this.props.history.push(`/singlegig/${gig_id}`)
+    
+    
   }
 
   goBack = () => {
@@ -74,7 +77,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-  updateGigs
+  updateGigs,
+  userInfo
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskWizard)

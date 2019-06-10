@@ -66,20 +66,20 @@ module.exports = {
 
         try {
           //get user's gigs
-          let userGigs= await dbInstance.get_gigs_by_user_id(session.user.id)
+          let userGigs = await dbInstance.get_gigs_by_user_id(session.user.id)
           // console.log(userGigs, "USER GIGS")
 
-          session.gigs=userGigs
+          session.gigs = userGigs
 
 
           //get gig's tasks
 
- for(let i=0; i<session.gigs.length; i++){
-  
-let gigTasks= await dbInstance.get_tasks_by_gig_id(session.gigs[i].id)
-session.gigs[i].tasks=gigTasks
+          for (let i = 0; i < session.gigs.length; i++) {
 
-}
+            let gigTasks = await dbInstance.get_tasks_by_gig_id(session.gigs[i].id)
+            session.gigs[i].tasks = gigTasks
+
+          }
 
         } catch (error) {
           console.log('error in for loop', error)
@@ -114,12 +114,12 @@ session.gigs[i].tasks=gigTasks
   },
 
   getSession: (req, res) => {
-if(req.session.user){
-  res.send(req.session).status(200)
+    if (req.session.user) {
+      res.send(req.session).status(200)
 
-}else{
-  res.sendStatus(418)
-}
+    } else {
+      res.sendStatus(418)
+    }
 
   }
 

@@ -4,6 +4,7 @@ import axios from 'axios';
 import Task from './Task'
 import { Link } from 'react-router-dom'
 import Switch from 'react-switch'
+import { userInfo} from '../redux/userReducer'
 
 import TaskWizard from './TaskWizard'
 const ms = require('pretty-ms')
@@ -66,8 +67,8 @@ class SingleGig extends Component {
     editGig = (id) => {
         const { title, description, project_rate } = this.state
         // project_rate = +project_rate
-        axios.put(`/api/gigs/${id}`, { title, description, project_rate }).then(() => {
-
+        axios.put(`/api/gigs/${id}`, { title, description, project_rate }).then((res) => {
+            this.props.userInfo(res.data)
         })
         this.toggleEdit()
     }
@@ -150,14 +151,12 @@ class SingleGig extends Component {
                 <p>Billed: {gig.is_billed} <Switch value={this.state.is_billed} checked={this.state.is_billed} onChange={this.handleBilledSwitch}></Switch></p>
 
 
+                <div className="button_task_container">
+                    <button onClick={() => {
+                        this.sendUpdateToClientHandler(client.client_first, client.client_email, gig_id)
+                    }}>Send Update To Client </button>
+                </div>
 
-                <button onClick={() => {
-                    this.sendUpdateToClientHandler(client.client_first, client.client_email, gig_id)
-                }}>Send Update To Client </button>
-
-                <button onClick={this.toggleEdit}>edit Gig</button>
-
-                <button onClick={() => this.deleteGig(gig.id)}>delete Gig</button>
 
                 <div>
                     <Task gig={gig} />
@@ -211,4 +210,8 @@ const mapStateToProps = (state) => {
     return { gigs, firstName }
 }
 
-export default connect(mapStateToProps)(SingleGig);
+const mapDispatchToProps = {
+    userInfo
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingleGig);
