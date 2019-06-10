@@ -49,6 +49,9 @@ app.get('/api/gigs/:title', gigCtrl.getGigs)
 app.delete('/api/gigs/:id', gigCtrl.delete)
 app.put('/api/gigs/:id', gigCtrl.update)
 
+app.put('/api/gig/paid/:id', gigCtrl.togglePaid)
+app.put('/api/gig/billed/:id', gigCtrl.toggleBilled)
+
 app.put('/api/gigtime/:id', gigCtrl.updateGigTime)
 
 
@@ -67,20 +70,15 @@ app.post("/api/clients", clientCtrl.getClient)
 
 app.get('/api/getsession', authCtrl.getSession)
 
+
+app.post('/feedback', clientCtrl.sendFeedback)
+
 app.post('/billGig/:gigId', gigCtrl.billGig)
 
 
 //this is paypal generating the client token
-gateway.clientToken.generate({
-  customerId: "josh.buchanan00@gmail.com"
-}, function (err, response){
-  console.log(11111, response)
-  // let clientToken = response.clientToken
-}
-)
 app.get("/client_token", function (req, res) {
   gateway.clientToken.generate({}, function (err, response) {
-    console.log(2222222, gateway)
     res.send(response.clientToken);
   });
 });
@@ -90,3 +88,8 @@ app.post("/checkout", function (req, res) {
   clientCtrl.clientPayment()
 });
 app.post('/feedback', clientCtrl.sendFeedback)
+  
+
+app.get('/api/getSingleGig/:gigId', gigCtrl.getSingleGig)
+app.post('/feedback', clientCtrl.sendFeedback)
+app.post('/update/:gig_id', clientCtrl.sendUpdate)
