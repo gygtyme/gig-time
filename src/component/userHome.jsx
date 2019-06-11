@@ -40,14 +40,14 @@ class UserHome extends Component {
       <div  className="user_home_main_container">
         {gigMapped}
 
-        <div id="circularMenu" class={this.state.menuOn ? 'circular-menu active' : 'circular-menu'}>
-          <div class="floating-btn" onClick={this.menuToggle}>
-            <i class="fa fa-plus"></i>
+        <div id="circularMenu" className={this.state.menuOn ? 'circular-menu active' : 'circular-menu'}>
+          <div className="floating-btn" onClick={this.menuToggle}>
+            <i className="fa fa-plus"></i>
           </div>
-          <menu class="items-wrapper">
-            <a href={"/#/wizard"} class="menu-item ">create</a>
-            <a href={"/#/gighistory"} class="menu-item ">history</a>
-            <a href={"/#/clientlist"} class="menu-item ">clients</a>
+          <menu className="items-wrapper">
+            <a href={"/#/wizard"} className="menu-item ">create</a>
+            <a href={"/#/gighistory"} className="menu-item ">history</a>
+            <a href={"/#/clientlist"} className="menu-item ">clients</a>
           </menu>
         </div>
       </div>
