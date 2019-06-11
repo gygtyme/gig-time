@@ -3,11 +3,7 @@ const { GOOGLE } = process.env
 module.exports = {
   getGigs: (req, res) => {
     console.log(`get gigs fired`)
-    
-    
     const db = req.app.get('db')
-    
-    if(req.session.user){
     let { id } = req.session.user
     id = String(id)
 
@@ -22,9 +18,6 @@ module.exports = {
         res.status(200).send(recipe)
       }).catch(err => console.log("error", err))
     }
-  }
-
-
   },
 
   createGig: async (req, res) => {
@@ -32,11 +25,11 @@ module.exports = {
     const { session } = req
     const { id: user_id } = req.session.user
     const db = req.app.get('db')
-    const { gigName, gigDesc, rate, clientFName, clientLName, clientPhone, clientEmail  } = req.body 
+    const { gigName, gigDesc, rate, clientFName, clientLName, clientPhone, email  } = req.body 
     
 
     try {
-      let newClient=await db.create_client([clientFName, clientLName, clientEmail, clientPhone])
+      let newClient=await db.create_client([clientFName, clientLName, email, clientPhone])
 
       await db.create_gig([user_id, gigName, gigDesc, rate, newClient[0].id])
       let newGigs= await db.get_gigs_by_user_id(user_id)
@@ -177,6 +170,13 @@ module.exports = {
     console.log(oldTime[0])
     let newTime = oldTime[0].total_time + totalGigTime
 
+<<<<<<< HEAD
+    db.update_gig_total_time({id, newTime}).then(() => {
+      res.sendStatus(200)
+    }).catch(err => console.log("error", err))
+  }
+ }
+=======
     await db.update_gig_total_time({ id, newTime })
     let userGigs = await db.get_gigs_by_user_id(session.user.id)
       session.gigs = userGigs
@@ -253,3 +253,4 @@ module.exports = {
 
 
 }
+>>>>>>> master

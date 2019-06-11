@@ -10,9 +10,19 @@ class ClientView extends Component {
 
     this.state = {
       feedback:'', 
-      displayGig:{}
+      
     }
   }
+<<<<<<< HEAD
+  
+
+  render() {
+let gigId= this.props.match.params.gig_id
+let gigToDisplay= this.props.gigs.find(el=>{
+  return +el.id===+gigId
+})
+
+=======
   async componentDidMount() {
 // let display= await axios.get(`/api/getSingleGig/${this.props.match.params.gig_id}`)
   }
@@ -22,14 +32,15 @@ class ClientView extends Component {
     // let gigToDisplay= this.props.gigs.find(el=>{
     //     return +el.id===+gigId
     // })
+>>>>>>> master
 
-let {displayGig}=this.state
-return(
+    return(
       <div>
         <div class='progress'>
           <ProgressBar />
 
-      <h1>{displayGig.title}</h1>
+      <h1>{gigToDisplay.title}</h1>
+
 
         <textarea name="feedback" placeholder='type feedback here!' cols="30" rows="10" onChange={(e)=> {
           this.setState({
@@ -40,8 +51,9 @@ return(
 
 
           axios.post('/feedback', {feedback: this.state.feedback,
-            user_id: this.state.displayGig.user_id, 
-            gig: this.state.displayGig 
+            clientId: gigToDisplay.client_id,
+            gig:gigToDisplay,
+          // userId
           })
         }}>Submit Feedback</button>         
         </div>

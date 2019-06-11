@@ -20,6 +20,23 @@ class UserHome extends Component {
     let gigMapped = this.props.gigs.map((gig) => {
       return (
         
+<<<<<<< HEAD
+          <div style={{
+            border: "solid",
+            width: "200px",
+            borderRadius: "5px",
+            padding: "5px",
+            margin: '15px'
+          }} key={gig.id} onClick={() => {
+            this.props.history.push(`/singlegig/${gig.id}`)
+          }}>
+
+            <h2>{gig.title}</h2>
+            <p>Desc: {gig.description}</p>
+          
+    </div>
+      )})
+=======
         <div className='gig_card_container' key={gig.id} onClick={() => {
           this.props.history.push(`/singlegig/${gig.id}`)
         }}>
@@ -32,6 +49,7 @@ class UserHome extends Component {
 
       )
     })
+>>>>>>> master
 
 
 
