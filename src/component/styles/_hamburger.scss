@@ -1,0 +1,72 @@
+@import 'variables';
+
+.hamburger_container{
+  
+  .link_container{
+    
+    list-style: none;
+    
+    .link_text{
+      text-decoration: none;
+      font-weight: 600;
+      color: $lapis-lazuli;
+      text-align: center;
+      font-size: 26px;
+      margin: 1em;
+      font-family: $site-font;
+    }
+    .link_text:hover{
+      color: black;
+      transition: 700ms;
+     
+    }
+    
+  }
+}
+
+
+
+.nav_container{
+  margin-left: 1em;
+  display: flex;
+  justify-content: space-between;
+
+}
+.material-icons{
+    font-size: 32px;
+  }
+
+@media(min-width:600px){
+  .material-icons{
+    font-size: 55px;
+  }
+
+  .hamburger_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+   
+    
+  }
+  
+}
+@media(min-width:1000px){
+  .hamburger_container{
+    display: flex;
+    flex-direction: row;
+    width: 90vw;
+    box-sizing: unset;
+    padding-bottom: 2em;
+    padding-right: 2em;
+    
+    
+  }
+
+  
+}
+
+@media(min-width:1400px){
+  .hamburger_container{
+    max-width: 1400px;
+  }
+}

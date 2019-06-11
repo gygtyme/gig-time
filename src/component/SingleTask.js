@@ -80,15 +80,18 @@ class SingleTask extends Component {
           </div>
         </div>
         : !this.state.toggleView && this.state.editToggle ?
-          <div>
-            <p>task Title:</p>
-            <input className="input_task_container" onChange={this.handleChange} placeholder={this.state.task_title}
-              value={this.state.task_title} name='task_title' />
-            <p>task Description:</p>
-            <input className="input_task_container" onChange={this.handleChange} placeholder={this.state.task_desc}
-              value={this.state.task_desc} name="task_desc" />
-            <button className='button_task' onClick={() => this.editTask(task.id)}>save</button>
-          </div>
+          <>
+            <div>
+              <p>task Title:</p>
+              <input className="input_task_container" onChange={this.handleChange} placeholder={this.state.task_title}
+                value={this.state.task_title} name='task_title' />
+              <p>task Description:</p>
+              <input className="input_task_container" onChange={this.handleChange} placeholder={this.state.task_desc}
+                value={this.state.task_desc} name="task_desc" />
+            </div>
+              <button className='button_task' onClick={() => this.editTask(task.id)}>save</button>
+              <button className='button_task' onClick={this.editToggle}>back</button>
+          </>
           : null
 
     return (
