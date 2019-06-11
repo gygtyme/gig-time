@@ -160,7 +160,7 @@ class SingleGig extends Component {
         let gigDisplay = (this.props.firstName && !this.state.toggleEdit) ?
 
             <div className="gig_card_container" >
-                <h2>{gig.title}</h2>
+                <h2 className="card_title">{gig.title}</h2>
                 <p>Client name: {client.client_first} {client.client_last}</p>
                 <p>Client contact: {client.client_email} {client.client_phone}</p>
                 <p>Gig description: {gig.description}</p>

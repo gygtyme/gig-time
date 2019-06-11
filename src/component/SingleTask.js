@@ -65,7 +65,7 @@ class SingleTask extends Component {
     let taskView = this.state.toggleView && !this.state.editToggle ?
       <div className='task_card_container' key={task.id}>
         <h4 className="task_title">{task.task_title}</h4>
-        <p>{task.task_description}</p>
+        <p className="desc_container">{task.task_desc}</p>
         <div className='timer_container'><Timer /></div>
         <i class="fas fa-window-minimize" onClick={this.handleToggle}></i>
       </div>
@@ -73,7 +73,7 @@ class SingleTask extends Component {
         <div className="container_all_task">
           <div className="task_card_container_before" key={task.id} task_id={task.id}>
             <h4 className="task_title">{task.task_title}</h4>
-            <p>{task.task_description}</p>
+            <p className="desc_container">{task.task_desc}</p>
             <i class="fas fa-expand-arrows-alt" onClick={this.handleToggle}></i>
             <button className='button_task_edit' onClick={this.editToggle}><i class="fas fa-pencil-alt"></i>edit task</button>
             <i class="fas fa-trash-alt" onClick={() => this.deleteTask(task.id)}></i>
