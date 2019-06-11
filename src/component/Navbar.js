@@ -25,12 +25,12 @@ class Navbar extends Component {
 
     loginHandler = async () => {
         let { email, pass } = this.state
-        try{
-        let login = await axios.post('/users/login', { email, pass })
-        console.log(login.data.user)
-        this.props.userInfo(login.data)
-        this.props.history.push("/userhome")
-        }catch{
+        try {
+            let login = await axios.post('/users/login', { email, pass })
+            console.log(login.data.user)
+            this.props.userInfo(login.data)
+            this.props.history.push("/userhome")
+        } catch{
             swal("Unable to Login", "Email or Password is Incorrect", "error")
         }
     }
@@ -41,6 +41,7 @@ class Navbar extends Component {
         }).catch(err => console.log(err, 'logout issue'))
         this.props.history.push('/')
     }
+
     changeHandler = (e) => {
         this.setState({
             [e.target.name]: e.target.value
@@ -82,7 +83,7 @@ class Navbar extends Component {
                     
                 ) : (
                         <div className="menu_logout_container">
-                            <HamburgerMenu />
+                            <HamburgerMenu firstName={firstName}/>
                         </div>
                     )}
             </nav>
