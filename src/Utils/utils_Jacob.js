@@ -2,6 +2,23 @@ const { GOOGLE } = process.env
 const axios= require('axios')
 
 module.exports = {
+  axiosPost: (endpoint, req) => {
+  return (axios.post(endpoint, req)
+    .then(res => {
+      return res.data
+    }))
+    .catch(err => {
+      return err
+    })
+  },
+
+  axiosGet: (endpoint, req)=> {
+    return(axios.get(endpoint, req).then(res=>{
+      return res.data
+    })).catch(err=> {
+      return err
+    })
+  },
 
 
   sendEmail: function () {
@@ -148,3 +165,43 @@ fetchData: async (query, config) => {
   }
 
 }
+
+
+
+
+//from doss to test axios 
+
+
+const axios = require('axios')
+
+module.exports = {
+  axiosPost: (endpoint, req) => {
+  return (axios.post(endpoint, req)
+    .then(res => {
+      return res.data
+    }))
+    .catch(err => {
+      return err
+    })
+  }
+}
+
+
+//for tests 
+
+
+const dossFunc = require('../src/utils/doss.functions')
+
+test('/auth/login should log you in', () => {
+  expect(dossFunc.axiosPost('http://localhost:8989/auth/login', { email: 'b', password: 'c' })).resolves.toBe('Email or password incorrect')
+  expect(dossFunc.axiosPost('http://localhost:8989/auth/login', { email: 'b', password: '' })).resolves.toBe('There was an error logging in')
+})
+
+test('auth/register should get ...', () => {
+  expect(dossFunc.axiosPost('http://localhost:8989/auth/register', { email: 'b', firstName: 'b', lastName: 'b', password: 'b' })).resolves.toBe('Email is in use')
+  expect(dossFunc.axiosPost('http://localhost:8989/auth/register', { email: 'c', firstName: 'c', lastName: 'c', password: '' })).resolves.toBe('There was an error registering')
+})
+
+test('api/list/incomes should get ...', () => {
+  expect(dossFunc.axiosPost('http://localhost:8989/api/list/incomes', {})).resolves.toBe('There was an error adding income')
+})

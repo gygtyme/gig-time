@@ -1,6 +1,6 @@
 const { toggle, breakTime } = require('../Utils/utils_Tiago')
 const { getClient, userInfo, updateGigTime } = require("../Utils/utils.Josh")
-const { reducer, sendEmail, getSession, login} = require('../Utils/utils_Jacob')
+const { reducer, sendEmail, getSession, login, axiosPost} = require('../Utils/utils_Jacob')
 
 //tiago test1
 
@@ -77,17 +77,26 @@ expect(sendEmail() ).toEqual('email sent')
 })
 
 
-test('get session returns an object', () =>{
-  expect(getSession()).toBeDefined()
+test('get gig returns an object with a title', ()=> {
+  expect(axiosGet('/api/getSingleGig/4')).resolves.toMatchObject({
+    id:4, 
+    user_id: 1, 
+    title: 'afoeiwj', 
+    description: 'afoijwfaoweifj', 
+    total_time:0, 
+    project_rate:1199, 
+    client_id:1, 
+    is_paid: true, 
+    is_builled: true
+
+  })
 })
 
-test('get gig returns an object with a title', () =>{
-  expect(getGig(4).title).toEqual('afoeiwj')
-})
 
 test('Login returns the session', () =>{
-  expect(login({
+  expect(axiosPost.login({
     email:'j@j.com', 
     pass: 'thejoyformidable'
   })).toBeDefined()
 })
+
