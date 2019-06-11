@@ -25,7 +25,8 @@
     "react-scroll-to": "^2.0.9",
     "react-switch": "^5.0.0",
     "redux": "^4.0.1",
-    "sass": "^1.20.3"
+    "sass": "^1.20.3",
+    "twilio": "^3.31.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -49,7 +50,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "jest": "^24.8.0"
-  }
+  "devDependencies": {}
 }
