@@ -85,12 +85,8 @@ class Navbar extends Component {
                 ) : (
                         <div className="menu_logout_container">
                             <HamburgerMenu />
-
                         </div>
                     )}
-
-
-
             </nav>
         )
     }
