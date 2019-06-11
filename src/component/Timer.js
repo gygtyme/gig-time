@@ -94,7 +94,7 @@ class Timer extends React.Component {
 
 
   render() {
-    let editInput = (this.state.editToggle) ? <><input onChange={this.handleChange} />
+    let editInput = (this.state.editToggle) ? <><input className='input_edit_timer' onChange={this.handleChange} />
       <button onClick={this.saveEdit}>save</button></> : null
     let start = (this.state.time === 0) ?
       <><i class="fas fa-play-circle" onClick={this.startTimer}></i>

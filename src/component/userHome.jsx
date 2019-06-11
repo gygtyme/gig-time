@@ -31,7 +31,7 @@ componentDidMount() {
 
     let gigMapped = (this.props.gigs) ? this.props.gigs.map((gig) => {
       return (
-        
+        <>
         <div className='gig_card_container' key={gig.id} onClick={() => {
           this.props.history.push(`/singlegig/${gig.id}`)
         }}>
@@ -39,9 +39,10 @@ componentDidMount() {
           <p className="card_title">{gig.title}</p>
           <p>Desc: {gig.description}</p>
           <p>Time: {ms(gig.total_time)}</p>
+        <i class="fas fa-expand"></i>
 
         </div>
-
+        </>
       )
     }) : null
 
