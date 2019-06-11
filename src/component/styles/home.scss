@@ -1,0 +1,11 @@
+@import 'variables';
+@import 'Navbar';
+@import 'UserHome';
+@import 'menu';
+@import 'Single_gig';
+@import 'task_wizard';
+@import 'wizard';
+
+html, body {
+  background: $ghost-white;
+}

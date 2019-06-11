@@ -49,6 +49,11 @@ app.get('/api/gigs/:title', gigCtrl.getGigs)
 app.delete('/api/gigs/:id', gigCtrl.delete)
 app.put('/api/gigs/:id', gigCtrl.update)
 
+app.get('/api/paid', gigCtrl.paidGigs)
+app.get('/api/notpaid', gigCtrl.notPaidGigs)
+
+app.get('/api/clients', clientCtrl.getClientByUser)
+
 app.put('/api/gig/paid/:id', gigCtrl.togglePaid)
 app.put('/api/gig/billed/:id', gigCtrl.toggleBilled)
 

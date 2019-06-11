@@ -1,15 +1,26 @@
-import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 const ms = require('pretty-ms')
 
 
 class UserHome extends Component {
+
+  state = {
+
+    menuOn: false
+  }
+
+  menuToggle = () => {
+    this.setState({
+      menuOn: !this.state.menuOn
+    })
+  }
   render() {
 
     let gigMapped = this.props.gigs.map((gig) => {
       return (
         
+<<<<<<< HEAD
           <div style={{
             border: "solid",
             width: "200px",
@@ -25,38 +36,38 @@ class UserHome extends Component {
           
     </div>
       )})
+=======
+        <div className='gig_card_container' key={gig.id} onClick={() => {
+          this.props.history.push(`/singlegig/${gig.id}`)
+        }}>
+
+          <p className="card_title">{gig.title}</p>
+          <p>Desc: {gig.description}</p>
+          <p>Time: {ms(gig.total_time)}</p>
+
+        </div>
+
+      )
+    })
+>>>>>>> master
 
 
 
 
     return (
-      <div style={{
-        display: 'flex',
-        justifyContent: 'space-around',
-        flexWrap: 'wrap',
-      }}>
-        User Home!
+      <div  className="user_home_main_container">
+        {gigMapped}
 
-{gigMapped}
-
-
-      <Link to='/wizard'>
-        <div style={{
-
-            width: '60px',
-
-            border: '2px solid black',
-            fontSize: '60px',
-            position: 'absolute',
-            bottom: '20px',
-            right: "20px",
-            borderRadius: '100%',
-            textAlign: 'center',
-            padding: '20px',
-
-
-          }}>+</div>
-        </Link>
+        <div id="circularMenu" class={this.state.menuOn ? 'circular-menu active' : 'circular-menu'}>
+          <div class="floating-btn" onClick={this.menuToggle}>
+            <i class="fa fa-plus"></i>
+          </div>
+          <menu class="items-wrapper">
+            <a href={"/#/wizard"} class="menu-item ">create</a>
+            <a href={"/#/gighistory"} class="menu-item ">history</a>
+            <a href={"/#/clientlist"} class="menu-item ">clients</a>
+          </menu>
+        </div>
       </div>
     )
   }

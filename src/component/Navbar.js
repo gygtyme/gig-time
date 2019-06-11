@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { logout, userInfo } from '../redux/userReducer'
 import axios from 'axios'
 import HamburgerMenu from './HamburgerMenu'
-import './styles/Navbar.css';
 
 
 class Navbar extends Component {
@@ -61,17 +60,19 @@ class Navbar extends Component {
         const { firstName } = this.props.prop
         return (
             <nav className='navbar'>
-                {/* <div className="app_name_logout_container"> */}
                 <Link to='/' style={{ textDecoration: 'none', color: 'black' }}>
                     <span className="app_name_container">GIG Time</span>
                 </Link>
                 {firstName && <div>Welcome, {firstName}  <button className="logout_button" onClick={() => {
                     this.props.logout()
+<<<<<<< HEAD
                     axios.get('/auth/logout').then(() => { this.props.history.push('/home') })
+=======
+                    axios.delete('/users/logout').then(() => { this.props.history.push('/') })
+>>>>>>> master
                 }}>logout</button></div>}
-                {/* </div> */}
                 {!firstName ? (
-                    <div>
+                    <form>
                         <div className='loginJacob'>
                             Email <input  className="newTask" autoFocus type="email"
                                 name="email" placeholder="email" required onChange={e => {
@@ -84,7 +85,7 @@ class Navbar extends Component {
                             <button onClick={this.loginHandler}>Login</button>
                             <Link to='/register' style={{ 'text-decoration': 'none' }}> <button> Register </button> </Link>
                         </div>
-                    </div>
+                    </form>
                 ) : (
                         <div className="menu_logout_container">
                             <HamburgerMenu />

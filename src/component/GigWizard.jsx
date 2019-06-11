@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
-import {updateGigs} from '../redux/userReducer'
+import { updateGigs, userInfo } from '../redux/userReducer'
 
 class GigWizard extends Component {
   constructor() {
@@ -24,57 +24,64 @@ class GigWizard extends Component {
     })
 
   }
-  wizardSubmitHandler = (e) => {
+  wizardSubmitHandler = async(e) => {
     e.preventDefault()
-    
-    axios.post('/api/createGig', this.state).then(res => {
+
+    await axios.post('/api/createGig', this.state).then(res => {
       //dispatch to redux store updated gig list
       this.props.updateGigs(res.data)
+      this.props.userInfo(res.data)
     })
     this.props.history.push('/userHome')
+    
   }
 
   goBack = () => {
-    
+
     this.props.history.push(`/userHome`)
   }
 
 
   render() {
     return (
-      <div>
+      <div className="task_wizard_container">
         <form >
-          <div>
+          <div className="group">
             <h1>Gig Info</h1>
-            <input type="text" onChange={this.changeHandler} required placeholder="Gig Name" name="gigName" />
+            <input className="input_task_container" type="text" onChange={this.changeHandler} required placeholder="Gig Name" name="gigName" />
 
-            <input type="text" onChange={this.changeHandler} required placeholder="gig description" name="gigDesc" />
+            <input className="input_task_container" type="text" onChange={this.changeHandler} required placeholder="gig description" name="gigDesc" />
 
+<<<<<<< HEAD
 
             <input type="number" onChange={this.changeHandler} required placeholder="Hourly Rate" name="rate" />
+=======
+            <input className="input_task_container" type="number" onChange={this.changeHandler} required placeholder="Hourly Rate" name="rate" />
+>>>>>>> master
 
           </div>
 
 
-          <div>
+          <div className="group">
             <h1>Client Info</h1>
-            <input type="text" onChange={this.changeHandler} required placeholder="Client first Name" name="clientFName" />
+            <input className="input_task_container" type="text" onChange={this.changeHandler} required placeholder="Client first Name" name="clientFName" />
 
-            <input type="text" onChange={this.changeHandler} required placeholder="Client Last Name" name="clientLName" />
+            <input className="input_task_container" type="text" onChange={this.changeHandler} required placeholder="Client Last Name" name="clientLName" />
 
-            <input type="email" onChange={this.changeHandler} required placeholder="client Email" name="clientEmail" />
+            <input className="input_task_container" type="email" onChange={this.changeHandler} required placeholder="client Email" name="clientEmail" />
 
 
-            <input type="number" onChange={this.changeHandler} required placeholder="Client Phone" name="clientPhone" />
+            <input className="input_task_container" type="number" onChange={this.changeHandler} required placeholder="Client Phone" name="clientPhone" />
 
           </div>
 
 
 
-
-          <button type="submit" onClick={this.wizardSubmitHandler}>Submit</button>
+          <div className="button_task_container">
+            <button type="submit" onClick={this.wizardSubmitHandler}>Submit</button>
+            <button onClick={this.goBack}>cancel</button>
+          </div>
         </form>
-          <button onClick={this.goBack}>cancel</button>
 
       </div>
     )
@@ -82,14 +89,15 @@ class GigWizard extends Component {
 
 }
 
-const mapStateToProps=(state)=> {
-return {
-  reduxState: state
-}
+const mapStateToProps = (state) => {
+  return {
+    reduxState: state
+  }
 }
 
-const mapDispatchToProps= {
-  updateGigs
+const mapDispatchToProps = {
+  updateGigs,
+  userInfo
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(GigWizard)

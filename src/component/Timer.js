@@ -1,10 +1,10 @@
 import React from 'react'
 import { toggle, breakTime} from '../Utils/utils_Tiago'
 import { connect } from "react-redux"
-import { updateGigTime, refreshTotalGigTime  } from '../redux/userReducer'
+import { updateGigTime, refreshTotalGigTime, userInfo  } from '../redux/userReducer'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios';
-import { async } from 'q';
+// import { async } from 'q';
 const ms = require('pretty-ms')
 
 class Timer extends React.Component {
@@ -62,7 +62,8 @@ class Timer extends React.Component {
 
   saveEdit = async() => {
     await this.setState({
-      totalTime: this.state.inputTime * 1000 * 60 //we need to ask for time in minutes from user
+      
+      totalTime: +this.state.inputTime * 1000 * 60 //we need to ask for time in minutes from user
     })
     this.props.updateGigTime(this.state.totalTime)
     this.updateGigTime()
@@ -72,8 +73,8 @@ class Timer extends React.Component {
   updateGigTime = () => {
     const { totalGigTime } = this.props.reduxState
     console.log('this is in updateGigTime', this.props.match.params, totalGigTime, this.props)
-    axios.put(`/api/gigtime/${this.props.match.params.gig_id}`, { totalGigTime }).then(() => {
-      console.log('hey')
+    axios.put(`/api/gigtime/${this.props.match.params.gig_id}`, { totalGigTime }).then((res) => {
+      this.props.userInfo(res.data)
     })
   }
 
@@ -95,7 +96,7 @@ class Timer extends React.Component {
   render() {
     let editInput = (this.state.editToggle) ? <><input onChange={this.handleChange} />
       <button onClick={this.saveEdit}>save</button></> : null
-    let start = (this.state.time == 0) ?
+    let start = (this.state.time === 0) ?
       <><button onClick={this.startTimer}>start</button>
         <button onClick={this.editTime}>edit time</button>
         {editInput}
@@ -104,13 +105,13 @@ class Timer extends React.Component {
     let stop = (this.state.isOn) ?
       <button onClick={this.stopTimer}>stop</button> :
       null
-    let reset = (this.state.time != 0 && !this.state.isOn) ?
+    let reset = (this.state.time !== 0 && !this.state.isOn) ?
       <button onClick={this.resetTimer}>reset</button> :
       null
-    let resume = (this.state.time != 0 && !this.state.isOn) ?
+    let resume = (this.state.time !== 0 && !this.state.isOn) ?
       <button onClick={this.startTimer}>resume</button> :
       null
-    let takeBreak = (this.state.time != 0 && !this.state.isOn) ?
+    let takeBreak = (this.state.time !== 0 && !this.state.isOn) ?
       <button onClick={this.takeBreak}>break</button> :
       null
     return (
@@ -129,7 +130,8 @@ class Timer extends React.Component {
 }
 const mapDispatchToProps = {
   updateGigTime,
-  refreshTotalGigTime
+  refreshTotalGigTime, 
+  userInfo
 }
 const mapStateToProps = (reduxState) => {
 
