@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux"
 import axios from 'axios'
 import Timer from './Timer'
-import { userInfo} from '../redux/userReducer'
+import { userInfo } from '../redux/userReducer'
 
 class SingleTask extends Component {
   state = {
@@ -50,42 +50,44 @@ class SingleTask extends Component {
   }
 
   editTask = (id) => {
-    const { task_title, task_desc} = this.state
-    
-    axios.put(`/api/tasks/${id}`, { task_title, task_desc}).then(() => {
+    const { task_title, task_desc } = this.state
+
+    axios.put(`/api/tasks/${id}`, { task_title, task_desc }).then(() => {
 
     })
     this.editToggle()
-}
+  }
 
   render() {
     console.log(this.props)
     const { task } = this.props
 
     let taskView = this.state.toggleView && !this.state.editToggle ?
-      <div style={{ border: "solid" }} key={task.id}>
-        <h4>{task.task_title}</h4>
+      <div className='task_card_container' key={task.id}>
+        <h4 className="task_title">{task.task_title}</h4>
         <p>{task.task_description}</p>
-        <Timer />
-        <button onClick={this.handleToggle}>Minimize</button>
+        <div className='timer_container'><Timer /></div>
+        <i class="fas fa-window-minimize" onClick={this.handleToggle}></i>
       </div>
       : !this.state.toggleView && !this.state.editToggle ?
-        <div style={{ border: "solid" }} key={task.id} task_id={task.id}>
-          <h4>{task.task_title}</h4>
-          <p>{task.task_description}</p>
-          <button onClick={this.handleToggle}>Expand</button>
-          <button onClick={this.editToggle}>edit task</button>
-          <button onClick={() => this.deleteTask(task.id)}>X</button>
+        <div className="container_all_task">
+          <div className="task_card_container_before" key={task.id} task_id={task.id}>
+            <h4 className="task_title">{task.task_title}</h4>
+            <p>{task.task_description}</p>
+            <i class="fas fa-expand-arrows-alt" onClick={this.handleToggle}></i>
+            <button className='button_task_edit' onClick={this.editToggle}><i class="fas fa-pencil-alt"></i>edit task</button>
+            <i class="fas fa-trash-alt" onClick={() => this.deleteTask(task.id)}></i>
+          </div>
         </div>
         : !this.state.toggleView && this.state.editToggle ?
           <div>
             <p>task Title:</p>
-            <input onChange={this.handleChange} placeholder={this.state.task_title}
+            <input className="input_task_container" onChange={this.handleChange} placeholder={this.state.task_title}
               value={this.state.task_title} name='task_title' />
             <p>task Description:</p>
-            <input onChange={this.handleChange} placeholder={this.state.task_desc}
+            <input className="input_task_container" onChange={this.handleChange} placeholder={this.state.task_desc}
               value={this.state.task_desc} name="task_desc" />
-            <button onClick={() => this.editTask(task.id)}>save</button>
+            <button className='button_task' onClick={() => this.editTask(task.id)}>save</button>
           </div>
           : null
 
