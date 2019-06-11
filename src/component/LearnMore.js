@@ -29,7 +29,7 @@ export default class LearnMore extends Component {
           <p>Learn How It Works Below!</p>
           <div><Scroller y={1200}/></div>
         </div>
-
+        
         <section className='learnMoreVideo'>
           <Iframe
             width="700"
