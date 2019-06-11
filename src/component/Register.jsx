@@ -22,7 +22,7 @@ submitHandler=(e)=> {
 axios.post('/users/register', this.state).then((res)=>{
   console.log(res)
   this.props.history.push('/userHome')
-
+  window.location.reload()
 }).catch(err=>console.log(err, 'register failed' ))
 }
 
