@@ -7,10 +7,10 @@ const client=require('twilio')(TWILIO_SID, TWILIO_AUTH_TOKEN)
 
 module.exports= {
 
-textAlert: (clientPhone, gigTotal)=>{
+textAlert: (clientPhone, gigTotal, userFirst, userVenmo)=>{
 
   client.messages.create({
-    body:`Your project has been finished! Please send ${gigTotal} to Jacob at your earliest convenience.`,
+    body:`Your project has been finished! Please send ${gigTotal} to ${userFirst}'s venmo ${userVenmo} at your earliest convenience.`,
     from:"+13852175119", 
     to:`${clientPhone}` 
   }).then(message=>{
