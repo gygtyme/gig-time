@@ -28,7 +28,9 @@ export default class HamburgerMenu extends Component {
       <ul key={10} className="hamburger_container">
         
         <li className="link_container" key={1}><Link to='/userHome' className="link_text">Gigs</Link></li>
-        
+        <li className="link_container" key={1}><Link to='/userHome' className="link_text">Gigs</Link></li>
+        <li className="link_container" key={1}><Link to='/userHome' className="link_text">Gigs</Link></li>
+        <li className="link_container" key={1}><Link to='/userHome' className="link_text">Gigs</Link></li>
       </ul>
     ];
   }

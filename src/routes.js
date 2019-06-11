@@ -29,6 +29,8 @@ export default (
     <Route path="/wizard" component={GigWizard} />
     <Route path="/singlegig/:gig_id" component={SingleGig} />
     <Route path="/taskwizard/:gig_id" component={TaskWizard} />
+    
+
     <Route path='/gighistory' component={GigHistory} />
     <Route path='/clientlist' component={ClientList} />
 
