@@ -18,9 +18,10 @@ class SingleGig extends Component {
         title: null,
         description: null,
         project_rate: 0,
-        is_paid: null,
-        is_billed: null,
-        menuOn: false
+        is_paid: false,
+        is_billed: false,
+        menuOn: false,
+        isLoading: false
     }
 
 
@@ -99,15 +100,24 @@ class SingleGig extends Component {
         this.setState({
             is_paid: !this.state.is_paid
         })
-        this.saveToDB()
+        this.saveToDBPaid()
     }
 
-    saveToDB = async() => {
-        console.log('look at me', 'bille:',this.state.is_billed, 'paid:', this.state.is_paid)
+    saveToDBPaid = async () => {
         const { gig_id: id } = this.props.match.params
-        const { is_paid, is_billed } = this.state
+        const { is_paid} = this.state
+        this.setState({
+            isLoading: true
+        })
         await axios.put(`/api/gig/paid/${id}`, { is_paid })
-        
+        this.setState({
+            isLoading: false
+        })
+    }
+
+    saveToDBBilled = async() => {
+        const { gig_id: id } = this.props.match.params
+        const { is_billed } = this.state
         await axios.put(`/api/gig/billed/${id}`, { is_billed })
     }
 
@@ -115,7 +125,7 @@ class SingleGig extends Component {
         this.setState({
             is_billed: !this.state.is_billed
         })
-        this.saveToDB()
+        this.saveToDBBilled()
     }
 
     menuToggle = () => {
@@ -143,7 +153,6 @@ class SingleGig extends Component {
         let gig = this.props.gigs.filter(gig => +gig_id === +gig.id)
         gig = gig[0]
 
-
         let gigDisplay = (this.props.firstName && !this.state.toggleEdit) ?
 
             <div className="gig_card_container" >
@@ -154,7 +163,7 @@ class SingleGig extends Component {
                 <p>Total development time: {ms(gig.total_time)}</p>
                 <p>Gig rate: ${gig.project_rate}</p>
                 <p>Ammount due: ${((gig.total_time / 1000 / 60 / 60) * gig.project_rate).toFixed(2)}</p>
-                <p>Paid:{gig.is_paid}</p> <Switch checked={this.state.is_paid} onChange={this.handlePaidSwitch}></Switch>
+                {(this.state.isLoading) ? "Loading..." : <div><p>Paid:{gig.is_paid}</p> <Switch checked={this.state.is_paid} onChange={this.handlePaidSwitch}></Switch> </div>}
                 <p>Billed: {gig.is_billed}</p> <Switch value={this.state.is_billed} checked={this.state.is_billed} onChange={this.handleBilledSwitch}></Switch>
 
 

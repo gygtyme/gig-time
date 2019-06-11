@@ -211,24 +211,22 @@ module.exports = {
   }
   ,
 
-  togglePaid: (req, res) => {
+  togglePaid: async (req, res) => {
     console.log(`update paid fired`, req.params, req.body)
     const db = req.app.get('db')
     const { id } = req.params;
     const { is_paid } = req.body
-    db.update_paid({ id, is_paid }).then(() => {
-      res.sendStatus(200)
-    }).catch(err => console.log("error", err))
+    await db.update_paid({id, is_paid})
+    res.status(200).send("Paid status updated")
   },
 
-  toggleBilled: (req, res) => {
+  toggleBilled: async (req, res) => {
     console.log(`update paid fired`, req.params, req.body)
     const db = req.app.get('db')
     const { id } = req.params;
     const { is_billed } = req.body
-    db.update_billed({ id, is_billed }).then(() => {
-      res.sendStatus(200)
-    }).catch(err => console.log("error", err))
+    await db.update_billed({id, is_billed})
+    res.status(200).send("Billed status updated")
   },
 
     paidGigs: (req, res) => {
