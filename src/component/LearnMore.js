@@ -5,9 +5,6 @@ import Iframe from 'react-iframe';
 import Scroller from './Scroller';
 
 export default class LearnMore extends Component {
-  // constructor() {
-  //   super()
-  // }
 
   render() {
     return (
