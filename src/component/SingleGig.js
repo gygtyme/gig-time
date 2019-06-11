@@ -154,8 +154,8 @@ class SingleGig extends Component {
                 <p>Total development time: {ms(gig.total_time)}</p>
                 <p>Gig rate: ${gig.project_rate}</p>
                 <p>Ammount due: ${((gig.total_time / 1000 / 60 / 60) * gig.project_rate).toFixed(2)}</p>
-                <p>Paid:{gig.is_paid} <Switch checked={this.state.is_paid} onChange={this.handlePaidSwitch}></Switch></p>
-                <p>Billed: {gig.is_billed} <Switch value={this.state.is_billed} checked={this.state.is_billed} onChange={this.handleBilledSwitch}></Switch></p>
+                <p>Paid:{gig.is_paid}</p> <Switch checked={this.state.is_paid} onChange={this.handlePaidSwitch}></Switch>
+                <p>Billed: {gig.is_billed}</p> <Switch value={this.state.is_billed} checked={this.state.is_billed} onChange={this.handleBilledSwitch}></Switch>
 
 
                 <div className="button_task_container">

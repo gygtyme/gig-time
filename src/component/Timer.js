@@ -97,26 +97,26 @@ class Timer extends React.Component {
     let editInput = (this.state.editToggle) ? <><input onChange={this.handleChange} />
       <button onClick={this.saveEdit}>save</button></> : null
     let start = (this.state.time === 0) ?
-      <><button onClick={this.startTimer}>start</button>
-        <button onClick={this.editTime}>edit time</button>
+      <><i class="fas fa-play-circle" onClick={this.startTimer}></i>
+        <i class="fas fa-pen" onClick={this.editTime}></i>edit time
         {editInput}
       </> :
       null
     let stop = (this.state.isOn) ?
-      <button onClick={this.stopTimer}>stop</button> :
+    <i class="fas fa-pause-circle"onClick={this.stopTimer}></i>:
       null
     let reset = (this.state.time !== 0 && !this.state.isOn) ?
-      <button onClick={this.resetTimer}>reset</button> :
+      <i class="fas fa-redo-alt" onClick={this.resetTimer}></i> :
       null
     let resume = (this.state.time !== 0 && !this.state.isOn) ?
-      <button onClick={this.startTimer}>resume</button> :
+      <i class="fas fa-play-circle" onClick={this.startTimer}></i> :
       null
     let takeBreak = (this.state.time !== 0 && !this.state.isOn) ?
-      <button onClick={this.takeBreak}>break</button> :
+      <i class="fas fa-stop-circle" onClick={this.takeBreak}></i> :
       null
     return (
-      <div>
-        <h3 className="countdown">timer: {ms(this.state.time)}</h3>
+      <div className="clock">
+        <h3 className="countdown">{ms(this.state.time, {keepDecimalsOnWholeSeconds:true})}</h3>
         
         
         {start}

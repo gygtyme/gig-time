@@ -1,4 +1,6 @@
 const { GOOGLE } = process.env
+const twilioFunc= require('../Controllers/twilioFunc')
+
 
 module.exports = {
   getGigs: (req, res) => {
@@ -104,10 +106,17 @@ module.exports = {
 
     try {
       let gig = await db.get_gig_by_gig_id([req.params.gigId])
-      let id = gig[0].client_id
+
+      let user=await db.get_user_by_user_id(gig.user_id)
+
       console.log(id, 'client ID')
       let client = await db.get_client_by_id({ id })
-      console.log("gig", gig[0], "client", client)
+      console.log("gig", gig[0], "client", client[0])
+
+      let total= gig[0].project_rate*gig[0].total_time/1000/60/60
+
+      twilioFunc.textAlert(client[0].client_phone, total, user[0].first_name, user[0].venmo)
+
 
 
 

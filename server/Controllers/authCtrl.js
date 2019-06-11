@@ -5,7 +5,7 @@ module.exports = {
   register: async (req, res) => {
     console.log('reg hit')
     let dbInstance = req.app.get('db')
-    let { phone, firstName, email, lastName } = req.body
+    let { phone, firstName, email, lastName, venmo } = req.body
     const { session } = req
     phone = phone.toString()
 
@@ -24,7 +24,7 @@ module.exports = {
     let hashedPass = bcrypt.hashSync(req.body.pass, salt)
 
 
-    const user = await dbInstance.register_new_user([firstName, lastName, email, phone, hashedPass])
+    const user = await dbInstance.register_new_user([firstName, lastName, email, phone, hashedPass, venmo])
 
 
     user[0].isLoggedIn = true
@@ -32,6 +32,7 @@ module.exports = {
 
     session.user = user[0]
 
+    console.log(session)
 
     res.status(200).send(session)
 
@@ -46,9 +47,12 @@ module.exports = {
 
     try {
       let loginUser = await dbInstance.find_user_by_email([loginEmail])
-      
+      if(!loginUser[0]){
+        return res.sendStatus(409)
+      }
       loginUser[0].isLoggedIn = true
       console.log(loginUser, "loginAttempt", req.body.pass, loginUser[0].pass_hash, "passwords")
+      
       session.user = loginUser[0]
 
       const authenticated = bcrypt.compareSync(req.body.pass, loginUser[0].pass_hash)

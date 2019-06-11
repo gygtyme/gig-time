@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import Axios from 'axios';
 const ms = require('pretty-ms')
 
 
@@ -10,14 +11,25 @@ class UserHome extends Component {
     menuOn: false
   }
 
+componentDidMount() {
+  Axios.get('/getSession').then(res=> {
+   console.log(res.data, 'fawoifjwaoefij')
+    if(!res.data.user){
+      this.props.history.push('/')
+    }
+  })
+}
+  
+
   menuToggle = () => {
     this.setState({
       menuOn: !this.state.menuOn
     })
   }
+
   render() {
 
-    let gigMapped = this.props.gigs.map((gig) => {
+    let gigMapped = (this.props.gigs) ? this.props.gigs.map((gig) => {
       return (
         
         <div className='gig_card_container' key={gig.id} onClick={() => {
@@ -31,7 +43,7 @@ class UserHome extends Component {
         </div>
 
       )
-    })
+    }) : null
 
 
 
@@ -58,7 +70,8 @@ class UserHome extends Component {
 const mapStateToProps = (reduxState) => {
   return {
     gigs: reduxState.gigs,
-    totalGigTime: reduxState.totalGigTime
+    totalGigTime: reduxState.totalGigTime,
+    userId: reduxState.user_id
   }
 }
 
