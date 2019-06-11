@@ -41,6 +41,7 @@ class Navbar extends Component {
         }).catch(err => console.log(err, 'logout issue'))
         this.props.history.push('/')
     }
+
     changeHandler = (e) => {
         this.setState({
             [e.target.name]: e.target.value
@@ -66,23 +67,23 @@ class Navbar extends Component {
                     axios.delete('/users/logout').then(() => { this.props.history.push('/') })
                 }}>logout</button></div>}
                 {!firstName ? (
+                    
+                        <div className='loginJacob'>
+                            Email: <input  className="newTask" autoFocus type="email"
+                                name="email" placeholder="email@example.com" required onChange={e => {
+                                    this.changeHandler(e)
+                                }} />
+                            Password: <input type="password"
+                                name="pass" placeholder="password" required onChange={(e) => {
+                                    this.changeHandler(e)
+                                }} />
+                            <button onClick={this.loginHandler}>Login</button>
 
-                    <div className='loginJacob'>
-                        Email <input className="newTask" autoFocus type="email"
-                            name="email" placeholder="email" required onChange={e => {
-                                this.changeHandler(e)
-                            }} />
-                        Password <input type="password"
-                            name="pass" placeholder="password" required onChange={(e) => {
-                                this.changeHandler(e)
-                            }} />
-                        <button onClick={this.loginHandler}>Login</button>
-                        <Link to='/register' style={{ 'textDecoration': 'none' }}> <button> Register </button> </Link>
-                    </div>
-
+                        </div>
+                    
                 ) : (
                         <div className="menu_logout_container">
-                            <HamburgerMenu />
+                            <HamburgerMenu firstName={firstName}/>
                         </div>
                     )}
             </nav>
