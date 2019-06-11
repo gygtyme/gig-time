@@ -1,7 +1,7 @@
 import React from 'react'
 import { toggle, breakTime} from '../Utils/utils_Tiago'
 import { connect } from "react-redux"
-import { updateGigTime, refreshTotalGigTime  } from '../redux/userReducer'
+import { updateGigTime, refreshTotalGigTime, userInfo  } from '../redux/userReducer'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios';
 // import { async } from 'q';
@@ -62,7 +62,8 @@ class Timer extends React.Component {
 
   saveEdit = async() => {
     await this.setState({
-      totalTime: this.state.inputTime * 1000 * 60 //we need to ask for time in minutes from user
+      
+      totalTime: +this.state.inputTime * 1000 * 60 //we need to ask for time in minutes from user
     })
     this.props.updateGigTime(this.state.totalTime)
     this.updateGigTime()
@@ -72,8 +73,8 @@ class Timer extends React.Component {
   updateGigTime = () => {
     const { totalGigTime } = this.props.reduxState
     console.log('this is in updateGigTime', this.props.match.params, totalGigTime, this.props)
-    axios.put(`/api/gigtime/${this.props.match.params.gig_id}`, { totalGigTime }).then(() => {
-      console.log('hey')
+    axios.put(`/api/gigtime/${this.props.match.params.gig_id}`, { totalGigTime }).then((res) => {
+      this.props.userInfo(res.data)
     })
   }
 
@@ -129,7 +130,8 @@ class Timer extends React.Component {
 }
 const mapDispatchToProps = {
   updateGigTime,
-  refreshTotalGigTime
+  refreshTotalGigTime, 
+  userInfo
 }
 const mapStateToProps = (reduxState) => {
 

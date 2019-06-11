@@ -3,11 +3,7 @@ const { GOOGLE } = process.env
 module.exports = {
   getGigs: (req, res) => {
     console.log(`get gigs fired`)
-    
-    
     const db = req.app.get('db')
-    
-    if(req.session.user){
     let { id } = req.session.user
     id = String(id)
 
@@ -22,9 +18,6 @@ module.exports = {
         res.status(200).send(recipe)
       }).catch(err => console.log("error", err))
     }
-  }
-
-
   },
 
   createGig: async (req, res) => {
@@ -32,11 +25,11 @@ module.exports = {
     const { session } = req
     const { id: user_id } = req.session.user
     const db = req.app.get('db')
-    const { gigName, gigDesc, rate, clientFName, clientLName, clientPhone, clientEmail  } = req.body 
+    const { gigName, gigDesc, rate, clientFName, clientLName, clientPhone, email  } = req.body 
     
 
     try {
-      let newClient=await db.create_client([clientFName, clientLName, clientEmail, clientPhone])
+      let newClient=await db.create_client([clientFName, clientLName, email, clientPhone])
 
       await db.create_gig([user_id, gigName, gigDesc, rate, newClient[0].id])
       let newGigs= await db.get_gigs_by_user_id(user_id)
@@ -58,15 +51,25 @@ module.exports = {
 
   },
 
-  delete: (req, res) => {
+  delete: async(req, res) => {
     const db = req.app.get('db')
     const { id } = req.params
+    const { session } = req
     console.log(`delete gig was fired`, id)
-    // const { id: user_id } = req.session.user 
+    
 
-    db.delete_gig([id]).then(() => {
-      res.status(200).send(gig)
-    }).catch(err => console.log("error", err))
+    await db.delete_gig([id])
+    let userGigs = await db.get_gigs_by_user_id(session.user.id)
+      session.gigs = userGigs
+      for (let i = 0; i < session.gigs.length; i++) {
+
+        let gigTasks = await db.get_tasks_by_gig_id(session.gigs[i].id)
+        session.gigs[i].tasks = gigTasks
+      }
+      session.gigs = userGigs
+     
+      res.status(200).send(session)
+     
   },
 
   update: async(req, res) => {
@@ -158,6 +161,7 @@ module.exports = {
   updateGigTime: async (req, res) => {
     console.log(`update gigTime fired`, req.params, req.body)
     const db = req.app.get('db')
+    const { session } = req
     let { id } = req.params;
     id = +id
     const { totalGigTime } = req.body
@@ -166,9 +170,25 @@ module.exports = {
     console.log(oldTime[0])
     let newTime = oldTime[0].total_time + totalGigTime
 
-    db.update_gig_total_time({ id, newTime }).then(() => {
+<<<<<<< HEAD
+    db.update_gig_total_time({id, newTime}).then(() => {
       res.sendStatus(200)
     }).catch(err => console.log("error", err))
+  }
+ }
+=======
+    await db.update_gig_total_time({ id, newTime })
+    let userGigs = await db.get_gigs_by_user_id(session.user.id)
+      session.gigs = userGigs
+      for (let i = 0; i < session.gigs.length; i++) {
+
+        let gigTasks = await db.get_tasks_by_gig_id(session.gigs[i].id)
+        session.gigs[i].tasks = gigTasks
+      }
+      session.gigs = userGigs
+      
+      res.status(200).send(session)
+
   }, 
 
   getSingleGig: async (req, res)=> {
@@ -233,3 +253,4 @@ module.exports = {
 
 
 }
+>>>>>>> master

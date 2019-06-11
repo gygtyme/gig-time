@@ -1,1 +1,0 @@
-select * from _user where id=$1

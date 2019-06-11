@@ -76,6 +76,19 @@ module.exports = {
 
           }
 
+// session.gigs.forEach(async (el, i)=>{
+//    gigTasks= await dbInstance.get_tasks_by_gig_id(el.id)
+//   session.gigs[i].tasks=gigTasks
+// })
+
+
+
+
+// console.log("tasks added", session.gigs[0].tasks)
+
+          //get client. 
+
+
         } catch (error) {
           console.log('error in for loop', error)
         }
@@ -110,6 +123,9 @@ module.exports = {
   },
 
   getSession: (req, res) => {
+<<<<<<< HEAD
+    res.send(req.session).status(200)
+=======
     if (req.session.user) {
       res.send(req.session).status(200)
 
@@ -117,6 +133,7 @@ module.exports = {
       res.sendStatus(418)
     }
 
+>>>>>>> master
   }
 
 }
