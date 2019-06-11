@@ -1,7 +1,7 @@
 import React, {Component} from "react"
-import dotenv from "dotenv"
+// import dotenv from "dotenv"
 // import {PayPalButton} from "react-paypal-button"
-import {dropin} from "braintree-web-drop-in"
+// import {dropin} from "braintree-web-drop-in"
 import Axios from "axios";
 import braintree from "braintree"
 

@@ -13,7 +13,11 @@ textAlert: (clientPhone, gigTotal)=>{
     body:`Your project has been finished! Please send ${gigTotal} to Jacob at your earliest convenience.`,
     from:"+13852175119", 
     to:`${clientPhone}` 
-  }).then(message=>console.log("the message worked you're a genius"))
+  }).then(message=>{
+    console.log("the message worked you're a genius")
+  return "message sent"
+  }
+  )
 
 
 }

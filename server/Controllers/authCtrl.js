@@ -32,6 +32,7 @@ module.exports = {
 
     session.user = user[0]
 
+    console.log(session)
 
     res.status(200).send(session)
 
