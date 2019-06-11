@@ -68,16 +68,16 @@ class Navbar extends Component {
                 {!firstName ? (
                     
                         <div className='loginJacob'>
-                            Email <input  className="newTask" autoFocus type="email"
-                                name="email" placeholder="email" required onChange={e => {
+                            Email: <input  className="newTask" autoFocus type="email"
+                                name="email" placeholder="email@example.com" required onChange={e => {
                                     this.changeHandler(e)
                                 }} />
-                            Password <input type="password"
+                            Password: <input type="password"
                                 name="pass" placeholder="password" required onChange={(e) => {
                                     this.changeHandler(e)
                                 }} />
                             <button onClick={this.loginHandler}>Login</button>
-                            <Link to='/register' style={{ 'textDecoration': 'none' }}> <button> Register </button> </Link>
+
                         </div>
                     
                 ) : (
