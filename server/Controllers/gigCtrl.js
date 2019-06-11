@@ -170,13 +170,6 @@ module.exports = {
     console.log(oldTime[0])
     let newTime = oldTime[0].total_time + totalGigTime
 
-<<<<<<< HEAD
-    db.update_gig_total_time({id, newTime}).then(() => {
-      res.sendStatus(200)
-    }).catch(err => console.log("error", err))
-  }
- }
-=======
     await db.update_gig_total_time({ id, newTime })
     let userGigs = await db.get_gigs_by_user_id(session.user.id)
       session.gigs = userGigs
@@ -253,4 +246,3 @@ module.exports = {
 
 
 }
->>>>>>> master

@@ -123,9 +123,6 @@ module.exports = {
   },
 
   getSession: (req, res) => {
-<<<<<<< HEAD
-    res.send(req.session).status(200)
-=======
     if (req.session.user) {
       res.send(req.session).status(200)
 
@@ -133,7 +130,6 @@ module.exports = {
       res.sendStatus(418)
     }
 
->>>>>>> master
   }
 
 }
