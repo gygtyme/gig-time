@@ -47,9 +47,12 @@ module.exports = {
 
     try {
       let loginUser = await dbInstance.find_user_by_email([loginEmail])
-      
+      if(!loginUser[0]){
+        return res.sendStatus(409)
+      }
       loginUser[0].isLoggedIn = true
       console.log(loginUser, "loginAttempt", req.body.pass, loginUser[0].pass_hash, "passwords")
+      
       session.user = loginUser[0]
 
       const authenticated = bcrypt.compareSync(req.body.pass, loginUser[0].pass_hash)
