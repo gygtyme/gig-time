@@ -11,7 +11,8 @@ export default class Register extends Component {
       lastName:'', 
       email:'', 
       phone: '', 
-      pass:''
+      pass:'', 
+      venmo:''
     }
   }
 
@@ -46,6 +47,8 @@ changeHandler=(e)=> {
       <input type="text" name="phone" placeholder="Phone Number" onChange={this.changeHandler} required/>
 
       <input type="password" name="password" placeholder="password" onChange={this.changeHandler} required/>
+
+      <input type="text" name="venmo" placeholder="Venmo Handle" onChange={this.changeHandler} required/>
 
 <button type="submit" onClick={this.submitHandler}>register!</button>
         </form>
