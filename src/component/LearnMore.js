@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './styles/LearnMore.css';
 import Iframe from 'react-iframe';
-import Scroller from './Scroller'
+import Scroller from './Scroller';
 
 export default class LearnMore extends Component {
-
 
   render() {
     return (
@@ -13,17 +13,23 @@ export default class LearnMore extends Component {
           <div className='heroText'>
             <h2>Welcome to GIG Time!</h2>
             <h4>We are fast, furious, and efficient!</h4>
-            <h2>Learn More</h2>
-            <Scroller y={800}/>
+            <Link to='/register'><button className='registerButton'>Register Today!</button></Link>
+            <h3>Learn More!</h3>
+            <Scroller y={600}/>
           </div>
         </div>
-        <section className='learnMoreCardContainer'>
-          <div className='learnMoreCard'>You'll Get Hot Chicks</div>
-          <div className='learnMoreCard'>You'll Get The Fat Stacks</div>
-          <div className='learnMoreCard'>You'll Probably Get Free Drugs</div>
-        </section>
-        <p>Want even more?<Scroller y={1600}/></p>
-          
+        
+        <div className='learnMoreCardContainer' id='learnMoreCardContainer'>
+          <div className='midPageContainer'>
+            <div className='learnMoreCard'>You'll Get Hot Chicks</div>
+            <div className='learnMoreCard'>You'll Get The Fat Stacks</div>
+            <div className='learnMoreCard'>You'll Probably Get Free Drugs</div>
+          </div>
+          <Link to='/register'><button className='registerButton'>Register Here!</button></Link>
+          <p>Learn How It Works Below!</p>
+          <div><Scroller y={1200}/></div>
+        </div>
+
         <section className='learnMoreVideo'>
           <Iframe
             width="700"

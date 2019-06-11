@@ -72,6 +72,9 @@ app.get('/api/getsession', authCtrl.getSession)
 app.post('/feedback', clientCtrl.sendFeedback)
 
 app.post('/billGig/:gigId', gigCtrl.billGig)
+
+
+app.post('/feedback', clientCtrl.sendFeedback)
   
 
 app.get('/api/getSingleGig/:gigId', gigCtrl.getSingleGig)

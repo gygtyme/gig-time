@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux"
 import axios from 'axios'
 import Timer from './Timer'
+import { userInfo} from '../redux/userReducer'
 
 class SingleTask extends Component {
   state = {
@@ -22,7 +23,7 @@ class SingleTask extends Component {
 
   deleteTask = (id) => {
     axios.delete(`/api/tasks/${id}`).then(res => {
-
+      this.props.userInfo(res.data)
     })
 
   }
@@ -30,8 +31,8 @@ class SingleTask extends Component {
   editTask = (id) => {
     const { title, description, project_rate } = this.state
     // project_rate = +project_rate
-    axios.put(`/api/gigs/${id}`, { title, description, project_rate }).then(() => {
-
+    axios.put(`/api/tasks/${id}`, { title, description, project_rate }).then((res) => {
+      this.props.userInfo(res.data)
     })
     this.toggleEdit()
   }
@@ -101,4 +102,8 @@ const mapStateToProps = (state) => {
   return { gigs }
 }
 
-export default connect(mapStateToProps)(SingleTask);
+const mapDispatchToProps = {
+  userInfo
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingleTask);

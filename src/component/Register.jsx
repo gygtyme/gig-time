@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios';
+import './styles/Register.css';
 
 
 export default class Register extends Component {
@@ -33,7 +34,7 @@ changeHandler=(e)=> {
 
   render() {
     return(
-      <div>
+      <div className='main'>
         <form action="submit">
 
       <input type="text" name="firstName" placeholder="First Name" onChange={this.changeHandler} required/>

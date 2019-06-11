@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
-const ms = require('pretty-ms')
+// const ms = require('pretty-ms')
 
 
 class GigHistory extends Component {

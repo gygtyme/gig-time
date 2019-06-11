@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { connect } from "react-redux"
 import axios from 'axios';
 import Task from './Task'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import Switch from 'react-switch'
+import { userInfo} from '../redux/userReducer'
 
-import TaskWizard from './TaskWizard'
+// import TaskWizard from './TaskWizard'
 const ms = require('pretty-ms')
 
 
@@ -23,10 +24,20 @@ class SingleGig extends Component {
     }
 
 
-    componentDidMount() {
+    componentDidMount () {
+        console.log(this.props)
         let id = this.getGigClient()
         this.getClient(id)
+        // this.reduxCollector() //going to fix it tomorrow
     }
+    
+    // reduxCollector = () =>{
+        
+    //      this.setState({
+    //         is_billed : this.props.gigs[0].is_billed,
+    //         is_paid : this.props.gigs[0].is_paid
+    //     })
+    // }
 
     getClient = (id) => {
         axios.post("/api/clients", { id }).then(res => {
@@ -49,7 +60,7 @@ class SingleGig extends Component {
 
     deleteGig = (id) => {
         axios.delete(`/api/gigs/${id}`).then(res => {
-
+            this.props.userInfo(res.data)
         })
         this.props.history.push('/userHome')
     }
@@ -66,8 +77,8 @@ class SingleGig extends Component {
     editGig = (id) => {
         const { title, description, project_rate } = this.state
         // project_rate = +project_rate
-        axios.put(`/api/gigs/${id}`, { title, description, project_rate }).then(() => {
-
+        axios.put(`/api/gigs/${id}`, { title, description, project_rate }).then((res) => {
+            this.props.userInfo(res.data)
         })
         this.toggleEdit()
     }
@@ -91,16 +102,13 @@ class SingleGig extends Component {
         this.saveToDB()
     }
 
-    saveToDB = () => {
-        console.log('look at me', this.props.match.params.gig_id)
+    saveToDB = async() => {
+        console.log('look at me', 'bille:',this.state.is_billed, 'paid:', this.state.is_paid)
         const { gig_id: id } = this.props.match.params
         const { is_paid, is_billed } = this.state
-        axios.put(`/api/gig/paid/${id}`, { is_paid }).then(() => {
-            console.log('you have altered the db')
-        })
-        axios.put(`/api/gig/billed/${id}`, { is_billed }).then(() => {
-            console.log('you have update billed')
-        })
+        await axios.put(`/api/gig/paid/${id}`, { is_paid })
+        
+        await axios.put(`/api/gig/billed/${id}`, { is_billed })
     }
 
     handleBilledSwitch = () => {
@@ -150,28 +158,26 @@ class SingleGig extends Component {
                 <p>Billed: {gig.is_billed} <Switch value={this.state.is_billed} checked={this.state.is_billed} onChange={this.handleBilledSwitch}></Switch></p>
 
 
+                <div className="button_task_container">
+                    <button onClick={() => {
+                        this.sendUpdateToClientHandler(client.client_first, client.client_email, gig_id)
+                    }}>Send Update To Client </button>
+                </div>
 
-                <button onClick={() => {
-                    this.sendUpdateToClientHandler(client.client_first, client.client_email, gig_id)
-                }}>Send Update To Client </button>
-
-                <button onClick={this.toggleEdit}>edit Gig</button>
-
-                <button onClick={() => this.deleteGig(gig.id)}>delete Gig</button>
 
                 <div>
                     <Task gig={gig} />
 
 
                     <div id="circularMenu" class={this.state.menuOn ? 'circular-menu active' : 'circular-menu'}>
-                        <a class="floating-btn" onClick={this.menuToggle}>
+                        <div class="floating-btn" onClick={this.menuToggle}>
                             <i class="fa fa-plus"></i>
-                        </a>
+                        </div>
                         <menu class="items-wrapper">
                             <a href={"/#/taskwizard/" + gig_id} class="menu-item ">create</a>
-                            <a onClick={() => this.deleteGig(gig.id)} class="menu-item ">delete</a>
-                            <a onClick={this.toggleEdit} class="menu-item ">edit</a>
-                            <a onClick={this.billThem} class="menu-item">bill</a>
+                            <div onClick={() => this.deleteGig(gig.id)} class="menu-item ">delete</div>
+                            <div onClick={this.toggleEdit} class="menu-item ">edit</div>
+                            <div onClick={this.billThem} class="menu-item">bill</div>
                         </menu>
                     </div>
 
@@ -211,4 +217,8 @@ const mapStateToProps = (state) => {
     return { gigs, firstName }
 }
 
-export default connect(mapStateToProps)(SingleGig);
+const mapDispatchToProps = {
+    userInfo
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingleGig);

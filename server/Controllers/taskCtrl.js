@@ -26,14 +26,20 @@ module.exports = {
     let gigId = +gig_id
     console.log(req.body, 'did this get fired?')
     let db = req.app.get('db')
-
+    const { session } = req
 
     try {
-      let dbRes = await db.create_task({taskTitle, taskDesc, gigId})
+      let dbRes = await db.create_task({ taskTitle, taskDesc, gigId })
+      let userGigs = await db.get_gigs_by_user_id(session.user.id)
+      session.gigs = userGigs
+      for (let i = 0; i < session.gigs.length; i++) {
 
-      // let dbRes = await db.get_gig_tasks()
+        let gigTasks = await db.get_tasks_by_gig_id(session.gigs[i].id)
+        session.gigs[i].tasks = gigTasks
+      }
+      session.gigs = userGigs
       console.log(dbRes)
-      res.status(200).send(dbRes)
+      res.status(200).send(session)
     } catch (error) {
       res.status(500).send(error)
     }
@@ -43,28 +49,47 @@ module.exports = {
   },
 
   editTask: async (req, res) => {
-   
+
     console.log(`update task fired`, req.params, req.body)
     const db = req.app.get('db')
     const { taskId } = req.params;
+    const { session } = req
     let id = taskId
-    const { task_title, task_desc } = req.body  
-    db.edit_task({id, task_title, task_desc}).then(() => {
-      res.sendStatus(200)
-    }).catch(err => console.log("error", err))
+    const { task_title, task_desc } = req.body
+    await db.edit_task({ id, task_title, task_desc })
+    let userGigs = await db.get_gigs_by_user_id(session.user.id)
+      session.gigs = userGigs
+      for (let i = 0; i < session.gigs.length; i++) {
 
+        let gigTasks = await db.get_tasks_by_gig_id(session.gigs[i].id)
+        session.gigs[i].tasks = gigTasks
+      }
+      session.gigs = userGigs
+      
+      res.status(200).send(session)
 
   },
 
- 
-  deleteTask: (req, res) => {
+
+  deleteTask: async(req, res) => {
     const db = req.app.get('db')
     let { taskId } = req.params
+    const { session } = req
     console.log(`delete gig was fired`, taskId)
+
+    await db.delete_task({ taskId })
+    let userGigs = await db.get_gigs_by_user_id(session.user.id)
+      session.gigs = userGigs
+      for (let i = 0; i < session.gigs.length; i++) {
+
+        let gigTasks = await db.get_tasks_by_gig_id(session.gigs[i].id)
+        session.gigs[i].tasks = gigTasks
+      }
+      session.gigs = userGigs
+      
+      res.status(200).send(session)
     
-    db.delete_task({taskId}).then(() => { 
-      res.sendStatus(200)
-    }).catch(err => console.log("error", err))
+
   },
 
 }

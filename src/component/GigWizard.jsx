@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
-import { updateGigs } from '../redux/userReducer'
+import { updateGigs, userInfo } from '../redux/userReducer'
 
 class GigWizard extends Component {
   constructor() {
@@ -24,14 +24,16 @@ class GigWizard extends Component {
     })
 
   }
-  wizardSubmitHandler = (e) => {
+  wizardSubmitHandler = async(e) => {
     e.preventDefault()
 
-    axios.post('/api/createGig', this.state).then(res => {
+    await axios.post('/api/createGig', this.state).then(res => {
       //dispatch to redux store updated gig list
       this.props.updateGigs(res.data)
+      this.props.userInfo(res.data)
     })
     this.props.history.push('/userHome')
+    
   }
 
   goBack = () => {
@@ -89,7 +91,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-  updateGigs
+  updateGigs,
+  userInfo
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(GigWizard)
