@@ -9,12 +9,8 @@ import ClientView from './component/ClientView';
 import GigWizard from './component/GigWizard'
 import SingleGig from './component/SingleGig';
 import TaskWizard from './component/TaskWizard';
-<<<<<<< HEAD
-import PaypalView from "./component/PaypalView"
-=======
 import GigHistory from './component/GigHistory';
 import ClientList from './component/ClientList'
->>>>>>> master
 
 
 export default (
@@ -33,13 +29,8 @@ export default (
     <Route path="/wizard" component={GigWizard} />
     <Route path="/singlegig/:gig_id" component={SingleGig} />
     <Route path="/taskwizard/:gig_id" component={TaskWizard} />
-<<<<<<< HEAD
-    <Route path="/clientpay" component={PaypalView} />
-
-=======
     <Route path='/gighistory' component={GigHistory} />
     <Route path='/clientlist' component={ClientList} />
->>>>>>> master
 
   </Switch>
 )

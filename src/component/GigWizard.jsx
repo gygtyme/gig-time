@@ -52,12 +52,7 @@ class GigWizard extends Component {
 
             <input className="input_task_container" type="text" onChange={this.changeHandler} required placeholder="gig description" name="gigDesc" />
 
-<<<<<<< HEAD
-
-            <input type="number" onChange={this.changeHandler} required placeholder="Hourly Rate" name="rate" />
-=======
             <input className="input_task_container" type="number" onChange={this.changeHandler} required placeholder="Hourly Rate" name="rate" />
->>>>>>> master
 
           </div>
 

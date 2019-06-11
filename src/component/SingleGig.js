@@ -2,16 +2,11 @@ import React, { Component } from 'react';
 import { connect } from "react-redux"
 import axios from 'axios';
 import Task from './Task'
-<<<<<<< HEAD
-import { Link } from 'react-router-dom'
-import TaskWizard from './TaskWizard'
-=======
 // import { Link } from 'react-router-dom'
 import Switch from 'react-switch'
 import { userInfo} from '../redux/userReducer'
 
 // import TaskWizard from './TaskWizard'
->>>>>>> master
 const ms = require('pretty-ms')
 
 
@@ -70,13 +65,6 @@ class SingleGig extends Component {
         this.props.history.push('/userHome')
     }
 
-<<<<<<< HEAD
-    editGig = (id) => {
-        const { title, description, project_rate } = this.state
-        // project_rate = +project_rate
-        axios.put(`/api/gigs/${id}`, { title, description, project_rate}).then(() => {
-
-=======
     sendUpdateToClientHandler = (firstName, clientEmail, gig_id) => {
         console.log(firstName, clientEmail, gig_id)
         axios.post(`/update/${gig_id}`, { firstName, clientEmail }).then(res => {
@@ -91,7 +79,6 @@ class SingleGig extends Component {
         // project_rate = +project_rate
         axios.put(`/api/gigs/${id}`, { title, description, project_rate }).then((res) => {
             this.props.userInfo(res.data)
->>>>>>> master
         })
         this.toggleEdit()
     }
@@ -108,8 +95,6 @@ class SingleGig extends Component {
         })
     }
 
-<<<<<<< HEAD
-=======
     handlePaidSwitch = () => {
         this.setState({
             is_paid: !this.state.is_paid
@@ -152,7 +137,6 @@ class SingleGig extends Component {
         ).catch(err => console.log(err, 'frontendError'))
     }
 
->>>>>>> master
     render() {
         const { client } = this.state
         let gig_id = this.props.match.params.gig_id
@@ -170,30 +154,6 @@ class SingleGig extends Component {
                 <p>Total development time: {ms(gig.total_time)}</p>
                 <p>Gig rate: ${gig.project_rate}</p>
                 <p>Ammount due: ${((gig.total_time / 1000 / 60 / 60) * gig.project_rate).toFixed(2)}</p>
-<<<<<<< HEAD
-                <p>{gig.is_paid}</p>
-                <p>{gig.is_billed}</p>
-                <button onClick={() => {
-                    axios.post(`/billGig/${gig_id}`, {
-                        total: this.state.amountDue,
-
-                    }).then((res) => {
-
-                        this.props.history.push('/userHome')
-                        alert('your email has been sent to the client!')
-                    }
-                    ).catch(err => console.log(err, 'frontendError'))
-                }}>Bill This Gig </button>
-              
-                <button onClick={this.toggleEdit}>edit Gig</button>
-                <button onClick={()=>this.deleteGig(gig.id)}>delete Gig</button>
-{/* 
-
-    this is for later- to send the update to the client when requested. 
-                <button onClick={()=> {
-                    axios.post('/update')
-                }}>Send Update To Client</button> */}
-=======
                 <p>Paid:{gig.is_paid} <Switch checked={this.state.is_paid} onChange={this.handlePaidSwitch}></Switch></p>
                 <p>Billed: {gig.is_billed} <Switch value={this.state.is_billed} checked={this.state.is_billed} onChange={this.handleBilledSwitch}></Switch></p>
 
@@ -204,7 +164,6 @@ class SingleGig extends Component {
                     }}>Send Update To Client </button>
                 </div>
 
->>>>>>> master
 
                 <div>
                     <Task gig={gig} />
@@ -227,20 +186,6 @@ class SingleGig extends Component {
 
             </div> : (this.props.firstName && this.state.toggleEdit) ?
                 <div>
-<<<<<<< HEAD
-                    
-                    <p>Gig Title:</p>
-                    <input onChange={this.handleChange} placeholder={this.state.title}
-                    value={this.state.title} name='title'/>
-                    <p>Gig Description:</p>
-                    <input onChange={this.handleChange} placeholder={this.state.description}
-                    value={this.state.description} name="description" />
-                    <p>Gig rate:</p>
-                    <input onChange={this.handleChange} placeholder={this.state.project_rate}
-                    value={this.state.project_rate} name='project_rate'/>
-                    <button onClick={()=>this.editGig(gig.id)}>save</button>
-                   
-=======
 
                     <p className="sub_header">Gig Title:</p>
                     <input className="input_task_container" onChange={this.handleChange} placeholder={this.state.title}
@@ -254,7 +199,6 @@ class SingleGig extends Component {
                     <div className="button_task_container">
                         <button onClick={() => this.editGig(gig.id)}>save</button>
                     </div>
->>>>>>> master
 
                 </div>
                 : null

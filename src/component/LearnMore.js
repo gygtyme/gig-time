@@ -3,12 +3,8 @@ import { Link } from 'react-router-dom';
 import './styles/LearnMore.css';
 import Iframe from 'react-iframe';
 import Scroller from './Scroller';
-import { Link } from 'react-router-dom';
 
 export default class LearnMore extends Component {
-  constructor() {
-    super()
-  }
 
   render() {
     return (
