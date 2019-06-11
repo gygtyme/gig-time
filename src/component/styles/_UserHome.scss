@@ -1,5 +1,12 @@
 @import 'variables';
 
+.fa-expand{
+  color: $japanese-carmine;
+  position: absolute;
+  top: .5em;
+  right: .5em;
+}
+
 .user_home_main_container{
   
   padding-top: 6em;
@@ -12,6 +19,8 @@
   transition: 0.3s;
   padding: 1em;
   margin: 1em;
+  position: relative;
+  cursor: pointer;
   
   
   .card_title {
