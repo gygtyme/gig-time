@@ -29,12 +29,10 @@ class Navbar extends Component {
             //update redux store
             // console.log(res.data, 'res data')
             this.props.userInfo(res.data)
-
+            console.log(res.data)
             //push to userHomepage
-
-
+            this.props.history.push('/userHome')
         }).catch(err => console.log('login error', err))
-        this.props.history.push('/userHome')
     }
 
     logoutHandler = () => {
