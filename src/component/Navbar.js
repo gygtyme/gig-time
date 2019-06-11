@@ -25,12 +25,12 @@ class Navbar extends Component {
 
     loginHandler = async () => {
         let { email, pass } = this.state
-        try{
-        let login = await axios.post('/users/login', { email, pass })
-        console.log(login.data.user)
-        this.props.userInfo(login.data)
-        this.props.history.push("/userhome")
-        }catch{
+        try {
+            let login = await axios.post('/users/login', { email, pass })
+            console.log(login.data.user)
+            this.props.userInfo(login.data)
+            this.props.history.push("/userhome")
+        } catch{
             swal("Unable to Login", "Email or Password is Incorrect", "error")
         }
     }
@@ -66,20 +66,20 @@ class Navbar extends Component {
                     axios.delete('/users/logout').then(() => { this.props.history.push('/') })
                 }}>logout</button></div>}
                 {!firstName ? (
-                    
-                        <div className='loginJacob'>
-                            Email <input  className="newTask" autoFocus type="email"
-                                name="email" placeholder="email" required onChange={e => {
-                                    this.changeHandler(e)
-                                }} />
-                            Password <input type="password"
-                                name="pass" placeholder="password" required onChange={(e) => {
-                                    this.changeHandler(e)
-                                }} />
-                            <button onClick={this.loginHandler}>Login</button>
-                            <Link to='/register' style={{ 'textDecoration': 'none' }}> <button> Register </button> </Link>
-                        </div>
-                    
+
+                    <div className='loginJacob'>
+                        Email <input className="newTask" autoFocus type="email"
+                            name="email" placeholder="email" required onChange={e => {
+                                this.changeHandler(e)
+                            }} />
+                        Password <input type="password"
+                            name="pass" placeholder="password" required onChange={(e) => {
+                                this.changeHandler(e)
+                            }} />
+                        <button onClick={this.loginHandler}>Login</button>
+                        <Link to='/register' style={{ 'textDecoration': 'none' }}> <button> Register </button> </Link>
+                    </div>
+
                 ) : (
                         <div className="menu_logout_container">
                             <HamburgerMenu />

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import Sidebar from "react-sidebar"
 
 export default class HamburgerMenu extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      windowWidth: window.innerWidth,
-      mobileNavVisible: false
+      mobileBarOpen: false
     };
   }
 
@@ -23,14 +23,14 @@ export default class HamburgerMenu extends Component {
     window.removeEventListener('resize', this.handleResize.bind(this));
   }
 
-  navigationLinks() {
+  navigationLinks = () => {
     return [
       <ul key={10} className="hamburger_container">
         
         <li className="link_container" key={1}><Link to='/userHome' className="link_text">Gigs</Link></li>
-        <li className="link_container" key={1}><Link to='/userHome' className="link_text">Gigs</Link></li>
-        <li className="link_container" key={1}><Link to='/userHome' className="link_text">Gigs</Link></li>
-        <li className="link_container" key={1}><Link to='/userHome' className="link_text">Gigs</Link></li>
+        <li className="link_container" key={2}><Link to='/userHome' className="link_text">History</Link></li>
+        <li className="link_container" key={3}><Link to='/userHome' className="link_text"></Link></li>
+        <li className="link_container" key={4}><Link to='/userHome' className="link_text">Gigs</Link></li>
       </ul>
     ];
   }
@@ -66,11 +66,22 @@ export default class HamburgerMenu extends Component {
     }
   }
 
+  sidebarOpen = () => {
+    this.setState({
+      mobileBarOpen: !this.state.mobileBarOpen
+    })
+  }
   render() {
     return(
       <div className="nav_container">
-        {this.renderNavigation()}
-        
+        <Sidebar className="mobileNavView"
+        sidebar={<b>Sidebar Content</b>}
+        open={this.state.mobileNavVisible}
+        onSetOpen={this.renderNavigation}
+        styles={{sidebar: {background: "grey"}}}
+        >
+          <button onClick={this.renderNavigation}></button>
+        </Sidebar>
       </div>
     )
   }
