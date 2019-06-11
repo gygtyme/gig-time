@@ -212,7 +212,6 @@ module.exports = {
   ,
 
   togglePaid: async (req, res) => {
-    console.log(`update paid fired`, req.params, req.body)
     const db = req.app.get('db')
     const { id } = req.params;
     const { is_paid } = req.body

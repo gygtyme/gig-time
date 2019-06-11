@@ -5,7 +5,7 @@ import Task from './Task'
 // import { Link } from 'react-router-dom'
 import Switch from 'react-switch'
 import { userInfo} from '../redux/userReducer'
-
+import { isBigIntLiteral } from '@babel/types';
 // import TaskWizard from './TaskWizard'
 const ms = require('pretty-ms')
 
@@ -26,19 +26,17 @@ class SingleGig extends Component {
 
 
     componentDidMount () {
-        console.log(this.props)
         let id = this.getGigClient()
         this.getClient(id)
-        // this.reduxCollector() //going to fix it tomorrow
-    }
-    
-    // reduxCollector = () =>{
+        let {gig_id} = this.props.match.params
+        axios.get(`/api/getSingleGig/${gig_id}`).then(res => {
+            this.setState({
+                is_paid: res.data.is_paid,
+                is_billed: res.data.is_billed
+            })
+        })
         
-    //      this.setState({
-    //         is_billed : this.props.gigs[0].is_billed,
-    //         is_paid : this.props.gigs[0].is_paid
-    //     })
-    // }
+    }
 
     getClient = (id) => {
         axios.post("/api/clients", { id }).then(res => {
@@ -96,8 +94,8 @@ class SingleGig extends Component {
         })
     }
 
-    handlePaidSwitch = () => {
-        this.setState({
+    handlePaidSwitch = async () => {
+        await this.setState({
             is_paid: !this.state.is_paid
         })
         this.saveToDBPaid()
@@ -115,16 +113,23 @@ class SingleGig extends Component {
         })
     }
 
-    saveToDBBilled = async() => {
+    saveToDBBilled = async () => {
         const { gig_id: id } = this.props.match.params
         const { is_billed } = this.state
+        this.setState({
+            isLoading: true
+        })
         await axios.put(`/api/gig/billed/${id}`, { is_billed })
+        this.setState({
+            isLoading: false
+        })
     }
 
-    handleBilledSwitch = () => {
-        this.setState({
+    handleBilledSwitch = async () => {
+        await this.setState({
             is_billed: !this.state.is_billed
         })
+        console.log(this.state.is_billed)
         this.saveToDBBilled()
     }
 
@@ -140,7 +145,6 @@ class SingleGig extends Component {
             total: this.state.amountDue,
 
         }).then((res) => {
-
             this.props.history.push('/userHome')
             alert('your email has been sent to the client!')
         }
