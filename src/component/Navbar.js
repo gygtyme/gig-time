@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { logout, userInfo } from '../redux/userReducer'
 import axios from 'axios'
 import HamburgerMenu from './HamburgerMenu'
+import swal from "sweetalert"
 
 
 class Navbar extends Component {
@@ -22,19 +23,16 @@ class Navbar extends Component {
         }).catch((err) => { console.log(err) })
     }
 
-    loginHandler = () => {
+    loginHandler = async () => {
         let { email, pass } = this.state
-
-        axios.post('/users/login', { email, pass }).then(res => {
-            //update redux store
-            // console.log(res.data, 'res data')
-            this.props.userInfo(res.data)
-
-            //push to userHomepage
-
-
-        }).catch(err => console.log('login error', err))
-        this.props.history.push('/userHome')
+        try{
+        let login = await axios.post('/users/login', { email, pass })
+        console.log(login.data.user)
+        this.props.userInfo(login.data)
+        this.props.history.push("/userhome")
+        }catch{
+            swal("Unable to Login", "Email or Password is Incorrect", "error")
+        }
     }
 
     logoutHandler = () => {
@@ -68,7 +66,7 @@ class Navbar extends Component {
                     axios.delete('/users/logout').then(() => { this.props.history.push('/') })
                 }}>logout</button></div>}
                 {!firstName ? (
-                    <form>
+                    
                         <div className='loginJacob'>
                             Email <input  className="newTask" autoFocus type="email"
                                 name="email" placeholder="email" required onChange={e => {
@@ -81,7 +79,7 @@ class Navbar extends Component {
                             <button onClick={this.loginHandler}>Login</button>
                             <Link to='/register' style={{ 'textDecoration': 'none' }}> <button> Register </button> </Link>
                         </div>
-                    </form>
+                    
                 ) : (
                         <div className="menu_logout_container">
                             <HamburgerMenu />

@@ -27,11 +27,10 @@ module.exports = {
     const { session } = req
     const { id: user_id } = req.session.user
     const db = req.app.get('db')
-    const { gigName, gigDesc, rate, clientFName, clientLName, clientPhone, email  } = req.body 
-    
+    const { gigName, gigDesc, rate, clientFName, clientLName, clientPhone, clientEmail  } = req.body 
 
     try {
-      let newClient=await db.create_client([clientFName, clientLName, email, clientPhone])
+      let newClient=await db.create_client([clientFName, clientLName, clientEmail, clientPhone])
 
       await db.create_gig([user_id, gigName, gigDesc, rate, newClient[0].id])
       let newGigs= await db.get_gigs_by_user_id(user_id)

@@ -9,7 +9,6 @@ import ClientView from './component/ClientView';
 import GigWizard from './component/GigWizard'
 import SingleGig from './component/SingleGig';
 import TaskWizard from './component/TaskWizard';
-
 import GigHistory from './component/GigHistory';
 import ClientList from './component/ClientList'
 
