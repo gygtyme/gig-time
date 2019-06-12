@@ -28,13 +28,13 @@ class ClientView extends Component {
 
   timeConversion = (millisec) => {
 
-    var seconds = (millisec / 1000).toFixed(1);
+    var seconds = (millisec / 1000).toFixed(2);
 
-    var minutes = (millisec / (1000 * 60)).toFixed(1);
+    var minutes = (millisec / (1000 * 60)).toFixed(2);
 
-    var hours = (millisec / (1000 * 60 * 60)).toFixed(1);
+    var hours = (millisec / (1000 * 60 * 60)).toFixed(2);
 
-    var days = (millisec / (1000 * 60 * 60 * 24)).toFixed(1);
+    var days = (millisec / (1000 * 60 * 60 * 24)).toFixed(2);
 
     if (seconds < 60) {
         return seconds + " Sec";
@@ -45,6 +45,12 @@ class ClientView extends Component {
     } else {
         return days + " Days"
     }
+  }
+
+  moneyConversion = (rate, time) => {
+    let msToTime = time / 1000 / 60 / 60
+    let totalMoney = msToTime * rate
+    return totalMoney
   }
 
   render() {
