@@ -23,6 +23,16 @@
     
   }
 }
+.h-menu-link{
+  width: 200px;
+  font-size: 2em;
+}
+.hamburger-icon-button{
+  color: white;
+  background-color: rgba(206, 180, 180, 0);
+  display: block;
+  float: right;
+  margin: 20px;
 
 
 
@@ -30,12 +40,20 @@
   margin-left: 1em;
   display: flex;
   justify-content: space-between;
-
+  width: 200px;
+  height: 1000px;
 }
 .material-icons{
     font-size: 32px;
   }
-
+.mobileNavView{
+    display: block;
+  }
+.hmenulinks{
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+}
 @media(min-width:600px){
   .material-icons{
     font-size: 55px;
@@ -48,7 +66,12 @@
    
     
   }
-  
+  .hamburger-icon-button{
+    display: none;
+  }
+  .mobileNavView{
+    display: none;
+  }
 }
 @media(min-width:1000px){
   .hamburger_container{
@@ -58,8 +81,6 @@
     box-sizing: unset;
     padding-bottom: 2em;
     padding-right: 2em;
-    
-    
   }
 
   
@@ -69,4 +90,6 @@
   .hamburger_container{
     max-width: 1400px;
   }
+  
+}
 }
