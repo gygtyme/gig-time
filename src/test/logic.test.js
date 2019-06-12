@@ -1,6 +1,7 @@
 const { toggle, breakTime } = require('../Utils/utils_Tiago')
 const { getClient, userInfo, updateGigTime } = require("../Utils/utils.Josh")
 const { reducer, sendEmail, getSession, login, axiosPost} = require('../Utils/utils_Jacob')
+const { timeConversion, moneyConversion } = require('../Utils/utils_Spencer');
 
 //tiago test1
 
@@ -54,6 +55,29 @@ test("test that the updated gig time is passed through and returns the correct v
   expect(updateGigTime(2)).toMatchObject({payload: 2, type: "UPDATE_GIG_TIME"})
 })
 
+//Spencer's tests
+
+describe('testing ms to time function to return either time + sec, min, hour, or day', () => {
+  test('test that time passed below 60000 returns a calculation plus Sec ', () => {
+    expect(timeConversion(27426).toBe('27.43 Sec'))
+  })
+  test('test that time passed between 60000 and 6000000 returns a calculation plus Min ', () => {
+    expect(timeConversion(326533).toBe('54.42 Min'))
+  })
+  test('test that time passed below 60000 returns a calculation plus Sec ', () => {
+    expect(timeConversion(4903540).toBe('1.36 Hrs'))
+  })
+  test('test that time passed below 60000 returns a calculation plus Sec ', () => {
+    expect(timeConversion(131246807).toBe('1.52 Days'))
+  })
+})
+
+describe('testing rate conversion function', () => {
+  test('given the time in milliseconds and rate per hr it will return a total amount to date', () => {
+    expect(moneyConversion(1500, 131246807).toBe('$54686.17'))
+  })
+})
+
 
 
 //Jacob's tests
@@ -99,4 +123,3 @@ test('Login returns the session', () =>{
     pass: 'thejoyformidable'
   })).toBeDefined()
 })
-
