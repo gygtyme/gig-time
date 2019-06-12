@@ -107,15 +107,16 @@ module.exports = {
     try {
       let gig = await db.get_gig_by_gig_id([req.params.gigId])
 
-      let user=await db.get_user_by_user_id(gig.user_id)
+      let user=await db.get_user_by_user_id(gig[0].user_id)
 
-      console.log(id, 'client ID')
-      let client = await db.get_client_by_id({ id })
+      let client = await db.get_client_by_id(gig[0].id)
+      // console.log(id, 'client ID')
       console.log("gig", gig[0], "client", client[0])
 
-      let total= gig[0].project_rate*gig[0].total_time/1000/60/60
+      let gigTotal= gig[0].project_rate*gig[0].total_time/1000/60/60
 
-      twilioFunc.textAlert(client[0].client_phone, total, user[0].first_name, user[0].venmo)
+      console.log('awoiejfawoiefjawoeifjawoeifj', client)
+      twilioFunc.textAlert(client[0].client_phone, gigTotal, user[0].first_name, user[0].venmo)
 
 
 
