@@ -81,6 +81,19 @@ html {
 .fa-angle-double-right{
   margin: 0px 2px;
 }
+.lower-arrow{
+  color: $japanese-carmine;
+}
+.learn-more-below-text{
+  font-size: 1.5em;
+}
+.button-learn-more-container{
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 .midPageContainer {
   display: flex;

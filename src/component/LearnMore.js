@@ -23,7 +23,7 @@ export default class LearnMore extends Component {
 
             <div className="myOval">
               <div className="text_in_oval">Learn More!</div>
-              <div className="arrow"><Scroller y={800} /></div>
+              <div className="arrow"><Scroller y={700} /></div>
             </div>
             
             <div className="card_container_learn">
@@ -41,10 +41,11 @@ export default class LearnMore extends Component {
               <p className="text_learn">Keep track of your clients, paid Gigs and unpaind Gigs.</p>
             </div>
           </div>
+          <div className="button-learn-more-container">
           <Link to='/register'><button className='registerButton'>Register Here!</button></Link>
-          <p>Learn How It Works Below!</p>
-          <div><Scroller y={1800} /></div>
-
+          <p className="learn-more-below-text">Learn How It Works Below!</p>
+          <div className="lower-arrow"><Scroller y={1800} /></div>
+          </div>
 
         </div>
 
