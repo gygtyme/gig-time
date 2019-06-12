@@ -14,8 +14,7 @@ export default class LearnMore extends Component {
             <h2>Welcome to GIG Time!</h2>
             <h4>We are fast, furious, and efficient!</h4>
             <Link to='/register' className="register-link-button"><button className='registerButton'>Register Today! <i className="fas fa-angle-double-right"></i></button></Link>
-            <h3>Learn More!</h3>
-            <Scroller y={600}/>
+            
           </div>
         </div>
 
