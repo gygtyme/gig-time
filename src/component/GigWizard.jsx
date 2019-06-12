@@ -75,7 +75,7 @@ class GigWizard extends Component {
 
           <div className="button_task_container">
             <button type="submit" onClick={this.wizardSubmitHandler}>Submit</button>
-            <button onClick={this.goBack}>cancel</button>
+            <button onClick={this.goBack} id='cancelButton'>cancel</button>
           </div>
         </form>
 

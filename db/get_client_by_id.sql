@@ -1,2 +1,2 @@
 select * from client
-where id = ${id}
+where id = $1

@@ -9,10 +9,12 @@ module.exports= {
 
 textAlert: (clientPhone, gigTotal, userFirst, userVenmo)=>{
 
+console.log('client phone', clientPhone)
+
   client.messages.create({
     body:`Your project has been finished! Please send ${gigTotal} to ${userFirst}'s venmo ${userVenmo} at your earliest convenience.`,
-    from:"+13852175119", 
-    to:`${clientPhone}` 
+    from:"+17244715070", 
+    to:`+1${clientPhone}` 
   }).then(message=>{
     console.log("the message worked you're a genius")
   return "message sent"
