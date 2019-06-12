@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './styles/LearnMore.css';
+
 import Iframe from 'react-iframe';
 import Scroller from './Scroller';
 
@@ -18,18 +18,37 @@ export default class LearnMore extends Component {
             <Scroller y={600}/>
           </div>
         </div>
-        
+
         <div className='learnMoreCardContainer' id='learnMoreCardContainer'>
           <div className='midPageContainer'>
-            <div className='learnMoreCard'>You'll Get Hot Chicks</div>
-            <div className='learnMoreCard'>You'll Get The Fat Stacks</div>
-            <div className='learnMoreCard'>You'll Probably Get Free Drugs</div>
+
+            <div className="myOval">
+              <div className="text_in_oval">Learn More!</div>
+              <div className="arrow"><Scroller y={800} /></div>
+            </div>
+            
+            <div className="card_container_learn">
+              <div className='learnMoreCard1'></div>
+              <p className="text_learn">This app makes it easy to keep track on time spent on each task of your gig.</p>
+            </div>
+
+            <div className="card_container_learn">
+              <div className='learnMoreCard2'></div>
+              <p className="text_learn">Send automatic notifications to your clients to remind them of payments due.</p>
+            </div>
+
+            <div className="card_container_learn">
+              <div className='learnMoreCard3'></div>
+              <p className="text_learn">Keep track of your clients, paid Gigs and unpaind Gigs.</p>
+            </div>
           </div>
           <Link to='/register'><button className='registerButton'>Register Here!</button></Link>
           <p>Learn How It Works Below!</p>
-          <div><Scroller y={1200}/></div>
+          <div><Scroller y={1800} /></div>
+
+
         </div>
-        
+
         <section className='learnMoreVideo'>
           <Iframe
             width="700"

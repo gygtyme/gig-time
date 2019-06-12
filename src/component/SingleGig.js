@@ -7,6 +7,8 @@ import Switch from 'react-switch'
 import { userInfo} from '../redux/userReducer'
 import { isBigIntLiteral } from '@babel/types';
 // import TaskWizard from './TaskWizard'
+import swal from 'sweetalert';
+
 const ms = require('pretty-ms')
 
 
@@ -62,6 +64,7 @@ class SingleGig extends Component {
             this.props.userInfo(res.data)
         })
         this.props.history.push('/userHome')
+        swal("Gig deleted", "", "success")
     }
 
     sendUpdateToClientHandler = (firstName, clientEmail, gig_id) => {
@@ -149,6 +152,7 @@ class SingleGig extends Component {
             alert('your email has been sent to the client!')
         }
         ).catch(err => console.log(err, 'frontendError'))
+        swal("Client billed", "", "success")
     }
 
     render() {

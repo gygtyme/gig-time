@@ -4,6 +4,8 @@ import { connect } from "react-redux"
 import { updateGigTime, refreshTotalGigTime, userInfo  } from '../redux/userReducer'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios';
+import swal from 'sweetalert';
+
 // import { async } from 'q';
 const ms = require('pretty-ms')
 
@@ -58,6 +60,7 @@ class Timer extends React.Component {
     this.props.updateGigTime(this.state.totalTime)
     this.updateGigTime()
     this.props.refreshTotalGigTime()
+    swal("Timer stopped", "task progress saved on gig", "success")
   }
 
   saveEdit = async() => {

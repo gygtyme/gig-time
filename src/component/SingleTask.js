@@ -3,6 +3,8 @@ import { connect } from "react-redux"
 import axios from 'axios'
 import Timer from './Timer'
 import { userInfo } from '../redux/userReducer'
+import swal from 'sweetalert';
+
 
 class SingleTask extends Component {
   state = {
@@ -19,13 +21,14 @@ class SingleTask extends Component {
       toggleView: !this.state.toggleView,
       targetId: val
     })
+    window.scroll(0, 1)
   }
 
   deleteTask = (id) => {
     axios.delete(`/api/tasks/${id}`).then(res => {
       this.props.userInfo(res.data)
     })
-
+    swal("Task deleted", "", "success")
   }
 
   editTask = (id) => {
@@ -63,12 +66,13 @@ class SingleTask extends Component {
     const { task } = this.props
 
     let taskView = this.state.toggleView && !this.state.editToggle ?
+      <><div className="gray_container"></div>
       <div className='task_card_container' key={task.id}>
         <h4 className="task_title">{task.task_title}</h4>
         <p className="desc_container">{task.task_desc}</p>
         <div className='timer_container'><Timer /></div>
         <i class="fas fa-window-minimize" onClick={this.handleToggle}></i>
-      </div>
+      </div></>
       : !this.state.toggleView && !this.state.editToggle ?
         <div className="container_all_task">
           <div className="task_card_container_before" key={task.id} task_id={task.id}>
@@ -89,8 +93,8 @@ class SingleTask extends Component {
               <input className="input_task_container" onChange={this.handleChange} placeholder={this.state.task_desc}
                 value={this.state.task_desc} name="task_desc" />
             </div>
-              <button className='button_task' onClick={() => this.editTask(task.id)}>save</button>
-              <button className='button_task' onClick={this.editToggle}>back</button>
+            <button className='button_task' onClick={() => this.editTask(task.id)}>save</button>
+            <button className='button_task' onClick={this.editToggle}>back</button>
           </>
           : null
 
