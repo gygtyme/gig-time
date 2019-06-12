@@ -82,7 +82,7 @@ class Navbar extends Component {
                 ) : (
                         <div className="menu_logout_container">
                             <div className="welcome-logout-container">
-                            {firstName && <div>Welcome, {firstName} </div>}</div>
+                            {firstName && <div className="welcome-name-container">Welcome, {firstName} </div>}</div>
                             <HamburgerMenu firstName={firstName} push={this.props.history.push}/>
                         </div>
                     )}
