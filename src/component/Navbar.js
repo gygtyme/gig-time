@@ -57,15 +57,13 @@ class Navbar extends Component {
 
     render() {
         const { firstName } = this.props.prop
+        console.log(this.props)
         return (
             <nav className='navbar'>
                 <Link to='/' style={{ textDecoration: 'none', color: 'black' }}>
                     <span className="app_name_container">GIG Time</span>
                 </Link>
-                {firstName && <div>Welcome, {firstName}  <button className="logout_button" onClick={() => {
-                    this.props.logout()
-                    axios.delete('/users/logout').then(() => { this.props.history.push('/') })
-                }}>logout</button></div>}
+                
                 {!firstName ? (
                     
                         <div className='loginJacob'>
@@ -77,13 +75,15 @@ class Navbar extends Component {
                                 name="pass" placeholder="password" required onChange={(e) => {
                                     this.changeHandler(e)
                                 }} />
-                            <button onClick={this.loginHandler}>Login</button>
+                            <button onClick={this.loginHandler} className="login-button">Sign In</button>
 
                         </div>
                     
                 ) : (
                         <div className="menu_logout_container">
-                            <HamburgerMenu firstName={firstName}/>
+                            <div className="welcome-logout-container">
+                            {firstName && <div>Welcome, {firstName} </div>}</div>
+                            <HamburgerMenu firstName={firstName} push={this.props.history.push}/>
                         </div>
                     )}
             </nav>
