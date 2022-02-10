@@ -15,7 +15,7 @@
     "express-session": "^1.16.1",
     "jest": "^24.8.0",
     "massive": "^5.10.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "nodemailer": "^6.2.1",
     "pretty-ms": "^5.0.0",
     "react": "^16.8.6",
